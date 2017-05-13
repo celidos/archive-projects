@@ -11,7 +11,7 @@
 * random (exploring different generators)
 
 ## TerraFire 2 game
-* Just some example of working with OpenGL and geometry
+Just some example of working with OpenGL and geometry
 
 ## Bitronics Lab
-* User client (serial port, plotting)
+User client (serial port, plotting)
