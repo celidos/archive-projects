@@ -1,0 +1,81 @@
+# depslib dependency file v1.0
+1412146078 source:/home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/main.cpp
+	<iostream>
+	<stdio.h>
+	<string>
+	<vector>
+	"textconsolecolors.h"
+	"master.hpp"
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+	"history.h"
+
+1397211326 /usr/local/include/opencv2/opencv.hpp
+	"opencv2/core/core_c.h"
+	"opencv2/core/core.hpp"
+	"opencv2/flann/miniflann.hpp"
+	"opencv2/imgproc/imgproc_c.h"
+	"opencv2/imgproc/imgproc.hpp"
+	"opencv2/photo/photo.hpp"
+	"opencv2/video/video.hpp"
+	"opencv2/features2d/features2d.hpp"
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/calib3d/calib3d.hpp"
+	"opencv2/ml/ml.hpp"
+	"opencv2/highgui/highgui_c.h"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/contrib/contrib.hpp"
+
+1412520799 /home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/textconsolecolors.h
+	<iostream>
+
+1412520799 /home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/master.hpp
+	<fstream>
+	<string>
+	<iostream>
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+
+1412876614 source:/home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/master.cpp
+	"master.hpp"
+	"CDI.h"
+	"HfH.h"
+
+1412004543 /home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/CDI.h
+	"facedetection.hpp"
+	"textdetection.hpp"
+
+1412009610 /home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/facedetection.hpp
+	<vector>
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+
+1412520324 /home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/HfH.h
+	"footydetector.hpp"
+
+1412147643 /home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/textdetection.hpp
+	"trg.hpp"
+
+1412847810 /home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/trg.hpp
+	<math.h>
+	<stdio.h>
+	<algorithm>
+	<vector>
+	<set>
+
+1412519064 /home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/history.h
+
+1412876314 /home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/footydetector.hpp
+	"opencv2/opencv.hpp"
+	<vector>
+	<algorithm>
+	<string.h>
+	<iostream>
+	<stdio.h>
+
+1412520125 source:/home/elluzion/Документы/CCAPTCHA project/cc_checker/cc_checker/tirg_raw.cpp
+	"trg.hpp"
+

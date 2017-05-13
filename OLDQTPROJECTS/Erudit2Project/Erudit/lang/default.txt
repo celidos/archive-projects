@@ -1,0 +1,5 @@
+﻿InterfaceLanguage=rus,bgr,eng,deu
+DictionaryLanguage=rus,bgr,eng,deu
+ExplanatoryLanguage=rus,bgr,eng,deu
+NoLanguageFoundMessage=Не удается загрузить файл локализации strings.txt. Попробуйте переустановить приложение.
+NoDictionaryFoundMessage=Не удается найти файлы словарей в папке \dict. Попробуйте переустановить приложение.

@@ -1,0 +1,75 @@
+	var selektion;
+	function insertAtCursor(myField, myValue, bbCode1, bbCode2, endOfLine) {
+		var bbb;
+		if (document.selection) {
+			var str = document.selection.createRange().text;
+			myField.focus();
+			sel = document.selection.createRange();
+			sel.text = bbCode1 + myValue + bbCode2 + endOfLine;
+			if(myValue=='') {
+				bbb=bbCode2.length; 
+				if(bbCode1.substring(0,4)=='[img' ) bbb=0;
+				else bbb=-bbb;
+				sel.moveStart('character',bbb); sel.moveEnd('character',bbb);
+			}
+			sel.select();
+			return;
+		} else if (myField.selectionStart || myField.selectionStart == '0') {
+			var startPos = myField.selectionStart;
+			var endPos = myField.selectionEnd;
+			var bbb2, bbV, eoll;
+			if(myValue=='') myValue = myField.value.substring(startPos, endPos);
+			myField.value = myField.value.substring(0, startPos) + bbCode1 + myValue + bbCode2 + endOfLine + myField.value.substring(endPos, myField.value.length);
+			if(myValue=='') {
+				if(bbCode1.substring(0,4)=='[img' ){
+					bbb=bbCode1.length + myValue.length + bbCode2.length;
+					myField.selectionStart=startPos+bbb; myField.selectionEnd=startPos+bbb;
+				} else {
+					bbb=bbCode1.length;
+					myField.selectionStart=startPos+bbb;
+					myField.selectionEnd=endPos+bbb;
+				}
+			} else {
+				bbb=bbCode1.length;
+				bbb2=bbCode2.length;
+				bbV=myValue.length;
+				eoll=endOfLine.length;
+				myField.selectionStart=startPos+bbV+bbb+bbb2+eoll;
+				myField.selectionEnd=myField.selectionStart;
+			}
+			myField.focus();
+			myField.scrollTop=myField.scrollHeight;
+			return;
+		} else {
+			myField.value += myValue;
+			return;
+		}
+	}
+
+	function paste_strinL(strinL, isQuote, bbCode1, endOfLine, bbCode2, User){
+		if((isQuote==1 || isQuote==2) && strinL=='') alert(l_quoteMsgAlert);
+		else {
+			if (isQuote==1) {
+				bbCode1='bq.. *' + User + ':* '; endOfLine='\n\n'; bbCode2='p. ';
+			}
+			if (isQuote==2) {
+				bbCode1='*'; bbCode2='*'; endOfLine='\n\n';
+			}
+			var isForm=document.getElementById('message');
+			if (isForm) {
+				var input=document.getElementById('message');
+				insertAtCursor(input, strinL, bbCode1, endOfLine, bbCode2);
+			}
+			else alert(l_accessDenied);
+		}
+	}
+
+	function pasteSel() {
+		selektion='';
+		if(window.getSelection) {
+			this.thisSel=window.getSelection()+'';
+			selektion=this.thisSel.toString();
+		}
+		else if(document.getSelection) selektion=document.getSelection()+'';
+		else if(document.selection) selektion=document.selection.createRange().text;
+	}

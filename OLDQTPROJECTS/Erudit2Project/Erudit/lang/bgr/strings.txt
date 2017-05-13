@@ -1,0 +1,292 @@
+﻿;localization unicode file
+;all text strings for Erudit-PC v. 1.6.x -
+;language - russian
+;
+;static data used for internal unchangeable strings and objects
+;left to '/'- caption part if available, 
+;right to '/' - hint part if available
+;'#' means carriage return to divide string to several lines if necessary
+;warning! Don't change identifier's name left to ':' 
+;
+;текстовые данные, используемые программой в статичных объектах
+;слева от '/'- текст объекта, если доступно
+;справа от '/' - текст всплывающей подсказки, если доступно
+;'#' - начало новой строки
+;ВАЖНО! Не меняйте названия строковых параметров слева от ":"
+;
+[Static]
+;-------------- v.1.6 --------------------------
+MainScreen.MenuGame:'Фигра'/''
+MainScreen.MenuGameNew:'Начать новую партию'/''
+MainScreen.MenuGameSave:'Сохранить партию...'/''
+MainScreen.MenuGameLoad:'Восстановить партию'/''
+MainScreen.MenuGameEnd:'Закончить партию'/''
+MainScreen.MenuGameDemo:'Демо-режим'/''
+MainScreen.MenuGameBestScore:'Лучшие результаты...'/''
+MainScreen.MenuGameConfig:'Настройки...'/''
+MainScreen.MenuGameExit:'Блудня'/''
+MainScreen.MenuIntellect:'Интеллект'/''
+MainScreen.MenuIntellectLow:'Невысокий'/''
+MainScreen.MenuIntellectNormal:'Нормальный'/''
+MainScreen.MenuIntellectHigh:'Достойный'/''
+MainScreen.MenuHelp:'Помощь'/''
+MainScreen.MenuHelpGame:'Справка по игре'/''
+MainScreen.MenuHelpRules:'Правила игры'/''
+MainScreen.MenuHelpHowStartGame:'Как начать новую партию?'/''
+MainScreen.MenuHelpAbout:'О программе...'/''
+MainScreen.MenuHelpAlphabet:'Ценность букв и ячеек'/''
+MainScreen.MenuHelpHint:'Подсказка'/''
+MainScreen.MenuHelpComputeScore:'Быстрый взгляд'/''
+MainScreen.MenuHelpGameSite:'Домашняя страница в Интернете'/''
+MainScreen.ScreenButtonTitleNewGame:'Новая игра'/''
+MainScreen.ScreenButtonTitleLoadGame:'Загрузить игру'/''
+MainScreen.ScreenButtonTitleExit:'Выход'/''
+MainScreen.InGameTagDeselect:'- снять выделение'/''
+MainScreen.InGameTagChangeBlankTile:'- взять "звездочку"'/''
+MainScreen.InGameTagSponsorLogo:''/'Добро пожаловать на сайт спонсора'
+MainScreen.InGameButtongChangeLetters:''/'Кнопочка "Меняю буквы!"'
+MainScreen.InGameButtongGo:''/'Кнопочка "Хожу!"'
+MainScreen.InGameButtongHint:''/'Кнопочка "Подсказка"'
+MainScreen.InGameButtongPreview:''/'Кнопочка "Быстрый взгляд"'
+MainScreen.InGameButtongConfig:''/'Настройки'
+MainScreen.InGameButtongSaveGame:''/'Сохранение текущей партии'
+MainScreen.InGameButtongLoadGame:''/'Восстановление партии текущего игрока'
+MainScreen.InGameButtongInfo:''/'Информация о партии'
+SplashWindow.LabelWinner:'ПОБЕДИТЕЛЬ В ПАРТИИ'/''
+SplashWindow.ButtonOK:''/'Все понятно!'
+ImageScreen.LabelChooseAvatar:'Щелкните на картинке для выбора персонажа'/''
+ImageScreen.ButtonCancel:''/'Пожалуй, нет!'
+SaveGameWindow.ButtonCancel:''/'Пожалуй, нет!'
+HallFame.LabelNoWinner:'ЗАЛ СЛАВЫ#ЖДЕТ#СВОИХ#ГЕРОЕВ'/''
+HallFame.ButtonOK:''/'Все понятно!'
+NewGameWindow.LabelLayout:'Поле:'/''
+NewGameWindow.LabelPlayersQty:'Количество игроков:'/''
+NewGameWindow.LabelDifficulty:'Интеллект партии:'/''
+NewGameWindow.LabelDictionary:'Словарь партии:'/''
+NewGameWindow.LabelLimits:'Ограничения:'/''
+NewGameWindow.LabelPagePlayer:'игрок'/''
+NewGameWindow.LabelPagePC:'компьютер'/''
+NewGameWindow.LabelPageNetwork:'сеть'/''
+NewGameWindow.LabelPlayerList:''/'Здесь выбираются имена оппонентов'
+NewGameWindow.ButtonSelectLayout:''/'Изменить параметры игрового поля'
+NewGameWindow.ButtonSelectDifficulty:''/'Изменить интеллект партии'
+NewGameWindow.ButtonSelectDictionary:''/'Настроить словарь партии'
+NewGameWindow.ButtonSelectLimits:''/'Настроить ограничения на партию'
+NewGameWindow.TagPlayerImage:''/'Щелкните мышкой для смены персонажа игрока'
+NewGameWindow.ButtonOK:''/'Начать партию'
+NewGameWindow.ButtonClose:''/'Не надо начинать партию'
+Options.ThemesTipListBox:''/'Снимите галочку с тематик,#которые не желаете#использовать в игре'
+Options.ButtonCancel:'Отменить'/'Нажмите эту кнопку, если раздумали изменять настройки'
+Options.ButtonOK:'Да'/'Нажмите эту кнопку, если хотите запомнить все изменения в настройках'
+Options.DictionaryButtonThemes:'Тематические настройки'/'Здесь можно исключить#из словаря термины некоторых#специфических тематик'
+Options.LanguageButtonAlphabet:'Настройка алфавита'/'Настройка ценности и количества#фишек с буквами для текущего#игрового языка'
+Options.UserDictionaryButtonWordAdd:''/'Добавить слово в пользовательский словарь'
+Options.UserDictionaryButtonWordUnAdd:''/'Удалить выделенные слова из списка'
+Options.UserDictionaryButtonWordExclude:''/'Добавить слово в список исключенных слов'
+Options.UserDictionaryButtonWordUnExclude:''/'Удалить выделенные слова из списка исключений'
+Options.MusicButtonAdd:''/'Добавить композицию в список'
+Options.MusicButtonAddAll:''/'Добавить все композиции в список'
+Options.MusicButtonRemoveAll:''/'Удалить все композиции из списка'
+Options.MusicButtonRemove:''/'Удалить композицию из списка'
+Options.AlphabetButtonDefault:'По умолчанию'/'Восстанавливает для фишек#изначальные значения очков#и количества'
+Options.TabSheetCommon:'Общие'/''
+Options.TabSheetDictionary:'Словарь'/''
+Options.TabSheetLimits:'Ограничения'/''
+Options.TabSheetMusic:'Звук'/''
+Options.TabSheetLayout:'Игровое поле'/''
+Options.TabSheetUserDictionary:'Исправления'/''
+Options.TabSheetHint:'Подсказка'/''
+Options.TabSheetSkin:'Оформление'/''
+Options.TabSheetLanguages:'Языки'/''
+Options.CommonRulesGroupName:'   Правила партии   '/''
+Options.CommonShowPCwords:'Показывать слова компьютера'/'Во время хода компьютера на поле отображаются#слова, которые он пробует составить. Функция заметно#увеличивает время обдумывания хода компьютера'
+Options.CommonChiefInRoom:'Сворачивать по ESC'/'Программа сворачивается#при нажатии на клавишу ESC'
+Options.SkinShadows:'Тени от интерфейсных элементов'/'Включение теней, подчеркивающих графику.#На медленных машинах опция может#являться причиной задержек при отрисовке'
+Options.DictionaryGroupUseUserDictionary:'  Использовать исправленный словарь'/'Опция включает-выключает возможность#использование исправлений для словаря'
+Options.CommonShowAllUserBestScores:'Показывать промежуточные результаты в "Зале Славы"'/'При включенной опции в таблицу лучших#результатов заносятся не только рекорды,#но и меньшие результаты от 100 очков'
+Options.MusicSoundFX:'  Звуковое сопровождение'/'Опция включает-выключает#воспроизведение музыкальных композиций#во время партии'
+Options.MusicGroupBackgroundMusic:'  Музыка'/'Опция включает-выключает#звуковые эффекты в игре'
+Options.SkinColoredTiles:'Цветные фишки на игровом поле'/'При включенной опции на игровом поле слова#отображаются цветами игроков, позволяя наглядно представлять#принадлежность слова тому или иному игроку'
+Options.HintWaitKeypress:'Ожидать нажатия клавиши или кнопки мыши'/'Для вывода каждого слова подсказки программа ожидает#нажатия клавиши или кнопки мыши. При отключенной#опции слова выводятся с задержкой.'
+Options.DictionaryRulesConfirmWordExclude:'  Подтверждать удаление слова из словаря'/'При исключении слова по щелчку правой кнопкой#мыши требуется подтверждение пользователя'
+Options.CommonRulesCrossword:'Выкладывать слова по принципу кроссворда'/'При включенной опции не разрешается#выставлять фишки рядом с перекрестьем слов'
+Options.CommonRulesSlashBlankTiles:'Мигание букв-звездочек на игровом поле'/'Выставленные вместо звездочек фишки#имеют мигающий маркер, означающий,#что из этой фишки можно получить звездочку,#путем замены на соответствующую букву'
+Options.CommonRulesPermitReuseBlankTile:'Разрешать замену звездочки на игровом поле'/'Звездочки, выставленные на игровом поле#могут быть заменены оппонентами#соответствующими буквами в свой ход'
+Options.DictionaryRulesPCReplayAfterExcludeWord:'  Повторять ход компьютера при исключении слова'/'Включает повторение хода компьютера,#при удалении слова, выставленного им в последний ход'
+Options.CommonRulesFreeWordPlacement:'Произвольная расстановка слов'/'Игрок может использовать для составления слов#любые буквосочетания на игровом поле,#выделяемые вручную при помощи мыши'
+Options.CommonRulesAllowRepeatWords:'Разрешать повторы слов'/'При включенной опции на игровом поле могут#выкладываться ранее выложенные слова или#два одинаковых слова в один ход'
+Options.CommonAutoGetLetters:'Автоматический выбор букв'/'При включенной опции не отображается#поле выбора букв. Фишки выбираются#автоматически случайным образом'
+Options.LimitsMoveTime:'Ограничение на ход'/'Время на обдумывание хода.#Может использоваться как#самостоятельное ограничение или#как дополнение к ограничению по счету'
+Options.PauseOnMinimazed:'Останавливать игру'/'В свернутом состоянии во время хода#игрока (не компьютера) ставятся "на паузу"#таймеры на ход и на партию до восстановления окна'
+Options.CommonRulesReusePrizeCells:'Не "сжигать" призовые ячейки'/'При включенной опции призовые#клетки после помещения на них букв#не теряют своих призовых#свойств в последующих ходах'
+Options.CommonAutoArrangeWindows:'Автоматически распределять окна'/'При выключенной опции программа#пытается распределить окна по экрану,#оставляя их развернутыми. В противном#случае включается режим сворачивания#неактивных окон'
+Options.SkinAnimateOnlyActivePlayer:'Анимировать аватары только в свой ход'/'При включенной опции анимационные аватары#начинают проигрываться только в ход#соответствующего игрока. В противном случае#анимация повторяется непрерывно'
+Options.SkinAccentActivePlayer:'Выделение активного игрока анимацией'/'Опция включает дополнительные#мигающие и движущиеся элементы#выделения текущего игрока'
+Options.LimitsWordLengthNoLess:'Не засчитывать слова длиной'/'Засчитываются только слова#с количеством букв большим#указанного значения'
+Options.MusicShuffle:'Вразброс'/'Опция включает-выключает#режим смешанного проигрывания#списка музыкальных композиций'
+Options.LayoutRandomIsSquareLayout:'квадратное'/''
+Options.DictionaryLabelSize:'Компьютер будет использовать в игре:'/''
+Options.DictionaryLabelThemes:'Использовать в партии слова следующих категорий:'/''
+Options.HintLabelSpeedLo:'Медленно'/''
+Options.HintLabelQuantity:'Количество подсказок'/'Установка количества подсказок, доступных во время партии.#Количество влияет на размер штрафных вычетов'
+Options.LayoutLabelSize:'Размер игрового поля'/''
+Options.MusicLabelPlaylist:'Список композиций:'/''
+Options.UserDictionaryLabelAddedWords:'Добавленные слова:'/''
+Options.UserDictionaryLabelExcludedWords:'Исключенные слова:'/''
+Options.UserDictionaryLabelComment:'Комментарий:'/''
+Options.MusicLabelVolume:'Громкость:        звук                                  музыка'/''
+Options.LayoutRandomCellsLetterX2:'буква х 2'/''
+Options.LayoutRandomCellsLetterX3:'буква х 3'/''
+Options.LayoutRandomCellsWordX2:'слово х 2'/''
+Options.LayoutRandomCellsWordX3:'слово х 3'/''
+Options.LayoutRandomCellsStart:'начальных ячеек'/''
+Options.SkinLabelUsed:'Используемая шкурка:'/''
+Options.AlphabetLabelLetterScore:'Ценность буквы:'/'Установка количества очков за букву'
+Options.AlphabetLabelLetterQuantity:'Количество фишек с буквой:'/'Установка количества фишек с выбранной буквой'
+Options.HintLabelSpeed:'Скорость показа слов при подсказке'/''
+Options.HintLabelSpeedHi:'Быстро'/''
+Options.DictionaryRadioButtonSizeMax:'  Экстремальный запас слов'/'Компьютер использует слова#из орфографического словаря#русского языка, включая#редкие и специфические (более 51000 слов)'
+Options.DictionaryRadioButtonSizeNormal:'  Нормальный запас слов'/'Компьютер использует общеупотребительные#и часто встречающиеся слова (более 18000 слов)'
+Options.DictionaryRadioButtonSizeExtended:'  Расширенный запас слов'/'Компьютер использует общеупотребительные слова,# а также слова из словаря Ожегова и словаря#иностранных слов (более 27000)'
+Options.DictionaryRadioButtonSizeChildren:'  Детский запас слов'/'Компьютер использует слова,# известные большинству детей от 8 до 12 лет (более 5000 слов)'
+Options.LimitsRadioButtonNoLimits:'  Без ограничений'/'На партию не накладывается никаких ограничений'
+Options.LimitsRadioButtonScore100:'  до 100 очков'/'Партия продолжается, пока один#из оппонентов не наберет 100 очков'
+Options.LimitsRadioButtonTime45minutes:'  до 45 минут'/'Партия продолжается 45 минут'
+Options.LimitsRadioButtonScore500:'  до 500 очков'/'Партия продолжается, пока один#из оппонентов не наберет 500 очков'
+Options.LimitsRadioButtonScoreUserSelected:'  до                  очков'/'Партия продолжается, пока один из оппонентов#не наберет указанное количество очков'
+Options.LimitsRadioButtonScore300:'  до 300 очков'/'Партия продолжается, пока один#из оппонентов не наберет 300 очков'
+Options.LayoutRadioButtonFromFile:'  Раскладка игрового поля'/'Игровое поле строится на основе#заранее спроектированного узора'
+Options.LimitsRadioButtonTime1Hour:'  до 1 часа'/'Партия продолжается один час'
+Options.LimitsRadioButtonTime30minutes:'  до 30 минут'/'Партия продолжается 30 минут'
+Options.LimitsRadioButtonTime20minutes:'  до 20 минут'/'Партия продолжается только 20 минут'
+Options.LimitsRadioButtonTime10minutes:'  до 10 минут'/'Партия продолжается каких-то 10 минут'
+Options.DictionaryRulesRadioButtonUserCannotAddWords:'  Требовать наличие слова в словаре'/'Игрок не может выставлять слово, отсутствующее в словаре.#Во время игры изменения в словаре не вносятся'
+Options.DictionaryRulesRadioButtonConfirmAddNewWord:'  Спрашивать о добавлении нового слова'/'Слово, отсутствующее в словаре, может быть добавлено в словарь#во время хода после подтверждения пользователя'
+Options.DictionaryRulesRadioButtonAddNewWordWithoutConfirm:'  Добавлять новые слова автоматически'/'Слово, отсутствующее в основном словаре#автоматически добавляется в пользовательский словарь#во время хода игрока'
+Options.DictionaryRulesConfirmAddWordExplanation:'  Спрашивать о добавлении толкования слова'/'В случае, если толкования слова отсуствует#в словаре толкований, пользователю#предлагается добавить свое толкование'
+Options.LayoutRadioButtonRandom:'  Произвольная раскладка'/'Игровое поле формируется путем#произвольного перемешивания ячеек'
+Options.TextboxCustomWordComment:''/'При исключении слова можно указать причину.#При добавлении слова можно указать его толкование'
+Options.LimitsComboboxListLetter:'2 буквы#3 и менее букв#4 и менее букв'/''
+Options.LimitsComboboxListMoveTime:'1 минута#2 минуты#3 минуты#4 минуты#5 минут#6 минут#7 минут#8 минут#9 минут'/''
+Options.MusicListboxFilesInSelectedFolder:''/'Список музыкальных файлов#в текущей папке'
+Options.MusicListboxSelectedSongs:''/'Список композиций, которые будут#проигрываться во время партии'
+Options.LanguageLabelInterfaceLanguage:'Язык интерфейса программы'/'Устанавливает язык меню#и текстовых сообщений в игре'
+Options.LanguageLabelDictionaryLanguage:'Игровой язык (словари и алфавит)'/'Устанавливает язык, на котором,#собственно, нужно составлять слова'
+Options.LanguageLabelExplanatoryLanguage:' Язык толкований'/'Устанавливает язык, на котором#будут даваться толкования слов'
+StarWindow.ButtonClose:''/'Пожалуй, не хочу!'
+ErrorWindow.ButtonYes:''/'Да!'
+ErrorWindow.ButtonNo:''/'Пожалуй, нет!'
+;
+;
+;dynamic data used for messages and adaptive captions
+;'#' means carriage return to divide string to several lines if necessary
+;warning! Don't change identifier's name left to '='
+;
+[Dynamic]
+;-------------- v.1.6 --------------------------
+InGameMessageGoNolessOneLetter=ЭТО ПРОСТО БУКВА. ОДИНОКАЯ БУКВА, А НЕ СЛОВО!
+InGameMessageGoUnknownWord=НЕИЗВЕСТНОЕ СЛОВО. ВОЗМОЖНО, ОНО СОДЕРЖИТ ОШИБКИ
+InGameMessageGoShortWord=СЛИШКОМ КОРОТКОЕ СЛОВО. ПРИДУМАЙТЕ ДЛИННЕЕ ИЛИ СНИМИТЕ ОГРАНИЧЕНИЕ В НАСТРОЙКАХ
+InGameMessageGoRepeatWord=ТАКОЕ СЛОВО УЖЕ ПРИСУТСТВУЕТ НА ИГРОВОМ ПОЛЕ
+InGameMessageGoTheSameWord=ВЫ ПЫТАЕТЕСЬ ВЫСТАВИТЬ ДВА РАЗА ОДНО И ТО ЖЕ СЛОВО
+InGameMessageCalculateNoWords=НА ИГРОВОМ ПОЛЕ НЕТ НОВЫХ СЛОВ. АНАЛИЗИРОВАТЬ НЕЧЕГО
+InGameMessageGoNoWords=ПРЕЖДЕ ЧЕМ НАЖИМАТЬ КНОПКУ "ХОЖУ", СЛЕДУЕТ СОСТАВИТЬ ХОТЯ БЫ ОДНО СЛОВО
+InGameMessageGoNeedUseStartCell=ПЕРВОЕ СЛОВО ДОЛЖНО ЗАХВАТЫВАТЬ БУКВОЙ НАЧАЛЬНУЮ ЯЧЕЙКУ
+InGameMessageGoNoCrossWord=СЛОВО НЕ ПЕРЕСЕКАЕТСЯ С ОСТАЛЬНЫМИ. ЭТО НЕДОПУСТИМО!
+InGameMessageChangeLettersNoOneSelected=ВЫ НЕ ОТМЕТИЛИ ДЛЯ ЗАМЕНЫ#НИ ОДНОЙ БУКВЫ
+InGameMessageHintNoVariants=ИЗВИНИТЕ, НЕТ ВАРИНТОВ. ВАМ РЕКОМЕНДУЕТСЯ ЗАМЕНИТЬ БУКВЫ
+OptionsMessageChangeSkin=ДЛЯ СМЕНЫ ШКУРКИ СЛЕДУЕТ ПЕРЕЗАПУСТИТЬ ИГРУ
+InGameMessageWordExcluded=СЛОВО "%s" ЗАНЕСЕНО В СЛОВАРЬ ИСКЛЮЧЕНИЙ И НЕ БУДЕТ ИСПОЛЬЗОВАТЬСЯ В ИГРЕ
+InGameQuestionExitFromProgram=#ЖЕЛАЕТЕ ПОКИНУТЬ НАС?
+InDemoQuestionBreakDemoGame=#ПРЕРВАТЬ ДЕМО-ИГРУ?
+InGameQuestionBreakGame=ПАРТИЯ В САМОМ РАЗГАРЕ!#ВЫ ДЕЙСТВИТЕЛЬНО ЖЕЛАЕТЕ ЗАВЕРШИТЬ ЕЕ?
+InGameQuestionTooMuchLettersExchange=СДЕЛАНО СЛИШКОМ МНОГО ЗАМЕН ПОДРЯД. ЖЕЛАЕТЕ ПРОДОЛЖАТЬ ПАРТИЮ?
+InGameQuestionExcludeWordFromDictionary=ХОТИТЕ ЗАНЕСТИ СЛОВО "%s" В СПИСОК ИСКЛЮЧЕНИЙ?
+InGameQuestionAddWordToDictionary=НЕИЗВЕСТНОЕ СЛОВО "%s". ДОБАВИТЬ В СЛОВАРЬ И ПРОДОЛЖИТЬ ХОД?
+InGameQuestionAddWordExplanation=ТОЛКОВАНИЕ СЛОВА "%s" НЕ ОПРЕДЕЛЕНО. ЖЕЛАЕТЕ ДОБАВИТЬ СВОЕ ТОЛКОВАНИЕ?
+InGameMessageLongWordBonus=ПРЕМИЯ ЗА ДЛИННОЕ СЛОВО:
+InGameMessageAllLettersUsedBonus=ПРЕМИЯ ЗА ВСЕ БУКВЫ: +15
+InGameMessageScoreWithHintPenalty=за подсказку
+UserWindowTagButtonMaximaze=Развернуть окно игрока
+UserWindowTagButtonMinimaze=Свернуть окно игрока
+UserWindowTagButtonLock=Закрепить окно
+UserWindowTagButtonUnLock=Окно закреплено. Щелкните, чтобы освободить
+InGameTagHintsLeft=Осталось подсказок -
+InGameTagPlayerScore=Очки игрока
+InGameTagPlayerMoveTime=Время на ход игрока
+InGameTagGameTime=Время на игру
+InGameTagPlayerWordsList=Выложенные слова:
+OptionsAlphabetTagLetterScore=Ценность:
+OptionsAlphabetTagLetterQuantity=Количество:
+TagEmptySlot=Пустой слот
+InGameInfoIntellectLow=Интеллект партии - Невысокий
+InGameInfoIntellectNormal=Интеллект партии - Нормальный
+InGameInfoIntellectHigh=Интеллект партии - Достойный
+InGameInfoLimitsNo=Игра без ограничений
+InGameInfoLimitsScore=Игра продолжается до %s очков
+InGameInfoLimitsTime=Партия продолжается %s минут
+InGameInfoLimitsMoveTime=На ход оппонента дается 
+InGameInfoLimitsSuffixMoveTime= на ход
+InGameInfoDictionaryMax=Используются все слова словаря
+InGameInfoDictionaryChildren=Используются только детский словарный запас
+InGameInfoDictionaryNormal=Используются только слова из словаря Ожегова
+InGameInfoDictionaryExtended=Используется расширенный запас слов
+InGameInfoMusicTitle=Проигрывается: 
+StatusTakeLetters=БЕРИТЕ БУКВЫ,
+StatusHint=ПОДСКАЗКА
+StatusNetOrPCTakingLetters=БЕРЕТ БУКВЫ
+StatusNetOrPCMoving=ХОДИТ
+StatusLoading=ЗАГРУЗКА...
+StatusDemoMode=ДЕМО-РЕЖИМ
+DefaultNamePlayer=ИГРОК
+DefaultNamePC=КОМПЬЮТЕР
+MenuHelpItemExplanatoryDictionary=Толковый словарь Эрудита
+ContextMenuItemExcludeWord=Исключить
+LoadStatusFonts=Загрузка шрифтов
+LoadStatusGfx=Загрузка графики
+LoadStatusSound=Загрузка звука
+LoadStatusNearlyComplete=Почти готово
+Title=Эрудит ПИСИКА
+TitleSuffixWithExplanatoryDictionary=с толковым словарем
+TagCellLetter=буква
+TagCellWord=слово
+InGameLayoutTagCellStartCell=начальная клетка
+InGameMessageNoWinner=НИЧЬЯ
+InGameMessageWait=ожидание...
+InGameMessageHintInProgress=идет подсказка...
+InGameTagButtonEndGame=Закончить партию
+InGameTagButtonEndDemo=Прервать демо
+InGameTagButtonSaveGame=Сохранение
+InGameTagButtonLoadGame=Загрузка
+NewGameLayoutRandom=ПРОИЗВОЛЬНОЕ
+NewGameIntellectLow=НЕВЫСОКИЙ
+NewGameIntellectNormal=НОРМАЛЬНЫЙ
+NewGameIntellectHigh=ДОСТОЙНЫЙ
+NewGameDicttionaryMax=ВСЕ СЛОВА СЛОВАРЯ
+NewGameDicttionaryExtended=РАСШИРЕННЫЙ ЗАПАС СЛОВ
+NewGameDicttionaryNormal=НОРМАЛЬНЫЙ ЗАПАС СЛОВ
+NewGameDicttionaryChildren=ДЕТСКИЙ ЗАПАС СЛОВ
+NewGameLimitsNo=БЕЗ ОГРАНИЧЕНИЙ
+NewGameLimitsScore=ИГРА ДО %s ОЧКОВ
+NewGameLimitsGameTime=ИГРА В ТЕЧЕНИЕ %s МИНУТ
+NewGameLimitsSuffixMoveTime=НА ХОД
+NewGameButtonDictionaryConfig=Настройки словаря
+NewGameButtonDictionaryTheme=Тематические настройки
+TagButtonDictionaryConfig=Настройки использования встроенного#и пользовательских словарей
+TagButtonDictionaryTheme=Здесь можно исключить#из словаря термины некоторых#специфических тематик
+LanguageButtonLanguageConfig=Языковые настройки
+LanguageButtonAlphabetConfig=Настройка алфавита
+TagButtonLanguageConfig=Установка языков для#отдельных элементов программы
+TagButtonAlphabetConfig=Настройка ценности и количества#фишек с буквами для текущего#игрового языка
+OptionsAlphabetLetterQuantityPrefix=на каждые
+OptionsAlphabetLayoutCellsQuantitySuffix=фишек
+OptionsAlphabetComputeForSelectedLayoutPrefix=Для установленного игрового поля:
+OptionsAlphabetComputeForSelectedLayoutMiddle=количество фишек с символом
+OptionsAlphabetComputeForSelectedLayoutSuffix=будет равно
+OptionsAlphabetMessageNullAllLetter=Не стоит "обнулять" все фишки. Чем играть будете?
+LoadMessageAlphabetFileNotFound=Не найден файл alphabet.txt. Используйте окно настроек для редактирования значений фишек.
+OptionsMessageWrongScore=Недопустимое значение счета!
+OptionsUserDictionaryErrorWordAlreadyInList=Слово уже есть в списке.
+OptionsUserDictionaryCollisionAddingWordAlreadyExcluded=Слово присутствует в словаре исключенных слов.
+OptionsUserDictionaryCollisionExcludingWordAlreadyAdded=Слово присутствует в словаре добавленных слов.
+InGameMessageNoWordExplanation=Толкование слова не определено.

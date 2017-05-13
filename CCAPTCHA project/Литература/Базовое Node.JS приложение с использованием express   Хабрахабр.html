@@ -1,0 +1,3849 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://habrahabr.ru/post/207930/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta content="width=1024" name="viewport">
+    
+    
+    <title>Базовое Node.JS приложение с использованием express / Хабрахабр</title>
+    
+    <meta name="yandex-verification" content="67d46b975fa41645"> <!-- яндекс вебмастер - верификация -->
+
+    <meta name="description" content="Всем привет.
+Искал статью, как сделать базовое Node.JS приложение с использованием express, точнее какая базовая структура должна быть у проекта, но так ничего похожего для меня не нашел.
+Потому...">    
+    <meta name="keywords" content="Javascript, Node.JS, express, MongoDB">
+    
+    	<meta property="fb:app_id" content="444736788986613"> 
+<meta property="og:type" content="article"> 
+<meta property="og:url" content="http://habrahabr.ru/post/207930/"> 
+<meta property="og:title" content="Базовое Node.JS приложение с использованием express"> 
+	
+	<meta property="og:image" content="http://habrahabr.ru/i/habralogo.jpg">
+	<link rel="image_src" href="http://habrahabr.ru/i/habralogo.jpg">
+<meta property="og:description" content="Всем привет. Искал статью, как сделать базовое Node.JS приложение с использованием express, точнее какая базовая структура должна быть у проекта, но так ничего...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@habrahabr">
+	<meta property="al:ios:url" content="habrahabr://post/207930">
+<meta property="al:ios:app_store_id" content="778613673">
+<meta property="al:ios:app_name" content="Habrahabr">
+<meta property="al:android:url" content="habrahabr://post/207930">
+<meta property="al:android:app_name" content="Habrahabr">
+<meta property="al:android:package" content="ru.habrahabr">
+<meta property="al:windows_phone:url" content="habrahabr://post/207930">
+<meta property="al:windows_phone:app_name" content="Habrahabr">
+<meta property="al:windows_phone:app_id" content="460a6bd6-8955-470f-935e-9ea1726a6060">
+
+
+    <link href="http://habrahabr.ru/styles/1408034048/assets/global_main.3932556069.css" rel="stylesheet" media="all">
+      <link href="http://habrahabr.ru/styles/1408034048/assets/post_common_css.2475661530.css" rel="stylesheet" media="all">
+
+    <link href="http://habrahabr.ru/styles/1408034048/printer.css" rel="stylesheet" media="print">
+
+    
+    
+
+    <script type="text/javascript" async="" src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/watch.js"></script><script async="" src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/analytics.js"></script><script type="text/javascript" src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/global_main.2330251109.js"></script><style type="text/css"></style>  
+
+
+      <script type="text/javascript" src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/post_common_js.4270603814.js"></script>
+
+
+      <!-- www.criteo.com/ru -->
+<script type="text/javascript">
+  var crtg_nid="2580";
+  var crtg_cookiename="cto_rtt";
+  var crtg_varname="crtg_content";
+  function crtg_getCookie(c_name){
+    var i,x,y,ARRCookies=document.cookie.split(";");
+    for(i=0;i<ARRCookies.length;i++){
+      x=ARRCookies[i].substr(0,ARRCookies[i].indexOf("="));
+      y=ARRCookies[i].substr(ARRCookies[i].indexOf("=")+1);
+      x=x.replace(/^\s+|\s+$/g,"");
+      if(x==c_name){return unescape(y);}
+    }
+    return'';
+  }
+  var crtg_content = crtg_getCookie(crtg_cookiename);var crtg_rnd=Math.floor(Math.random()*99999999999);
+  var crtg_url=location.protocol+'//rtax.criteo.com/delivery/rta/rta.js?netId='+escape(crtg_nid);crtg_url+='&cookieName='+escape(crtg_cookiename);crtg_url+='&rnd='+crtg_rnd;crtg_url+='&varName=' + escape(crtg_varname);
+  var crtg_script=document.createElement('script');crtg_script.type='text/javascript';crtg_script.src=crtg_url;crtg_script.async=true;
+  if(document.getElementsByTagName("head").length>0)document.getElementsByTagName("head")[0].appendChild(crtg_script);
+  else
+  if(document.getElementsByTagName("body").length>0)document.getElementsByTagName("body")[0].appendChild(crtg_script);
+</script><script type="text/javascript" src="http://rtax.criteo.com/delivery/rta/rta.js?netId=2580&cookieName=cto_rtt&rnd=93972037894&varName=crtg_content" async=""></script>
+      <script>
+        var N = 5;
+        var ar_duo1 = Math.floor(Math.random()*N+1);
+      </script>
+      <script type="text/javascript" src="http://habrahabr.ru/javascripts/1408034048/adriver.core.2.js"></script>
+
+    <link title="Хабрахабр / Комментарии к публикации «Базовое Node.JS приложение с использованием express»" type="application/rss+xml" rel="alternate" href="http://habrahabr.ru/rss/post/207930/">
+    
+    
+<script type="text/javascript">
+
+    var user_type = "guest";
+    var username = 'guest';
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-726094-1',  'auto' ); 
+
+  ga('require', 'displayfeatures');
+  ga('set', 'dimension1', user_type); // user type - guest/readonly/habrauser
+  ga('set', 'dimension2', username); // username
+
+
+  ga('send', 'pageview');
+  
+</script>
+
+
+
+<script type="text/javascript">
+var pp_gemius_identifier = new String('p8zr4.NqiIZJgD2cnP2s5fWWnIQFHrAvZ280B955gIr.f7');
+</script>
+<script src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/gemius.js"></script>
+
+
+
+
+
+
+
+    <meta content="Хабрахабр" name="apple-mobile-web-app-title">
+<link href="http://habrahabr.ru/images/apple-touch-icon_142x142.png" rel="apple-touch-icon" type="image/png">
+  <style type="text/css">#lleo_dialog, #lleo_dialog * {
+    margin: 0 !important;
+	padding: 0 !important;
+	background: none !important;
+	border: none 0 !important;
+	position: static !important;
+	vertical-align: baseline !important;
+	font: normal 13px Arial, Helvetica !important;
+	line-height: 15px !important;
+	color: #000 !important;
+	overflow: visible !important;
+	width: auto !important;
+	height: auto !important;
+	float: none !important;
+	visibility: visible !important;
+	text-align: left !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important;
+}
+
+#lleo_dialog iframe {
+	height: 0 !important;
+	width: 0 !important;
+}
+
+#lleo_dialog {
+    position: absolute !important;
+    background: #fff !important;
+    border: solid 1px #ccc !important;
+    padding: 7px 0 0 !important;
+    left: -999px;
+    top: -999px;
+	/*max-width: 450px !important;*/
+    width: 440px !important;
+    overflow: hidden;
+    display: block !important;
+    z-index: 999999999 !important;
+    opacity: 0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+	-moz-border-radius: 3px !important;
+	-webkit-border-radius: 3px !important;
+	border-radius: 3px !important;
+}
+#lleo_dialog.lleo_show {
+    opacity: 1 !important;
+    -webkit-transition: opacity 0.3s !important;
+}
+#lleo_dialog input::-webkit-input-placeholder {
+    color: #aaa !important;
+}
+#lleo_dialog .lleo_has_pic #lleo_word {
+	margin-right: 80px !important;
+}
+#lleo_dialog #lleo_translationsCopntainer1 {
+	position: relative !important;
+}
+#lleo_dialog #lleo_translationsCopntainer2 {
+	padding: 7px 0 0 !important;
+	vertical-align: middle !important;
+}
+#lleo_dialog #lleo_word {
+    color: #000 !important;
+    margin: 0 5px 2px 0 !important;
+    /*float: left !important;*/
+}
+#lleo_dialog .lleo_has_sound #lleo_word {
+    margin-left: 17px !important;
+}
+#lleo_dialog #lleo_text {
+    font-weight: bold !important;
+    color: #d56e00 !important;
+    text-decoration: none !important;
+    cursor: default !important;
+}
+#lleo_dialog #lleo_text.lleo_known {
+    cursor: pointer !important;
+    text-decoration: underline !important;
+}
+#lleo_dialog #lleo_closeBtn {
+    position: absolute !important;
+    right: 6px !important;
+    top: 5px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 0 !important;
+    color: #aaa !important;
+    display: block !important;
+    padding: 2px !important;
+	z-index: 9999999999 !important;
+	width: 7px !important;
+	height: 7px !important;
+	padding: 0  !important;
+	margin: 0   !important;
+}
+
+#lleo_dialog #lleo_optionsBtn {
+    position: absolute !important; 
+    right: 1px !important;
+    top: 12px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 13px !important;
+    color: #aaa !important;
+    padding: 2px !important;
+	display: none;
+}
+#lleo_dialog #lleo_optionsBtn img{
+	width: 12px !important;
+	height: 12px !important;
+}
+#lleo_dialog #lleo_sound {
+    float: left !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin-left: 12px !important;
+    background: 0 0 no-repeat !important;
+    cursor: pointer !important;
+    display: none !important;
+}
+#lleo_dialog .lleo_has_sound #lleo_sound {
+    display: block !important;
+}
+#lleo_dialog #lleo_picOuter {
+    position: absolute !important;
+    float: right !important;
+    right: 29px;
+    top: 0;
+    display: none !important;
+    z-index: 9 !important;
+}
+#lleo_dialog .lleo_has_pic #lleo_picOuter {
+    display: block !important;
+}
+#lleo_dialog #lleo_picOuter:hover {
+    z-index: 11 !important;
+}
+#lleo_dialog #lleo_pic,
+#lleo_dialog #lleo_picBig {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    border: solid 2px #fff !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    z-index: 1 !important;
+}
+#lleo_dialog #lleo_pic {
+	position: relative !important;
+    border: none !important;
+	width: 34px !important;
+}
+#lleo_dialog #lleo_picBig {
+    box-shadow: -1px 2px 4px rgba(0,0,0,0.3);
+    z-index: 2 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+#lleo_dialog #lleo_picOuter:hover #lleo_picBig {
+    visibility: visible !important;
+    opacity: 1 !important;
+    -webkit-transition: opacity 0.3s !important;
+    -webkit-transition-delay: 0.3s !important;
+}
+#lleo_dialog #lleo_transcription {
+    color: #486D85 !important;
+    margin: 0 0 4px 29px !important;
+    color: #aaaaaa !important;
+}
+#lleo_dialog .lleo_no_trans {
+    color: #aaa !important;
+}
+
+
+
+
+
+
+#lleo_dialog .ll-translation-counter {
+	float: right !important;
+    font-size: 11px !important;
+    color: #aaa !important;
+    padding: 2px 2px 1px 10px !important;
+}
+
+#lleo_dialog .ll-translation-text {
+	float: left !important;
+	width: 80% !important;
+}
+
+#lleo_dialog #lleo_trans a {
+    color: #3F669F !important;
+    padding: 1px 4px !important;
+    text-decoration: none !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}
+
+#lleo_dialog .ll-translation-item {
+	width: 100% !important;
+	float: left !important; 
+	padding:1px 4px;
+	color: #3F669F !important;
+	padding: 3px !important;
+	border: solid 1px white !important;
+	-moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+}
+
+#lleo_dialog .ll-translation-item:hover {
+	border: solid 1px #9FC2C9 !important;
+    background: #EDF4F6 !important;
+	cursor: pointer !important;
+}
+
+#lleo_dialog .ll-translation-marker {
+	margin: 0px 5px 2px 2px !important;
+}
+
+
+
+
+
+#lleo_dialog #lleo_icons {
+    margin: 10px 0 7px !important;
+    color: #aaa !important;
+    line-height: 20px !important;
+    font-size: 11px !important;
+    clear: both !important;
+    padding-left: 16px !important;
+}
+#lleo_icons a {
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 0 -2px 3px !important;
+    text-decoration: none !important;
+    background: 0 0 no-repeat !important;
+    opacity: 0.5 !important;
+}
+#lleo_icons a:hover {
+    opacity: 1 !important;
+}
+#lleo_icons a.lleo_google     {background-position:-34px 0 !important;}
+#lleo_icons a.lleo_multitran  {background-position:-64px 0 !important;}
+#lleo_icons a.lleo_lingvo     {background-position:-51px 0 !important; width: 12px !important;}
+#lleo_icons a.lleo_dict       {background-position:-17px 0 !important;}
+#lleo_icons a.lleo_linguee    {background-position:-81px 0 !important;}
+#lleo_icons a.lleo_michaelis  {background-position:-98px 0 !important;}
+
+
+
+
+#lleo_dialog #lleo_contextContainer {
+    margin: 0 !important;
+    padding: 3px 15px 3px 10px !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee)) !important;
+    border-bottom: solid 1px #ddd !important;
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+    display: none !important;
+    overflow: hidden !important;
+}
+#lleo_dialog .lleo_has_context #lleo_contextContainer {
+    display: block !important;
+}
+#lleo_dialog #lleo_context {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    line-height: 12px !important;
+    font-size: 11px !important;
+    margin-left: 2px !important;
+}
+#lleo_dialog #lleo_context b {
+    line-height: 12px !important;
+    color: #000 !important;
+    font-weight: bold !important;
+    font-size: 11px !important;
+}
+#lleo_dialog #lleo_gBrand {
+    color: #aaa !important;
+    font-size: 10px !important;
+    /*padding-right: 52px !important;*/
+    padding-bottom: 14px !important;
+    margin: -3px 4px 0 4px !important;
+    background: left bottom no-repeat !important;
+    display: inline-block !important;
+    float: right !important;
+}
+#lleo_dialog #lleo_gBrand.hidden {
+    display: none !important;
+}
+#lleo_dialog #lleo_translateContextLink {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#ddd)) !important;
+    border: solid 1px !important;
+    box-shadow: 1px 1px 0 #f6f6f6 !important;
+    border-color: #999 #aaa #aaa #999 !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    padding: 0 3px !important;
+    font-size: 11px !important;
+    text-decoration: none !important;
+    margin: 1px 5px 0 !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+}
+#lleo_dialog #lleo_translateContextLink:hover {
+    background: #f8f8f8 !important;
+}
+
+#lleo_dialog #lleo_setTransForm {
+    display: block !important;
+    margin-top: 3px !important;
+    padding-top: 5px !important;
+    /* Set position and background because the form might be overlapped by an image when no translations */
+    position: relative !important;
+    background: #fff !important;
+    z-index: 10 !important;
+    padding-bottom: 10px !important;
+    padding-left: 16px !important;
+}
+#lleo_dialog .lleo-custom-translation {
+    padding: 4px 5px !important;
+    border: solid 1px #ddd !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    width: 90% !important;
+    min-width: 270px !important;
+    background: -webkit-gradient(linear, 0 0, 0 20, from(#f1f1f1), to(#fff)) !important;
+	font: normal 13px Arial, Helvetica !important;
+	line-height: 15px !important;
+}
+#lleo_dialog .lleo-custom-translation:hover {
+    border: solid 1px #aaa !important;
+}
+#lleo_dialog .lleo-custom-translation:focus {
+    background: #FFFEC9 !important;
+}
+
+#lleo_dialog *.hidden {
+    display: none !important;
+}
+
+#lleo_dialog .infinitive{
+    color: #D56E00 !important;
+    text-decoration: none;
+    border-bottom: 1px dotted #D56E00 !important;
+}
+#lleo_dialog .infinitive:hover{
+    border: none !important;
+}
+
+
+#lleo_dialog #lleo_trans{
+    zoom: 1;
+    border-top: 1px solid #eeeeee !important;
+    margin: 10px 0 0 !important;
+    padding: 5px 30px 0 14px !important;
+}
+
+#lleo_dialog .lleo_clearfix {
+	display: block !important;
+	clear: both !important;
+	visibility: hidden !important;
+	height: 0 !important;
+	font-size: 0 !important;
+}
+
+#lleo_dialog #lleo_markBlock {
+    background: #eeeeee !important;
+	cursor: pointer !important; 
+	border-bottom-left-radius: 3px !important;
+	border-bottom-right-radius: 3px !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important; 
+}
+
+#lleo_dialog #lleo_markBlock img{
+	width: 14px !important;
+	height: 14px !important;
+}
+
+#lleo_dialog #lleo_markBlock .icon-cell {
+	padding: 5px 2px 5px 16px !important;
+	height: 17px !important;
+}
+
+#lleo_dialog #lleo_markBlock .wide-cell {
+	width: 100% !important;
+}
+
+#lleo_dialog #lleo_markBlock .text-cell {
+	color: #999999 !important; 
+    font: normal 13px Arial, Helvetica !important;
+    text-shadow: 0 1px #fff !important; 
+}
+
+#lleo_dialog #lleo_markBlock td {
+	vertical-align: middle !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important;
+}
+
+
+#lleo_dialog #lleo_picOuter table{
+    width: 44px !important;
+    position: absolute !important;
+    right: 0 !important;
+    vertical-align: middle !important;
+}
+
+#lleo_dialog #lleo_picOuter td{
+    width: 38px !important;
+    height: 38px !important;
+    border: 1px solid #eeeeee !important;
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+#lleo_dialog #lleo_picOuter td div {
+	height: 38px !important;
+	overflow: hidden !important;
+}</style><style type="text/css">
+.ll-content-notification *{
+	letter-spacing: normal !important;
+	margin: 0 !important;
+    padding: 0 !important;
+	background: none !important;
+	border: 0 !important;
+	float: none !important;
+	text-align: left !important;
+	text-decoration: none !important;
+    font: normal 15px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+}
+
+
+.ll-content-notification {
+    vertical-align: baseline !important;
+    color: #000 !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: fixed !important;
+    background: #fff !important;
+    border: solid 1px #AAA !important;
+	/*
+    left: -999px;
+    top: -999px;
+	*/
+    width: auto;
+    /* width: 300px !important; */
+    display: block;
+    z-index: 999999999 !important;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    -webkit-border-radius: 3px !important;
+    -moz-border-radius: 3px !important;
+    border-radius: 3px !important;
+    overflow: hidden !important;
+    /* opacity: 0 !important; */
+    transition: opacity 0.8s !important;
+    -moz-transition: opacity 0.8s !important; /* Firefox 4 */
+    -webkit-transition: opacity 0.8s !important; /* Safari and Chrome */
+    -o-transition: opacity 0.8s !important; /* Opera */
+    cursor: default !important;
+}
+
+.ll-content-notification-shown {
+    opacity: 1 !important;
+    transition: opacity 0.8s !important;
+    -moz-transition: opacity 0.8s !important; /* Firefox 4 */
+    -webkit-transition: opacity 0.8s !important; /* Safari and Chrome */
+    -o-transition: opacity 0.8s !important; /* Opera */
+}
+
+.ll-content-notification-header {
+	border: 0 !important;
+	margin: 0 !important;
+    background: url(data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAABJJREFUGFdjePHmCxw9e/UZjgAVYhYtk8xZqAAAAABJRU5ErkJggg==) !important;
+    border-bottom: solid 1px #CCC !important;
+    padding: 1px 4px !important;
+	min-height: 18px !important;
+	width: 100% !important;
+	-webkit-border-top-left-radius: 3px !important;
+    -webkit-border-top-right-radius: 3px !important;
+    -moz-border-radius-topleft: 3px !important;
+    -moz-border-radius-topright: 3px !important;
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+	border-collapse: collapse !important;
+	border-spacing: 0 !important;
+}
+
+.ll-content-notification-header-pic {
+	border: 0 !important;
+	margin: 0 !important;
+	padding: 3px 0 0 3px !important;
+	width: 20px !important;
+	vertical-align: top !important;
+	line-height: 1px !important;
+}
+
+.ll-content-notification-header-pic img{
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	line-height: 1px !important;
+}
+
+
+.ll-content-notification-header-caption {
+    font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+	font-weight: bold !important;
+    line-height: 15px !important;
+    color: #555 !important;
+    float: left !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+	white-space: normal !important;
+	padding: 3px !important;
+	margin: 0 !important;
+}
+
+.ll-content-notification-header-close {
+    width: 15px !important;
+	vertical-align: top !important;
+	text-align: right !important;
+	padding: 6px 5px 0 0 !important;
+	margin: 0 !important;
+	line-height: 1px !important;
+}
+
+.ll-content-notification-header-close img {
+	border: 0 !important;
+    width: 7px !important;
+    height: 7px !important;
+    margin: 0 !important;
+	padding: 0 !important;
+}
+
+.ll-content-notification-content {
+    margin: 0 !important;
+    padding: 8px !important;
+    float: left !important;
+    overflow: hidden !important;
+    width: auto !important;
+}
+
+.ll-content-notification-content-logo {
+    float: left !important;
+	height: 48px !important;
+	width: 48px !important;
+}
+
+.ll-content-notification-content-main {
+    margin-left: 60px !important;
+    overflow: hidden !important;
+    padding: 0 0 2px 0 !important;
+    color: #333 !important;
+    text-align: left !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+    font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+    line-height: 15px !important;
+    width: auto !important;
+}
+
+.ll-content-notification-content-header {
+	text-align: left !important;
+	text-decoration: none !important;
+    font: bold 15px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+    line-height: 19px !important;
+    margin: 0 0 4px 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    color: #333 !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+    display: block !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+.ll-content-notification-word {
+    color: #d56e00 !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+}
+</style></head>
+
+  <body>
+    
+    <div id="layout">
+      <div id="navbar_overlay" class="hidden"></div>
+<div id="navbar">
+    <div class="nav_panel">
+        <a href="http://habrahabr.ru/" class="logo"></a>
+
+            <a href="http://habrahabr.ru/posts/" class="tab tab_menu" data-tab="menu_tab" title="Меню"></a>
+            <a href="https://habrahabr.ru/auth/login/" class="tab tab_login" id="login" title="Войти"></a>
+        
+
+        <a href="http://habrahabr.ru/post/207930/#" class="scroll_to_up hidden scroll_to_up_for_guest" id="scroll_to_top" title="Наверх"></a>
+    </div>
+    <div class="nav_tabs_content ">
+
+        <div class="nav_tab hidden" id="menu_tab">
+            <div class="title">Разделы</div>
+            <form action="http://habrahabr.ru/search/" method="get" class="global_search_form">
+                <div>
+                    <input type="text" name="q" placeholder="Поиск">
+                </div>
+            </form>
+            <div class="menu">
+                <a href="http://habrahabr.ru/posts/top/">Публикации</a>
+                <a href="http://habrahabr.ru/hubs/">Хабы</a>
+                <a href="http://habrahabr.ru/companies/">Компании</a>
+                <a href="http://habrahabr.ru/users/">Пользователи</a>
+                <a href="http://toster.ru/?utm_source=tm_habrahabr&utm_medium=tm_menu&utm_campaign=tm_promo" class="new_window">Q&amp;A</a>
+                <a href="http://habrahabr.ru/sandbox/">Песочница</a>
+                <a href="http://habrahabr.ru/exchange/">Биржа авторов</a>
+
+
+
+            </div>
+
+            
+
+                    <div class="line"></div>
+                    <div class="title">Спецпроекты</div>
+                    <div class="menu">
+
+                    <a href="http://habrahabr.ru/lnk/25/">Конкурс от Wargaming</a>
+
+                    <a href="http://habrahabr.ru/lnk/31/">Тест-драйв</a>
+
+                    <a href="http://habrahabr.ru/lnk/29/">Помощь стартапам</a>
+                    </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+      <div class="inner">
+        
+                
+        
+
+        	
+  <div class="content_left">
+  	
+
+
+
+
+
+    <div class="post_show">
+  	  
+  <div class="post shortcuts_item" id="post_207930">
+  	<div class="published">31 декабря 2013 в 16:26</div>  
+    <h1 class="title">
+    
+      
+      
+
+      
+        <span class="post_title">Базовое Node.JS приложение с использованием express</span>
+			
+  		<a href="http://habrahabr.ru/sandbox/" class="flag flag_sandbox" title="Перейти в песочницу">из песочницы</a>
+			
+			<span class="flag flag_tutorial" title="Обучающий материал">tutorial</span>
+
+  	</h1>
+  	
+  	<div class="hubs">
+		<a href="http://habrahabr.ru/hub/MongoDB/" class="hub " title="Вы не подписаны на этот хаб">MongoDB</a><span class="profiled_hub" title="Профильный хаб">*</span>, 
+		<a href="http://habrahabr.ru/hub/nodejs/" class="hub " title="Вы не подписаны на этот хаб">Node.JS</a><span class="profiled_hub" title="Профильный хаб">*</span>, 
+		<a href="http://habrahabr.ru/hub/javascript/" class="hub " title="Вы не подписаны на этот хаб">JavaScript</a><span class="profiled_hub" title="Профильный хаб">*</span>
+</div>
+
+  	
+    <div class="content html_format">
+			Всем привет.<br>
+Искал статью, как сделать базовое Node.JS приложение с использованием express, точнее какая базовая структура должна быть у проекта, но так ничего похожего для меня не нашел.<br>
+Потому решил написать собственную, дабы объяснить таким же как и я как это сделать и как это должно выглядеть.<br>
+<br>
+Подробности под катом. Осторожно. Много текста и кода.<br>
+<a name="habracut"></a><br>
+Перед тем как начать, хочу отметить, что это моя первая статья. Я, быть может, что-то не учту, или наоборот, акцентирую на чем-то больше внимания, буду благодарен за поправки и уточнения по статье, а также подходу.<br>
+<br>
+Задача была следующей: сделать базовое приложение, которое смогло бы обрабатывать запросы, и выводить правильные страницы, либо же правильные ответы на запросы.<br>
+<br>
+Итак. Начнем, пожалуй, с используемых модулей внутри приложения:<br>
+<br>
+<pre><code class="brainfuck"><span class="comment">express</span> <span class="literal">-</span> <span class="comment">базовый</span> <span class="comment">пакет</span>, <span class="comment">для</span> <span class="comment">создания</span> <span class="comment">http</span>-<span class="comment">сервера</span>
+<span class="comment">mongoose</span> <span class="literal">-</span> <span class="comment">фреймверк</span>, <span class="comment">для</span> <span class="comment">удобной</span> <span class="comment">работы</span> <span class="comment">с</span> <span class="comment">MongoDB</span>
+<span class="comment">mongodb</span> <span class="literal">-</span> <span class="comment">native</span>-<span class="comment">driver</span> <span class="comment">для</span> <span class="comment">работы</span> <span class="comment">с</span> <span class="comment">MongoDB</span> <span class="comment">напрямую</span>
+<span class="comment">connect</span>-<span class="comment">mongo</span> <span class="literal">-</span> <span class="comment">нужно</span> <span class="comment">для</span> <span class="comment">работы</span> <span class="comment">express</span> <span class="comment">с</span> <span class="comment">session</span>
+<span class="comment">node</span>-<span class="comment">uuid</span> <span class="literal">-</span> <span class="comment">для</span> <span class="comment">генерирования</span> <span class="comment">токенов</span> <span class="comment">для</span> <span class="comment">авторизации</span> <span class="comment">(в</span> <span class="comment">случае</span> <span class="comment">использования</span> <span class="comment">веб</span>-<span class="comment">сервисов)</span>
+<span class="comment">async</span> <span class="literal">-</span> <span class="comment">для</span> <span class="comment">работы</span> <span class="comment">с</span> <span class="comment">цепочкой</span> <span class="comment">асинхронных</span> <span class="comment">вызовов</span>, <span class="comment">ака</span> <span class="comment">Promise</span>
+<span class="comment">ejs</span>-<span class="comment">locals</span> <span class="literal">-</span> <span class="comment">движок</span> <span class="comment">рендеринга</span>, <span class="comment">который</span> <span class="comment">поддерживает</span> <span class="comment">наследование</span> <span class="comment">шаблонов</span>
+<span class="comment">nconf</span> <span class="literal">-</span> <span class="comment">для</span> <span class="comment">удобной</span> <span class="comment">работы</span> <span class="comment">с</span> <span class="comment">настройками</span> <span class="comment">приложения</span> <span class="comment">(собственный</span> <span class="comment">config</span>.<span class="comment">json)</span>
+<span class="comment">string</span> <span class="literal">-</span> <span class="comment">для</span> <span class="comment">более</span> <span class="comment">удобной</span> <span class="comment">работы</span> <span class="comment">со</span> <span class="comment">строками</span>, <span class="comment">также</span> <span class="comment">очистка</span> <span class="comment">строк</span> <span class="comment">от</span> <span class="comment">ненужных</span> <span class="comment">вещей</span>, <span class="comment">типа</span> <span class="comment">html</span> <span class="comment">тегов</span> <span class="comment">и</span> <span class="comment">тд</span>
+<span class="comment">validator</span> <span class="literal">-</span> <span class="comment">валидация</span> <span class="comment">данных</span>
+<span class="comment">winston</span> <span class="literal">-</span> <span class="comment">для</span> <span class="comment">продвинутого</span> <span class="comment">логирования</span> <span class="comment">ошибок</span>
+</code></pre><br>
+<br>
+Каждый из модулей можно установив используя команду:<br>
+npm install &lt;&lt;module_name&gt;&gt; --save<br>
+<br>
+<b>--save</b> нужен для сохранения модуля в dependency (package.json), для дальнейшего развертывания приложения на других машинах.<br>
+<br>
+Структура приложения получается следующей:<br>
+<br>
+<pre><code class="objectivec">    /config
+        config<span class="variable">.json</span>
+        index<span class="variable">.js</span>
+    /middleware
+        checkAuth<span class="variable">.js</span>
+        errorHandler<span class="variable">.js</span>
+        index<span class="variable">.js</span>
+    /models
+        user<span class="variable">.js</span>
+    /<span class="keyword">public</span>
+        <span class="comment">/*JS, CSS, HTML static files*/</span>
+    /routes
+        authentication<span class="variable">.js</span>
+        error<span class="variable">.js</span>
+        index<span class="variable">.js</span>
+        main<span class="variable">.js</span>
+        <span class="keyword">register</span><span class="variable">.js</span>
+    /utils
+        index<span class="variable">.js</span>
+        log<span class="variable">.js</span>
+        mongoose<span class="variable">.js</span>
+        validate<span class="variable">.js</span>
+    /views
+        index<span class="variable">.ejs</span>
+    manage<span class="variable">.js</span>
+    package<span class="variable">.json</span>
+    server<span class="variable">.js</span>
+</code></pre><br>
+<br>
+Сейчас, собственно говоря, объясню в чем соль каждой из директорий и ее скриптов.<br>
+Начнем с самого главного скрипта, инициирующего все наше приложение.<br>
+<br>
+<h3>server.js</h3><br>
+<pre><code class="javascript"><span class="keyword">var</span> express = require(<span class="string">'express'</span>),
+    http = require(<span class="string">'http'</span>),
+    app = express(),
+    middleware = require(<span class="string">'./middleware'</span>)(app, express),
+    config = require(<span class="string">'./config'</span>),
+    log = require(<span class="string">'./utils/log'</span>)(app, module);
+
+http.createServer(app).listen(config.get(<span class="string">'port'</span>), <span class="keyword">function</span>(){
+    log.info(<span class="string">'Express server listening on port '</span> + config.get(<span class="string">'port'</span>));
+});
+</code></pre><br>
+<br>
+В <b>server.js</b> создаем приложение epxress <b>app</b>, подключаем модуль <b>middleware</b>, в котором подключаются все нужные middleware приложения.<br>
+Дальше создаем сервер, который будет обрабатывать все входящие подключения через порт, который указан в конфиге.<br>
+<br>
+<h3>package.json</h3><br>
+<pre><code class="json">{
+  "<span class="attribute">name</span>": <span class="value"><span class="string">"test_express_app"</span></span>,
+  "<span class="attribute">version</span>": <span class="value"><span class="string">"0.0.1"</span></span>,
+  "<span class="attribute">private</span>": <span class="value"><span class="literal">true</span></span>,
+  "<span class="attribute">scripts</span>": <span class="value">{
+    "<span class="attribute">start</span>": <span class="value"><span class="string">"node server.js"</span>
+  }</span></span>,
+  "<span class="attribute">dependencies</span>": <span class="value">{
+    "<span class="attribute">express</span>": <span class="value"><span class="string">"~3.4.6"</span></span>,
+    "<span class="attribute">mongoose</span>": <span class="value"><span class="string">"~3.8.1"</span></span>,
+    "<span class="attribute">node-uuid</span>": <span class="value"><span class="string">"~1.4.1"</span></span>,
+    "<span class="attribute">nconf</span>": <span class="value"><span class="string">"~0.6.9"</span></span>,
+    "<span class="attribute">winston</span>": <span class="value"><span class="string">"~0.7.2"</span></span>,
+    "<span class="attribute">async</span>": <span class="value"><span class="string">"~0.2.9"</span></span>,
+    "<span class="attribute">mongodb</span>": <span class="value"><span class="string">"~1.3.22"</span></span>,
+    "<span class="attribute">ejs-locals</span>": <span class="value"><span class="string">"~1.0.2"</span></span>,
+    "<span class="attribute">connect-mongo</span>": <span class="value"><span class="string">"~0.4.0"</span></span>,
+    "<span class="attribute">validator</span>": <span class="value"><span class="string">"~2.0.0"</span></span>,
+    "<span class="attribute">string</span>": <span class="value"><span class="string">"~1.7.0"</span>
+  }</span>
+}</span>
+
+</code></pre><br>
+<br>
+Содержит в себе всю нужную информацию о проекте, а также все требуемые пакеты.<br>
+<br>
+<h3>manage.js</h3><br>
+<pre><code class="javascript"><span class="keyword">var</span> mongoose = require(<span class="string">'./utils/mongoose'</span>),
+    async = require(<span class="string">'async'</span>),
+    User = require(<span class="string">'./models/user'</span>),
+    log = require(<span class="string">'./utils/log'</span>)(<span class="literal">null</span>, module),
+    config = require(<span class="string">'./config'</span>);
+
+<span class="function"><span class="keyword">function</span> <span class="title">openConnection</span><span class="params">(cb)</span> {</span>
+    mongoose.connection.on(<span class="string">'open'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        log.info(<span class="string">'connected to database '</span> + config.get(<span class="string">'db:name'</span>));
+        cb();
+    });
+}
+
+<span class="function"><span class="keyword">function</span> <span class="title">dropDatabase</span><span class="params">(cb)</span> {</span>
+    <span class="keyword">var</span> db = mongoose.connection.db;
+    db.dropDatabase(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        log.info(<span class="string">'dropped database '</span> + config.get(<span class="string">'db:name'</span>));
+        cb();
+    });
+}
+
+<span class="function"><span class="keyword">function</span> <span class="title">createBaseUser</span><span class="params">(cb)</span> {</span>
+    <span class="keyword">var</span> admin = <span class="keyword">new</span> User({
+        username: <span class="string">'admin'</span>,
+        password: config.get(<span class="string">'project:admin:password'</span>),
+        email: config.get(<span class="string">'project:admin:email'</span>),
+        role: <span class="number">1</span>
+    });
+    admin.save(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        log.info(<span class="string">'created database '</span> + config.get(<span class="string">'db:name'</span>));
+        log.info(<span class="string">'created base admin user'</span>);
+        cb();
+    });
+}
+
+<span class="function"><span class="keyword">function</span> <span class="title">ensureIndexes</span><span class="params">(cb)</span> {</span>
+    async.each(Object.keys(mongoose.models), <span class="function"><span class="keyword">function</span> <span class="params">(model, callback)</span> {</span>
+        mongoose.models[model].ensureIndexes(callback);
+    }, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        log.info(<span class="string">'indexes ensured completely'</span>);
+        cb();
+    });
+}
+
+<span class="function"><span class="keyword">function</span> <span class="title">closeConnection</span><span class="params">()</span> {</span>
+    mongoose.disconnect();
+    log.info(<span class="string">'disconnected'</span>);
+}
+
+async.series(
+    [
+        openConnection,
+        dropDatabase,
+
+        createBaseUser,
+
+        ensureIndexes
+    ],
+    closeConnection
+);
+</code></pre><br>
+<br>
+Нужен для инициализации базы данных, заполнение default информацией, которой сервер будет оперировать.<br>
+<br>
+<h3>config</h3><br>
+<h4>config.json</h4><br>
+<pre><code class="json">{
+    "<span class="attribute">port</span>": <span class="value"><span class="number">3000</span></span>,
+    "<span class="attribute">db</span>": <span class="value">{
+        "<span class="attribute">connection</span>": <span class="value"><span class="string">"mongodb://localhost"</span></span>,
+        "<span class="attribute">name</span>": <span class="value"><span class="string">"db_name"</span></span>,
+        "<span class="attribute">options</span>": <span class="value">{
+            "<span class="attribute">server</span>": <span class="value">{
+                "<span class="attribute">socketOptions</span>": <span class="value">{
+                    "<span class="attribute">keepAlive</span>": <span class="value"><span class="number">1</span>
+                }</span>
+            }</span>
+        }</span>
+    }</span></span>,
+    "<span class="attribute">session</span>": <span class="value">{
+        "<span class="attribute">secret</span>": <span class="value"><span class="string">"secret_key"</span></span>,
+        "<span class="attribute">key</span>": <span class="value"><span class="string">"cid"</span></span>,
+        "<span class="attribute">cookie</span>": <span class="value">{
+            "<span class="attribute">path</span>": <span class="value"><span class="string">"/"</span></span>,
+            "<span class="attribute">httpOnly</span>": <span class="value"><span class="literal">true</span></span>,
+            "<span class="attribute">maxAge</span>": <span class="value"><span class="literal">null</span>
+        }</span>
+    }</span>
+}</span>
+</code></pre><br>
+<br>
+<h4>index.js</h4><br>
+<pre><code class="javascript"><span class="keyword">var</span> nconf = require(<span class="string">'nconf'</span>);
+<span class="keyword">var</span> path = require(<span class="string">'path'</span>);
+
+nconf.argv()
+    .env()
+    .file({file: path.join(__dirname, <span class="string">'config.json'</span>)});
+
+module.exports = nconf;
+</code></pre><br>
+<br>
+В файле <b>config.js</b> содержится информация о настройках соединения с базой данных, а также настройки сессии.<br>
+Для работы с <b>config</b> используется пакет <b>nconf</b>, который позволяет через getter и setter манипулировать с объектом настроек. Также можно использовать вложенные объекты через символ <b>:</b>:<br>
+<br>
+<pre><code class="javascript">config.get(<span class="string">'session:secret'</span>);
+config.get(<span class="string">'session:cookie:path'</span>);
+</code></pre><br>
+<br>
+<h3>middleware</h3><br>
+<pre><code class="javascript">module.exports = <span class="function"><span class="keyword">function</span> <span class="params">(app, express)</span> {</span>
+    <span class="keyword">var</span> ejs = require(<span class="string">'ejs-locals'</span>),
+        path = require(<span class="string">'path'</span>),
+        config = require(<span class="string">'../config'</span>),
+
+        mongoose = require(<span class="string">'../utils/mongoose'</span>),
+        MongoStore = require(<span class="string">'connect-mongo'</span>)(express),
+
+        router = require(<span class="string">'../routes'</span>),
+        errorHandler = require(<span class="string">'./errorHandler'</span>)(app, express),
+
+        checkAuth = require(<span class="string">'./checkAuth'</span>);
+
+    <span class="comment">/**
+     * Page Rendering
+     * */</span>
+    app.engine(<span class="string">'html'</span>, ejs);
+    app.engine(<span class="string">'ejs'</span>, ejs);
+    app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'../views'</span>));
+    app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);
+
+
+    <span class="comment">/**
+     * Favicon
+     * */</span>
+    app.use(express.favicon(<span class="string">'public/images/favicon.ico'</span>));
+
+
+    <span class="comment">/**
+     * Logger
+     * */</span>
+    <span class="keyword">if</span> (app.get(<span class="string">'env'</span>) == <span class="string">'development'</span>) {
+        app.use(express.logger(<span class="string">'dev'</span>));
+    }
+
+
+    <span class="comment">/**
+     * Session
+     * */</span>
+    app.use(express.bodyParser());
+    app.use(express.cookieParser());
+    app.use(express.session({
+        secret: config.get(<span class="string">'session:secret'</span>),
+        key: config.get(<span class="string">'session:key'</span>),
+        cookie: config.get(<span class="string">'session:cookie'</span>),
+        store: <span class="keyword">new</span> MongoStore({mongoose_connection: mongoose.connection})
+    }));
+
+    <span class="comment">/**
+     * Authorization Access
+     * */</span>
+    app.use(checkAuth);
+
+
+    <span class="comment">/**
+     * Routing
+     * */</span>
+    app.use(app.router);
+    router(app);
+
+
+    <span class="comment">/**
+     * Public directory
+     * */</span>
+    app.use(express.static(path.join(__dirname, <span class="string">'../public'</span>)));
+    app.use(<span class="string">"/public"</span>, express.static(path.join(__dirname, <span class="string">'../public'</span>)));
+
+
+    <span class="comment">/**
+     * Error handing
+     * */</span>
+    app.use(errorHandler);
+};
+</code></pre><br>
+<br>
+Таким образом будем подключать все <b>middleware</b> не засоряя основную часть кода сервера, быть может, ее прийдется расширить, по ходу написания приложения.<br>
+<br>
+Хочу также отметить — <b>errorHandler</b> middleware предназначен для собственного handling ошибок сервера, и вывода страницы ошибки<br>
+<br>
+<h4>errorHandler</h4><br>
+<pre><code class="javascript"><span class="keyword">var</span> config = require(<span class="string">'../config'</span>);
+
+<span class="keyword">var</span> sendHttpError = <span class="function"><span class="keyword">function</span> <span class="params">(error, res)</span> {</span>
+    res.status(error.status);
+
+    <span class="keyword">if</span> (res.req.xhr) {
+        res.json(error);
+    } <span class="keyword">else</span> {
+        res.render(<span class="string">'error'</span>, {
+            error: {
+                status: error.status,
+                message: error.message,
+                stack: config.get(<span class="string">'debug'</span>) ? error.stack : <span class="string">''</span>
+            },
+            project: config.get(<span class="string">'project'</span>)
+        });
+    }
+};
+
+module.exports = <span class="function"><span class="keyword">function</span> <span class="params">(app, express)</span> {</span>
+    <span class="keyword">var</span> log = require(<span class="string">'../utils/log'</span>)(app, module),
+        HttpError = require(<span class="string">'../error'</span>).HttpError;
+
+    <span class="keyword">return</span> <span class="keyword">function</span>(err, req, res, next) {
+        <span class="keyword">if</span> (<span class="keyword">typeof</span> err === <span class="string">'number'</span>) {
+            err = <span class="keyword">new</span> HttpError(err);
+        }
+        <span class="keyword">if</span> (err <span class="keyword">instanceof</span> HttpError) {
+            sendHttpError(err, res);
+        } <span class="keyword">else</span> {
+            <span class="keyword">if</span> (app.get(<span class="string">'env'</span>) === <span class="string">'development'</span>) {
+                express.errorHandler()(err, req, res, next);
+            } <span class="keyword">else</span> {
+                log.error(err);
+                err = <span class="keyword">new</span> HttpError(<span class="number">500</span>);
+                sendHttpError(err, res);
+            }
+        }
+    };
+};
+</code></pre><br>
+<br>
+Также хочется отметить middleware <b>checkAuth</b><br>
+<pre><code class="javascript"><span class="keyword">var</span> HttpError = require(<span class="string">'../error'</span>).HttpError;
+
+module.exports =  <span class="function"><span class="keyword">function</span> <span class="params">(req, res, next)</span> {</span>
+    <span class="keyword">if</span> (!req.session.user) {
+        <span class="keyword">return</span> next(<span class="keyword">new</span> HttpError(<span class="number">401</span>, <span class="string">"You are not authorized!"</span>));
+    }
+    next();
+};
+</code></pre><br>
+Который будет проверять запросы на наличие сессии и, в случае ее отсутствия, будет бросать ошибку. Его можно использовать как глобальный middleware или же указать конкретно метод, где он будет использоваться:<br>
+<br>
+<pre><code class="javascript">app.get(<span class="string">'/user-info'</span>, checkAuth, <span class="function"><span class="keyword">function</span> <span class="params">(req, res, next)</span> {</span>
+    <span class="comment">//do your staff</span>
+});
+</code></pre><br>
+<br>
+<h2>models</h2><br>
+C помощью Mongoose мы будем создавать собственные модели для работы с данными. Пример модели может выглядеть следующим образом:<br>
+<br>
+<pre><code class="javascript"><span class="keyword">var</span> crypto = require(<span class="string">'crypto'</span>),
+    mongoose = require(<span class="string">'../utils/mongoose'</span>),
+    Schema = mongoose.Schema,
+    async = require(<span class="string">'async'</span>);
+
+<span class="keyword">var</span> User = <span class="keyword">new</span> Schema({
+    username: {
+        type: String,
+        unique: <span class="literal">true</span>,
+        required: <span class="literal">true</span>
+    },
+    hashedPassword: {
+        type: String,
+        required: <span class="literal">true</span>
+    },
+    salt: {
+        type: String,
+        required: <span class="literal">true</span>
+    }
+});
+
+User.methods.encryptPassword = <span class="function"><span class="keyword">function</span> <span class="params">(password)</span> {</span>
+    <span class="keyword">return</span> crypto.createHmac(<span class="string">'sha1'</span>, <span class="keyword">this</span>.salt).update(password).digest(<span class="string">'hex'</span>);
+};
+
+User.virtual(<span class="string">'password'</span>)
+    .set(<span class="function"><span class="keyword">function</span> <span class="params">(password)</span> {</span>
+        <span class="keyword">this</span>._plainPassword = password;
+        <span class="keyword">this</span>.salt = Math.random() + <span class="string">''</span>;
+        <span class="keyword">this</span>.hashedPassword = <span class="keyword">this</span>.encryptPassword(password);
+    })
+    .get(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">return</span> <span class="keyword">this</span>._plainPassword;
+    });
+
+User.methods.checkPassword = <span class="function"><span class="keyword">function</span> <span class="params">(password)</span> {</span>
+    <span class="keyword">return</span> <span class="keyword">this</span>.encryptPassword(password) === <span class="keyword">this</span>.hashedPassword;
+};
+
+module.exports = mongoose.model(<span class="string">'User'</span>, User);
+
+</code></pre><br>
+<br>
+<h3>public</h3><br>
+В данной директории будут содержаться все скрипты и css файлы, доступные извне. Осуществляется данная опция с помощью следующей настройки:<br>
+<br>
+<pre><code class="javascript"><span class="comment">/**
+ * Public directory
+ * */</span>
+app.use(express.static(path.join(__dirname, <span class="string">'../public'</span>)));
+app.use(<span class="string">"/public"</span>, express.static(path.join(__dirname, <span class="string">'../public'</span>)));
+</code></pre><br>
+<br>
+<h2>routes</h2><br>
+Cамое, пожалуй, интересное. В данной директории, мы объявляем модуль, который будет отвечает за роутинг. файл <b>index.js</b><br>
+<br>
+<pre><code class="javascript"><span class="keyword">var</span> main = require(<span class="string">'./main'</span>),
+    register = require(<span class="string">'./register'</span>),
+    authentication = require(<span class="string">'./authentication'</span>),
+    error = require(<span class="string">'./error'</span>);
+
+module.exports = <span class="function"><span class="keyword">function</span> <span class="params">(app)</span> {</span>
+    app.get(<span class="string">'/'</span>, main.home);
+
+    app.post(<span class="string">'/register'</span>, register.requestRegistration);
+
+    app.get(<span class="string">'/users'</span>, authentication.users);
+    app.get(<span class="string">'/users/:id'</span>, authentication.user);
+
+    app.get(<span class="string">'*'</span>, error[<span class="string">'404'</span>]);
+};
+</code></pre><br>
+<br>
+Здесь мы просто объявляем наши роуты, и просто делегируем выполенение другим модулям. Например, <b>route "/"</b>:<br>
+<pre><code class="javascript"><span class="comment">/**
+ * Method: GET
+ * URI: /
+ * */</span>
+exports.home = <span class="keyword">function</span>(req, res, next) {
+    res.render(<span class="string">'index'</span>);
+};
+</code></pre><br>
+<br>
+Cобственно говоря и все. В данном случае, как база приложение будет работать. Для поддержки сессии включаем соответствующий <b>middleware</b>. Всю бизнес логику, связанную с пользователем, переносим в <b>models/user.js</b>, в частности валидацию и регистрацию, к примеру.<br>
+<br>
+PS:<br>
+В написании данной статьи была использована информация из скринкастов И.Кантора. Ссылка на <a href="http://learn.javascript.ru/nodejs-screencast">скринкаст</a>.<br>
+Также использовалась информация из курсов по <a href="https://education.mongodb.com/"><b>MongoDB</b></a>
+			<div class="clear"></div>
+    </div>
+
+    
+<ul class="tags">
+	<li><a href="http://habrahabr.ru/search/?q=%5BJavascript%5D&target_type=posts" rel="tag">Javascript</a></li><li>, <a href="http://habrahabr.ru/search/?q=%5BNode.JS%5D&target_type=posts" rel="tag">Node.JS</a></li><li>, <a href="http://habrahabr.ru/search/?q=%5Bexpress%5D&target_type=posts" rel="tag">express</a></li><li>, <a href="http://habrahabr.ru/search/?q=%5BMongoDB%5D&target_type=posts" rel="tag">MongoDB</a></li>
+</ul>
+
+		<div class="infopanel_wrapper">
+	<div class="infopanel " id="infopanel_post_207930">
+	
+				<div class="voting   ">
+	
+						<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+	
+					<div class="mark positive ">
+							<span class="score" title="Всего 43: ↑31 и ↓12">+19</span>
+					</div>
+					
+						<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+		
+				</div>
+	
+		<div class="pageviews" title="Просмотры поста">21295</div>
+			
+		<div class="favorite">
+				<a class="guest" href="http://habrahabr.ru/post/207930/#" onclick="return false;" title="Только зарегистрированные пользователи могут добавлять посты в избранное"></a>
+		</div>
+		<div class="favs_count" title="Количество пользователей, добавивших пост в избранное">240</div>
+		
+		
+		
+	
+	
+	
+	
+				<div class="author">
+					<a title="Автор текста" href="http://habrahabr.ru/users/SSolonko/">SSolonko</a>
+					<span class="rating" title="рейтинг пользователя">0,5</span>
+				</div>
+		
+	
+	
+		
+			<div class="share">
+				<div class="twitter">
+					<a href="http://twitter.com/intent/tweet?text=%D0%91%D0%B0%D0%B7%D0%BE%D0%B2%D0%BE%D0%B5+Node.JS+%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5+%D1%81+%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%D0%BC+express+http://habr.ru/p/207930/+via+%40habrahabr+%23habr" title="Опубликовать ссылку в Twitter" target="_blank"></a>
+				</div>
+				<div class="vkontakte">
+					<a href="http://vk.com/share.php?url=http://habrahabr.ru/post/207930/" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, &#39;Опубликовать ссылку во Вконтакте&#39;, &#39;width=800,height=300&#39;); return false"></a>
+				</div>
+				<div class="facebook">
+					<a href="https://www.facebook.com/sharer/sharer.php?u=http://habrahabr.ru/post/207930/" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, &#39;Опубликовать ссылку в Facebook&#39;, &#39;width=640,height=436,toolbar=0,status=0&#39;); return false"></a>
+				</div>
+				<div class="googleplus">
+					<a href="https://plus.google.com/share?url=http://habrahabr.ru/post/207930/" title="Опубликовать ссылку в Google Plus" onclick="window.open(this.href, &#39;Опубликовать ссылку в Google Plus&#39;, &#39;width=800,height=300&#39;); return false"></a>
+				</div>
+			</div>
+	
+	</div>
+	<div class="clear"></div>
+</div>
+
+
+
+
+    
+		
+	</div>
+
+    </div>
+
+  	    
+    <div id="adriver_banner_132032996"></div>  
+
+  <script type="text/javascript">
+      /** Для блоков гугла **/
+      function requireAdsafe(file){
+          var head = document.getElementsByTagName("head")[0];
+          var script = document.createElement('script');
+          script.src = file;
+          script.type = 'text/javascript';
+          head.appendChild(script);
+      }
+
+      function show_inner_banner_block(name, url){
+          if( typeof(name) !== 'undefined'){
+              $.get('/html/'+name+'/1408034048/', function(html){
+                  $('#adriver_banner_132032996').html(html);
+                  $('.'+name+'_inner_banner').removeClass('hidden');
+                  if( typeof(url) !== 'undefined'){
+                      $('.'+name+'_inner_banner .block_url').attr('href', url);
+                  }
+
+                  if (name == 'google') {
+                      new Image().src = 'http://ad.doubleclick.net/jump/N5295.197836HABRAHABR.RU/B8185867.109918092;sz=1x1;ord=![rnd]';
+                      requireAdsafe('http://pixel.adsafeprotected.com/rjss/st/28047/2559986/skeleton.js');
+                  }
+
+                  if (name == 'google2') {
+                      new Image().src = 'https://ad.doubleclick.net/ad/N5295.197836HABRAHABR.RU/B8064776.109574175;sz=1x1;ord=![rnd]';
+                      requireAdsafe('https://pixel.adsafeprotected.com/rjss/st/25624/2476044/skeleton.js');
+                  }
+
+                  if (name == 'google3') {
+                      new Image().src = 'http://ad.doubleclick.net/jump/N5295.197836HABRAHABR.RU/B8185867.109918090;sz=1x1;ord=![rnd]';
+                      requireAdsafe('http://pixel.adsafeprotected.com/rjss/st/28047/2559984/skeleton.js');
+                  }
+
+                  if (name == 'google4') {
+                      new Image().src = 'https://ad.doubleclick.net/ad/N5295.197836HABRAHABR.RU/B8064776.109574176;sz=1x1;ord=![rnd]';
+                      requireAdsafe('https://pixel.adsafeprotected.com/rjss/st/25624/2476046/skeleton.js');
+                  }
+              })
+          }
+      }
+
+        $(function(){
+            var keyword = '';
+            if (typeof crtg_content !== 'undefined' && crtg_content) { keyword = crtg_content; }
+            var custom = { 4:ar_duo1 };
+                custom[1] = 'MongoDB';
+                custom[2] = 'nodejs';
+                custom[3] = 'javascript';
+
+            /* Антоша не удаляй это условие блеать! Как я тестить буду? */
+            //if (true)
+            //    show_inner_banner_block('wgdc1');
+            //else
+                new adriver("adriver_banner_132032996", {sid: 176776, bt: 52, bn: 3, custom: custom, keyword: keyword});
+        });
+    </script>
+    
+
+
+  	
+  		<div class="comments_list " id="comments">
+
+  <h2 class="title ">Комментарии (<span id="comments_count">45</span>)
+  
+  
+  </h2>
+
+    <div class="comment_item" id="comment_7159236">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7159236">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7159236" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark positive ">
+                    <span class="score" title="Всего 2: ↑2 и ↓0">+2</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/xGromMx/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/87d3ac3bc4c66d98ccb017e920560bec_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/xGromMx/" class="username">xGromMx</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 16:53</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7159236" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Чувствую влияние скринкастов по NodeJS от Ильи Кантора =)
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7159236">
+    </div>
+</div>
+
+    <div class="comment_item" id="comment_7159266">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7159266">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7159266" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/zag2art/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/0bd87893207d2f8caa41b9f28a7d5150_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/zag2art/" class="username">zag2art</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 17:05</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7159266" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Вот хорошее демо <a href="https://github.com/madhums/node-express-mongoose-demo">github.com/madhums/node-express-mongoose-demo</a> как раз примерно ваш набор модулей.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7159266">
+    </div>
+</div>
+
+    <div class="comment_item" id="comment_7159328">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7159328">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7159328" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark positive ">
+                    <span class="score" title="Всего 1: ↑1 и ↓0">+1</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/zag2art/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/0bd87893207d2f8caa41b9f28a7d5150_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/zag2art/" class="username">zag2art</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 17:29</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7159328" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            А, кстати, зачем вам модуль <code>mongodb</code>, у вас же mongoose…
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7159328">
+        <div class="comment_item" id="comment_7159338">
+
+    <span class="parent_id" data-parent_id="7159328"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7159338">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7159338" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/kDas/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/79e0934b415c166142fcf2fcddf72d7b_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/kDas/" class="username">kDas</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 17:32</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7159338" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7159338" data-parent_id="7159328" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7159328" data-id="7159338" data-parent_id="7159328" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Часто бывают случаи, когда нужно обращаться к БД напрямую.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7159338">
+        <div class="comment_item" id="comment_7159352">
+
+    <span class="parent_id" data-parent_id="7159338"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7159352">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7159352" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/zag2art/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/0bd87893207d2f8caa41b9f28a7d5150_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/zag2art/" class="username">zag2art</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 17:37</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7159352" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7159352" data-parent_id="7159338" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7159338" data-id="7159352" data-parent_id="7159338" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Ну так у вас же есть <code>mongoose.connection.db</code>. Именно так автор и делает, например, dropDatabase.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7159352">
+    </div>
+</div>
+
+        <div class="comment_item" id="comment_7159372">
+
+    <span class="parent_id" data-parent_id="7159338"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7159372">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7159372" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 17:41</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7159372" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7159372" data-parent_id="7159338" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7159338" data-id="7159372" data-parent_id="7159338" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Совершенно верно, теоретически еще можно получить доступ через mongoose connection, но, оно поддерживает лишь часть нативных возможностей
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7159372">
+        <div class="comment_item" id="comment_7159836">
+
+    <span class="parent_id" data-parent_id="7159372"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7159836">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7159836" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/zag2art/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/0bd87893207d2f8caa41b9f28a7d5150_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/zag2art/" class="username">zag2art</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 20:38</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7159836" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7159836" data-parent_id="7159372" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7159372" data-id="7159836" data-parent_id="7159372" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Что нельзя сделать из mongoose?
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7159836">
+        <div class="comment_item" id="comment_7159888">
+
+    <span class="parent_id" data-parent_id="7159836"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7159888">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7159888" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 21:00</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7159888" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7159888" data-parent_id="7159836" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7159836" data-id="7159888" data-parent_id="7159836" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            в принципе, если приглядеться — то можно увидеть в зависимостях mongoose нативный драйвер mongodb:<br>
+<img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/Screen_Shot_2013_12_31_at_6_58_07_PM.png" alt="image"><br>
+<br>
+и фактически да, через mongoose можно его использовать, таким образом выполнять все операции.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7159888">
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+    <div class="comment_item" id="comment_7159916">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7159916">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7159916" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark positive ">
+                    <span class="score" title="Всего 5: ↑5 и ↓0">+5</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/virpool/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/5a1168899a913ab58661540413d7c209_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/virpool/" class="username">virpool</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 21:07</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7159916" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Пара моментов:<br>
+1. middleware.registerMiddleware(app, express) — как масло масляное. require('./middleware')(app, express) — в принципе самое то.<br>
+2. <pre><code class="javascript"><span class="keyword">if</span> (res.req.headers[<span class="string">'x-requested-width'</span>] === <span class="string">'XMLHttpRequest'</span>)</code></pre> --&gt; <pre><code class="javascript"><span class="keyword">if</span> (req.xhr)</code></pre>
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7159916">
+        <div class="comment_item" id="comment_7159934">
+
+    <span class="parent_id" data-parent_id="7159916"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7159934">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7159934" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 21:11</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7159934" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7159934" data-parent_id="7159916" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7159916" data-id="7159934" data-parent_id="7159916" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            спасибо согласен, так лучше будет
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7159934">
+    </div>
+</div>
+
+    </div>
+</div>
+
+    <div class="comment_item" id="comment_7160050">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7160050">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160050" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark positive ">
+                    <span class="score" title="Всего 1: ↑1 и ↓0">+1</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/btd/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/06704f0112aec48c72cb850f6f0cefd3_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/btd/" class="username">btd</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 22:17</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160050" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            А чего все так прутся от winston?
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160050">
+        <div class="comment_item" id="comment_7160066">
+
+    <span class="parent_id" data-parent_id="7160050"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7160066">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160066" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 22:26<span class="time_changed"> (комментарий был изменён)</span></time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160066" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7160066" data-parent_id="7160050" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160050" data-id="7160066" data-parent_id="7160050" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            просто дает возможности для «продвинутого» логирования, также подсветка разных уровней логов. На самом деле можно использовать хоть собственную обвертку над <b>console.log</b>, тут кому как угодно.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160066">
+        <div class="comment_item" id="comment_7160092">
+
+    <span class="parent_id" data-parent_id="7160066"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7160092">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160092" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 2: ↑1 и ↓1">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/btd/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/06704f0112aec48c72cb850f6f0cefd3_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/btd/" class="username">btd</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 22:48</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160092" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7160092" data-parent_id="7160066" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160066" data-id="7160092" data-parent_id="7160066" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Если не сложно поясните что вы подразумеваете под «продвинутым» логированием?<br>
+Просто я не понимаю, какой понт в 10 уровнях логирования и подстветке логов как основных фич, логи используются для анализа проблемы после того как она случилась и ни одна ни другая фича в этом не помогут. А так да красивые сообщения в консоли — это мило, только бесполезно. <br>
+Еще заметил, что как то очень мало внимаю уделяется форматированию сообщений (н-р в большинстве либ нету миллисекунд, так как используется Date#toString).
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160092">
+        <div class="comment_item" id="comment_7160098">
+
+    <span class="parent_id" data-parent_id="7160092"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7160098">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160098" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 22:52</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160098" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7160098" data-parent_id="7160092" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160092" data-id="7160098" data-parent_id="7160092" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Фактически что вы описали, но я не задумывался о других модулях логирования, из комментария ниже можно попробовать пакет intel. Сейчас его попробую. Быть может Вы и правы.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160098">
+    </div>
+</div>
+
+        <div class="comment_item" id="comment_7162244">
+
+    <span class="parent_id" data-parent_id="7160092"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7162244">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7162244" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/asheee/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/4ada217149da913f0d9417590079e656_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/asheee/" class="username">asheee</a><span class="comma">,</span>
+            <time> 2 января 2014 в 16:00</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7162244" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7162244" data-parent_id="7160092" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160092" data-id="7162244" data-parent_id="7160092" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            У winston можно задавать дополнительные транспорты, то есть писать логи не только в консоль, но и в файл, в бд, на какой-нибудь удаленный сервис и тд. В купе с уровнями логирования и NODE_ENV может получиться «продвинутое логирование». 
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7162244">
+        <div class="comment_item" id="comment_7162396">
+
+    <span class="parent_id" data-parent_id="7162244"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7162396">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7162396" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/btd/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/06704f0112aec48c72cb850f6f0cefd3_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/btd/" class="username">btd</a><span class="comma">,</span>
+            <time> 2 января 2014 в 17:19</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7162396" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7162396" data-parent_id="7162244" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7162244" data-id="7162396" data-parent_id="7162244" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Полагаю тут на любителя (комбайн — либа). Я за unix-way — пусть логгер логирует, а куда я сам разберусь средствами ОС (есть ведь из чего выбирать). Потому как не легко написать грамотный логгер, который не будет жрать много ресурсов приложения и адекватно себя вести во всех ситуациях. Сами понимаете, что логи ценны именно тогда, когда само приложение уже может быть не в адекватном состоянии, не следует добивать его логгером.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7162396">
+        <div class="comment_item" id="comment_7162418">
+
+    <span class="parent_id" data-parent_id="7162396"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7162418">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7162418" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/asheee/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/4ada217149da913f0d9417590079e656_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/asheee/" class="username">asheee</a><span class="comma">,</span>
+            <time> 2 января 2014 в 17:32</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7162418" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7162418" data-parent_id="7162396" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7162396" data-id="7162418" data-parent_id="7162396" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Да, я, если честно, думал применить в своем проекте транспорты winston'а на продашне, но, в итоге, обошелся простым перенаправлением stdout. <br>
+<br>
+Думаю, такая популярность winston возникла из-за курса Ильи Кантора. <br>
+<br>
+
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7162418">
+        <div class="comment_item" id="comment_7162434">
+
+    <span class="parent_id" data-parent_id="7162418"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7162434">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7162434" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time> 2 января 2014 в 17:46</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7162434" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7162434" data-parent_id="7162418" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7162418" data-id="7162434" data-parent_id="7162418" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Скорее всего, но как по мне, один раз настроил как тебе нужно — и пользуйся.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7162434">
+    </div>
+</div>
+
+    </div>
+</div>
+
+        <div class="comment_item" id="comment_7179380">
+
+    <span class="parent_id" data-parent_id="7162396"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7179380">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7179380" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="username">rustler2000</a><span class="comma">,</span>
+            <time> 9 января 2014 в 10:51</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7179380" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7179380" data-parent_id="7162396" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7162396" data-id="7179380" data-parent_id="7162396" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Сам пускаю ноду через upstart так стандартный console.log, естественно, замечательно в лог попадает. Но access.log еще же надо.<br>
+<br>
+Тут бы с радостью принял чтото совсем простое — и хорошобы вообще без зависимостей.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7179380">
+        <div class="comment_item" id="comment_7179596">
+
+    <span class="parent_id" data-parent_id="7179380"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7179596">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7179596" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/btd/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/06704f0112aec48c72cb850f6f0cefd3_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/btd/" class="username">btd</a><span class="comma">,</span>
+            <time> 9 января 2014 в 11:55<span class="time_changed"> (комментарий был изменён)</span></time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7179596" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7179596" data-parent_id="7179380" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7179380" data-id="7179596" data-parent_id="7179380" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Если хочется, совсем без зависимостей, то можно как то так попробовать:<br>
+<pre><code class="vhdl">$ node
+&gt; var Console = require(<span class="attribute">'console</span>').Console
+&gt; var fs = require(<span class="attribute">'fs</span>')
+&gt; var fileStream = fs.createWriteStream('./<span class="keyword">access</span>.log');
+&gt; var <span class="keyword">access</span> = <span class="keyword">new</span> Console(fileStream, fileStream);
+&gt; <span class="keyword">access</span>.log(<span class="attribute">'GET</span> /aaa.txt <span class="number">200</span>')
+&gt; 
+^C
+$ cat <span class="keyword">access</span>.log 
+GET /aaa.txt <span class="number">200</span>
+</code></pre><br>
+<br>
+Я лично использую слегка дополненный connect logger, чтобы просто направлять от него сообщения в отдельный логгер.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7179596">
+        <div class="comment_item" id="comment_7180048">
+
+    <span class="parent_id" data-parent_id="7179596"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7180048">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7180048" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="username">rustler2000</a><span class="comma">,</span>
+            <time> 9 января 2014 в 14:10</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7180048" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7180048" data-parent_id="7179596" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7179596" data-id="7180048" data-parent_id="7179596" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            В реп положилбы — ленивых много :D
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7180048">
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+        <div class="comment_item" id="comment_7162260">
+
+    <span class="parent_id" data-parent_id="7160092"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7162260">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7162260" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/asheee/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/4ada217149da913f0d9417590079e656_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/asheee/" class="username">asheee</a><span class="comma">,</span>
+            <time> 2 января 2014 в 16:14<span class="time_changed"> (комментарий был изменён)</span></time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7162260" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7162260" data-parent_id="7160092" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160092" data-id="7162260" data-parent_id="7160092" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            **cообщение удалено**
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7162260">
+    </div>
+</div>
+
+    </div>
+</div>
+
+        <div class="comment_item" id="comment_7179088">
+
+    <span class="parent_id" data-parent_id="7160066"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7179088">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7179088" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="username">rustler2000</a><span class="comma">,</span>
+            <time> 9 января 2014 в 08:24</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7179088" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7179088" data-parent_id="7160066" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160066" data-id="7179088" data-parent_id="7160066" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Log4js подойдет?
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7179088">
+        <div class="comment_item" id="comment_7179324">
+
+    <span class="parent_id" data-parent_id="7179088"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7179324">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7179324" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/btd/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/06704f0112aec48c72cb850f6f0cefd3_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/btd/" class="username">btd</a><span class="comma">,</span>
+            <time> 9 января 2014 в 10:31</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7179324" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7179324" data-parent_id="7179088" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7179088" data-id="7179324" data-parent_id="7179088" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Он как минимум медленный.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7179324">
+        <div class="comment_item" id="comment_7179362">
+
+    <span class="parent_id" data-parent_id="7179324"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7179362">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7179362" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="username">rustler2000</a><span class="comma">,</span>
+            <time> 9 января 2014 в 10:45</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7179362" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7179362" data-parent_id="7179324" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7179324" data-id="7179362" data-parent_id="7179324" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Сделай статью с бенчами логгеров. У тебя почти все есть уже для этого.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7179362">
+        <div class="comment_item" id="comment_7180008">
+
+    <span class="parent_id" data-parent_id="7179362"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7180008">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7180008" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time> 9 января 2014 в 13:59</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7180008" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7180008" data-parent_id="7179362" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7179362" data-id="7180008" data-parent_id="7179362" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Ок, сегодня — завтра попробую
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7180008">
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+        <div class="comment_item" id="comment_7160090">
+
+    <span class="parent_id" data-parent_id="7160050"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7160090">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160090" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/cyberface/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/bd69ab59e782221f764b9176d1539ab1_small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/cyberface/" class="username">cyberface</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 22:47<span class="time_changed"> (комментарий был изменён)</span></time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160090" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7160090" data-parent_id="7160050" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160050" data-id="7160090" data-parent_id="7160050" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Я тоже не понимаю почему все от него прутся, крайне запутанное апи и плохая настраиваемость, по крайней мере я так и не смог его нормально использовать, особенно раздражало что нельзя иметь именнованые логеры и нормальные фильтры. Всем кто прется от винстона рекомендую посмотреть в сторону Intel <a href="https://github.com/seanmonstar/intel">github.com/seanmonstar/intel</a><br>
+ну или ваш форк =) <a href="https://github.com/btd/rufus">github.com/btd/rufus</a>
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160090">
+        <div class="comment_item" id="comment_7160100">
+
+    <span class="parent_id" data-parent_id="7160090"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7160100">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160100" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 22:52</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160100" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7160100" data-parent_id="7160090" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160090" data-id="7160100" data-parent_id="7160090" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Спасибо, сейчас посмотрим =)
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160100">
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+    <div class="comment_item" id="comment_7160154">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7160154">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160154" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="username">rustler2000</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 23:29</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160154" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            <code>app.use(express.static(...));</code> в хвост, иначе на каждый запрос по диску елозит. А с fstat все не очень хорошо — <a href="https://github.com/joyent/node/issues/6662">github.com/joyent/node/issues/6662</a>
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160154">
+        <div class="comment_item" id="comment_7160170">
+
+    <span class="parent_id" data-parent_id="7160154"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7160170">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160170" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time>31 декабря 2013 в 23:42</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160170" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7160170" data-parent_id="7160154" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160154" data-id="7160170" data-parent_id="7160154" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Опустил. Но в случае если нужно отрендерить единственную страницу с <b>public</b> папки, то эту опцию нужно оставить выше <b>router</b>, в случае если в основном использовать сервер как backend.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160170">
+        <div class="comment_item" id="comment_7160256">
+
+    <span class="parent_id" data-parent_id="7160170"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7160256">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160256" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/rustler2000/" class="username">rustler2000</a><span class="comma">,</span>
+            <time> 1 января 2014 в 01:14</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160256" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7160256" data-parent_id="7160170" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160170" data-id="7160256" data-parent_id="7160170" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Если <code>app.use('/public', express.static(...));</code> то без разницы. <br>
+Разница есть только в случае если у вас есть какойто «контроллер» будет за '/public'.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160256">
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+    <div class="comment_item" id="comment_7160360">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7160360">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160360" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/pikko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/b2ab06aa1ccd0d5e637d241cafa8aab7_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/pikko/" class="username">pikko</a><span class="comma">,</span>
+            <time> 1 января 2014 в 03:02</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160360" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            <a href="http://shop.oreilly.com/product/0636920024606.do">вот</a> очень хорошая книжка на эту тему
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160360">
+        <div class="comment_item" id="comment_7160648">
+
+    <span class="parent_id" data-parent_id="7160360"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7160648">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160648" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/asci/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/f999ae18ae7130f8950d9666bfda3650_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/asci/" class="username">asci</a><span class="comma">,</span>
+            <time> 1 января 2014 в 15:35</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160648" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7160648" data-parent_id="7160360" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160360" data-id="7160648" data-parent_id="7160360" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Недавно прочитал ее. В принципе там не много полезной информации, очень много воды, хотя может для новичков самое оно.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160648">
+        <div class="comment_item" id="comment_7160752">
+
+    <span class="parent_id" data-parent_id="7160648"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7160752">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160752" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/pikko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/b2ab06aa1ccd0d5e637d241cafa8aab7_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/pikko/" class="username">pikko</a><span class="comma">,</span>
+            <time> 1 января 2014 в 17:18</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160752" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7160752" data-parent_id="7160648" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7160648" data-id="7160752" data-parent_id="7160648" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Как бы и статья, вроде, для новичков. Если в «Learnning Node» вы нашли много воды, то вы, наверное, уже выросли из книжек, попробуйте почитать исходники каких-нибудь фреймворков
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160752">
+    </div>
+</div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+    <div class="comment_item" id="comment_7160624">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7160624">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160624" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/vitalets/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/dcfdea6eac4da91df0b727e542d6fc9f_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/vitalets/" class="username">vitalets</a><span class="comma">,</span>
+            <time> 1 января 2014 в 14:55</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160624" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            еще на эту тему можно посмотреть <a href="http://krakenjs.com/">krakenjs.com</a>
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160624">
+    </div>
+</div>
+
+    <div class="comment_item" id="comment_7160712">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7160712">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7160712" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark positive ">
+                    <span class="score" title="Всего 5: ↑3 и ↓2">+1</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/zelibobla/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/9c30abddfc7c632077128a372b66451f_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/zelibobla/" class="username">zelibobla</a><span class="comma">,</span>
+            <time> 1 января 2014 в 16:34</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7160712" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Удивляет, почему Mongoose, Sequelize и прочие назвают моделью то, что по всем признакам выглядит как репозиторий, которому при инстанцировании как раз таки скармливается именно модель; и который на операции поиска выплевывает именно инстансы моделей. В том числе сохраняет и удаляет модели именно репозиторий, насколько я себе представляю смысл этого паттерна.<br>
+<a href="http://www.codeproject.com/Articles/644605/CRUD-Operations-Using-the-Repository-Pattern-in-MV">www.codeproject.com/Articles/644605/CRUD-Operations-Using-the-Repository-Pattern-in-MV</a><br>
+<br>
+Греховность этой терминологической каши у разных ORM под Node.js состоит в том, что люди навешивают кастомные методы вроде бы как на модель, но по факту они навешиваются на репозиторий, который потом прикручивает эти самые методы собранным моделям. Все это порождает путаницу, например, в разруливании задачи: создать кастомный метод репозитория (замысловатую выборку, к примеру). И как я вижу решают люди эту проблему частенько саммым нездоровым способом – raw SQL прямо в теле контроллера. Это вместо того, чтобы расширить репозиторий.<br>
+<br>
+Кстати, утверждение, что вся логика должна сидеть в моделях – спорное. Ребята из Зенда, например, так не думают и я склонен с ними согласиться. <a href="http://www.slideshare.net/weierophinney/architecting-your-models">www.slideshare.net/weierophinney/architecting-your-models</a><br>
+<br>
+Вообще заметна склонность у авторов замечательных библиотек под javascript вносить, скажем так, сумятицу в термины, имеющие доселе конкретное понимание (вспомним Backbone, которые заварили кашу с «Controller was renamed to Router, for clarity» <a href="http://backbonejs.org/">backbonejs.org/</a>, вспомним oAuth2orize, который методом «var server = oauth2orize.createServer();» создает вовсе не сервер, а медиатр (middleware) <a href="https://github.com/jaredhanson/oauth2orize">github.com/jaredhanson/oauth2orize</a>). Странные они.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7160712">
+    </div>
+</div>
+
+    <div class="comment_item" id="comment_7162264">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7162264">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7162264" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/asheee/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/4ada217149da913f0d9417590079e656_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/asheee/" class="username">asheee</a><span class="comma">,</span>
+            <time> 2 января 2014 в 16:16<span class="time_changed"> (комментарий был изменён)</span></time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7162264" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Вот мой пример организации кода и написания небольшого приложения на express на примере очень простого движка для блога «<a href="https://github.com/shuvalov-anton/node-blog">node-blog</a>».
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7162264">
+    </div>
+</div>
+
+    <div class="comment_item" id="comment_7194234">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7194234">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7194234" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/jaybekster/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/48697854f823a416347c070f50f03861_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/jaybekster/" class="username">jaybekster</a><span class="comma">,</span>
+            <time>13 января 2014 в 14:44</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7194234" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            А почему mongoose.js файл пустой? Или это модуль? Про этот файл ничего не сказано…
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7194234">
+        <div class="comment_item" id="comment_7205280">
+
+    <span class="parent_id" data-parent_id="7194234"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7205280">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7205280" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time>15 января 2014 в 19:00</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7205280" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7205280" data-parent_id="7194234" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7194234" data-id="7205280" data-parent_id="7194234" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            <pre><code class="javascript"><span class="keyword">var</span> mongoose = require(<span class="string">'mongoose'</span>);
+<span class="keyword">var</span> config = require(<span class="string">'../config'</span>);
+
+mongoose.connect(
+    config.get(<span class="string">'db:connection'</span>) + <span class="string">'/'</span> + config.get(<span class="string">'db:name'</span>),
+    config.get(<span class="string">'db:options'</span>)
+);
+module.exports = mongoose;
+
+</code></pre><br>
+<br>
+это просто модуль с уже сохраненным объектом mongoose, который подключен к базе.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7205280">
+    </div>
+</div>
+
+    </div>
+</div>
+
+    <div class="comment_item" id="comment_7302595">
+
+    <span class="parent_id" data-parent_id="0"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7302595">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7302595" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/sergeymakoveev/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/2c6392e59c19ebf21787152583ae2ff0_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/sergeymakoveev/" class="username">sergeymakoveev</a><span class="comma">,</span>
+            <time>12 февраля 2014 в 12:42</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7302595" class="link_to_comment">#</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Не нашел в статье сырцов /routes/error.js<br>
+Очень смущает app.get('*', error['404']); — у меня такой роутинг перехватывает все запросы подряд, несмотря на то что он указан последним.<br>
+Было бы неплохо выложить рабочий вариант этой аппликухи на гитхаб, чтобы вживую посмотреть работу предложенной структуры приложения. Это возможно?
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7302595">
+        <div class="comment_item" id="comment_7302997">
+
+    <span class="parent_id" data-parent_id="7302595"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7302997">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7302997" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/sergeymakoveev/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/2c6392e59c19ebf21787152583ae2ff0_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/sergeymakoveev/" class="username">sergeymakoveev</a><span class="comma">,</span>
+            <time>12 февраля 2014 в 14:22</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7302997" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7302997" data-parent_id="7302595" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7302595" data-id="7302997" data-parent_id="7302595" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            errorHandler:<br>
+<br>
+<pre><code class="javascript"><span class="keyword">var</span> config = require(<span class="string">'../config'</span>);
+
+<span class="keyword">var</span> sendHttpError = <span class="function"><span class="keyword">function</span> <span class="params">(error, res)</span> {</span>
+    res.status(error.status);
+
+    <span class="keyword">if</span> (req.xhr) {
+       <span class="comment">// ....</span>
+    }
+</code></pre><br>
+<br>
+Подскажите плз «req» (… if (req.xhr) ...) где объявляется?
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7302997">
+        <div class="comment_item" id="comment_7321501">
+
+    <span class="parent_id" data-parent_id="7302997"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7321501">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7321501" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time>17 февраля 2014 в 20:37</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7321501" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7321501" data-parent_id="7302997" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7302997" data-id="7321501" data-parent_id="7302997" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            тут поправочку нужно сделать:<br>
+<br>
+<pre><code class="javascript">...
+ <span class="keyword">if</span> (res.req.xhr) {
+        res.json(error);
+    } <span class="keyword">else</span> {
+...
+</code></pre>
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7321501">
+    </div>
+</div>
+
+    </div>
+</div>
+
+        <div class="comment_item" id="comment_7305693">
+
+    <span class="parent_id" data-parent_id="7302595"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7305693">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7305693" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/asheee/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/4ada217149da913f0d9417590079e656_small.png" alt=""></a>
+            <a href="http://habrahabr.ru/users/asheee/" class="username">asheee</a><span class="comma">,</span>
+            <time>13 февраля 2014 в 09:31</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7305693" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7305693" data-parent_id="7302595" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7302595" data-id="7305693" data-parent_id="7302595" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            <blockquote>Очень смущает app.get('*', error['404']); — у меня такой роутинг перехватывает все запросы подряд, несмотря на то что он указан последним.</blockquote><br>
+<br>
+Это очень странно. Возможно, отправляя ответ клиенту, вы вызываете `next()` в обработчике? Можете показать пример, который к этому приводит?
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7305693">
+        <div class="comment_item" id="comment_7306181">
+
+    <span class="parent_id" data-parent_id="7305693"></span>
+    <div class="comment_body">
+        <div class="info  " rel="7306181">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7306181" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/sergeymakoveev/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/2c6392e59c19ebf21787152583ae2ff0_small.jpg" alt=""></a>
+            <a href="http://habrahabr.ru/users/sergeymakoveev/" class="username">sergeymakoveev</a><span class="comma">,</span>
+            <time>13 февраля 2014 в 12:02</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7306181" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7306181" data-parent_id="7305693" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7305693" data-id="7306181" data-parent_id="7305693" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Прошу прощения, вопрос снят — был баг в реализации контроллера обработки ошибок.
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7306181">
+    </div>
+</div>
+
+    </div>
+</div>
+
+        <div class="comment_item" id="comment_7321497">
+
+    <span class="parent_id" data-parent_id="7302595"></span>
+    <div class="comment_body">
+        <div class="info  is_topic_starter  " rel="7321497">
+            <div class="folding-dot-holder"><div class="folding-dot"></div></div>
+            <div id="voting_7321497" class="voting   ">
+                <span class="minus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <span class="plus" title="Голосовать могут только зарегистрированные пользователи"></span>
+                <div class="mark  ">
+                    <span class="score" title="Всего 0: ↑0 и ↓0">0</span>
+                </div>
+            </div>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="avatar"><img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+            <a href="http://habrahabr.ru/users/SSolonko/" class="username">SSolonko</a><span class="comma">,</span>
+            <time>17 февраля 2014 в 20:34</time>
+
+            <a href="http://habrahabr.ru/post/207930/#comment_7321497" class="link_to_comment">#</a>
+                <div class="show_tree" data-id="7321497" data-parent_id="7302595" title="Показать ветку комментариев">↵</div>
+                <a href="http://habrahabr.ru/post/207930/#comment_7302595" data-id="7321497" data-parent_id="7302595" class="to_parent">↑</a>
+            <span class="to_chidren"></span>
+            <div class="clear"></div>
+        </div>
+        <div class="message html_format ">
+            Этот роут опустите в самый низ. Он будет перехватывать оставшиеся не зарегистрированные маршруты и выдавать ошибку
+        </div>
+        <div class="reply_form_placeholder"></div>
+        <div class="reply">
+            
+        </div>
+    </div>
+
+    <div class="reply_comments" id="reply_comments_7321497">
+    </div>
+</div>
+
+    </div>
+</div>
+
+</div>
+
+  					<p class="for_users_only_msg">Только зарегистрированные пользователи могут оставлять комментарии.<br><a href="https://habrahabr.ru/auth/login/">Войдите</a>, пожалуйста.</p>
+
+
+  	
+<form action="http://habrahabr.ru/json/favorites/" method="post" id="edit_tags_form" class="hidden">
+  <input type="hidden" name="action" value="add">
+  <input type="hidden" name="ti" value="0">
+  <input type="hidden" name="tt" value="0">
+  <label>Пометьте топик понятными вам метками, если хотите</label>
+  <input type="text" name="tags_string" class="tags_string" autocomplete="off">
+  <div class="description">Метки лучше разделять запятой. Например: <i>общение, социальные сети, myspace.com, подростки, мердок</i></div>
+  <input type="submit" value="Сохранить" class="submit"> или <a href="http://habrahabr.ru/post/207930/#" class="close" onclick="return close_edit_tags()">закрыть</a>
+</form>
+    
+    
+
+  </div>
+  <div class="sidebar_right">
+      	<div class="banner_300x100">
+		<!--  AdRiver code START. Type:AjaxJS Site: habrahabr PZ: 0 BN: 5 -->
+		<div id="adriver_banner_2100516578"></div>
+		<script type="text/javascript">
+			$(function(){
+				var keyword = '';
+				if (typeof crtg_content !== 'undefined' && crtg_content) { keyword = crtg_content; }
+
+				var custom = {4:ar_duo1};
+					custom[1] = 'MongoDB';
+					custom[2] = 'nodejs';
+					custom[3] = 'javascript';
+
+				new adriver("adriver_banner_2100516578", {sid: 176776, bt: 52, bn: 5, custom: custom, keyword: keyword});
+			}());
+		</script>
+	</div>
+
+
+  			<div class="banner_300x500">
+		<div id="adriver_banner_1863387959"></div>
+		<script type="text/javascript">
+            function show_bn1_block(name, url){
+                console.log('show' + name);
+                if( typeof(name) !== 'undefined'){
+                    $.get('/html/'+name+'/1408034048/', function(html){
+                        $('#adriver_banner_1863387959').html(html);
+                        if( typeof(url) !== 'undefined'){
+                            $('.'+name+'_inner_banner .block_url').attr('href', url);
+                        }
+                    })
+                }
+            }
+
+			$(function(){
+
+				var keyword = '';
+				if (typeof crtg_content !== 'undefined' && crtg_content) { keyword = crtg_content; }
+
+				var custom = {4:ar_duo1};
+					custom[1] = 'MongoDB';
+					custom[2] = 'nodejs';
+					custom[3] = 'javascript';
+
+                 new adriver("adriver_banner_1863387959", {sid: 176776, bt: 52, bn: 1, custom: custom, keyword: keyword});
+			}());
+		</script>
+	</div>
+
+  		
+  		
+<div class="block daily_best_posts">
+  <div class="title">Популярное за сутки</div>
+  <div class="posts_list">
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/post/233209/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Плюсы и минусы работы в сфере IT, если ты девушка</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/company/alfa/blog/233291/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Как мы строили офис мечты с блэкджеком и пуфиками (почти за копейки)</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/post/233331/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Американские хакеры нечаянно отключили интернет в Сирии в 2012-м году</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/post/233261/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Японские учёные создали камеру, которая снимает со скоростью 4,4 триллиона кадров в секунду</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/post/233345/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Марсианский булыжник оставил след, видимый с орбиты</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/company/asus/blog/233347/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Электронная кожа</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/post/233283/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Проблемы со связностью интернета из-за разрастания BGP full-view</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/company/audiomania/blog/233317/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Руководство по выбору оборудования для подкастов от Дэна Бенжамина</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/company/intel/blog/233065/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Intel Embedded – процессоры вокруг нас</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/post/233245/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Разбираемся с прямым и обратным порядком байтов</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/post/233349/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Nokia и QMUL представили систему зарядки на основе звуковых волн</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/company/telebreeze/blog/233335/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">В Китае открылся робо-ресторан</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/company/medgadgets/blog/233299/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Om One: левитирующий Bluetooth-динамик</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/post/233333/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">На здоровье: 5 гаджетов для самых маленьких</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/company/yotadevices/blog/233339/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Geek-пикник и будни концепт-офиса Yota Devices</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/post/233363/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Получение пароля коммутаторов D-Link на примере DGS-1500</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/company/advertone_ru/blog/233341/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Как будет развиваться RTB-реклама в России: 3 прогноза</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/company/beeline/blog/233051/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Как мы строили и развивали сотовую сеть в Казахстане: организация связи в горах и степях</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/post/233297/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Опыт работы эникейщиком/системным администратором в бюджетной организации</a>
+      </div>
+      <div class="post_item">
+        
+				
+				
+				
+				
+				
+
+        <a href="http://habrahabr.ru/company/wargaming/blog/233343/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;daily_best_posts&#39;, $(this).parents(&#39;.daily_best_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" class="post_name">Как мы делали XVM — популярный мод для World of Tanks. Часть вторая: развитие серверной части</a>
+      </div>
+  </div>
+  <div class="all"><a href="http://habrahabr.ru/top/">все лучшие</a></div>
+</div>
+
+  	  
+
+
+<div class="block similar_posts">
+
+	<div class="title">Похожие посты</div>
+  <div class="posts_list">
+    	<div class="post_item">
+    				<a class="post_name" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;similar_posts&#39;, $(this).parents(&#39;.similar_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" href="http://habrahabr.ru/post/189812/">Node.JS и выгрузка каталога из 1С на сайт</a>
+    				<span class="when">12 августа 2013 в 11:52</span>
+      </div>
+    	<div class="post_item">
+    				<a class="post_name" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;similar_posts&#39;, $(this).parents(&#39;.similar_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" href="http://habrahabr.ru/post/168091/">LiveReload на Node.js</a>
+    				<span class="when"> 3 февраля 2013 в 14:31</span>
+      </div>
+    	<div class="post_item">
+    				<a class="post_name" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;similar_posts&#39;, $(this).parents(&#39;.similar_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" href="http://habrahabr.ru/post/147124/">Клонирование объектов в Node.js: Быстрее, глубже, нежнее!</a>
+    				<span class="when">28 декабря 2012 в 13:13</span>
+      </div>
+    	<div class="post_item">
+    				<a class="post_name" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;similar_posts&#39;, $(this).parents(&#39;.similar_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" href="http://habrahabr.ru/post/159201/">NODE.JS + Windows: заглянем внутрь</a>
+    				<span class="when">19 ноября 2012 в 03:12</span>
+      </div>
+    	<div class="post_item">
+    				<a class="post_name" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;similar_posts&#39;, $(this).parents(&#39;.similar_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" href="http://habrahabr.ru/post/193458/">RESTful API на Node.js + MongoDB</a>
+    				<span class="when">12 сентября 2013 в 11:49</span>
+      </div>
+    	<div class="post_item">
+    				<a class="post_name" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;similar_posts&#39;, $(this).parents(&#39;.similar_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" href="http://habrahabr.ru/post/207612/">Node.JS + taskset == немного странного юмора</a>
+    				<span class="when">27 декабря 2013 в 04:49</span>
+      </div>
+    	<div class="post_item">
+    				<a class="post_name" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;similar_posts&#39;, $(this).parents(&#39;.similar_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" href="http://habrahabr.ru/post/224073/">Node.js: Обзор технологий разработки библиотек общего назначения</a>
+    				<span class="when">10 июля в 01:11</span>
+      </div>
+    	<div class="post_item">
+    				<a class="post_name" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;similar_posts&#39;, $(this).parents(&#39;.similar_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" href="http://habrahabr.ru/post/227769/">Включение Node.js в ваше решение для Microsoft Azure</a>
+    				<span class="when">26 июня в 18:43</span>
+      </div>
+    	<div class="post_item">
+    				<a class="post_name" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;similar_posts&#39;, $(this).parents(&#39;.similar_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" href="http://habrahabr.ru/post/217901/">Node.js, Require и Exports</a>
+    				<span class="when"> 2 апреля в 00:05</span>
+      </div>
+    	<div class="post_item">
+    				<a class="post_name" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;similar_posts&#39;, $(this).parents(&#39;.similar_posts&#39;).hasClass(&#39;float_block&#39;) ? &#39;float&#39; : &#39;common&#39;); }" href="http://habrahabr.ru/post/146983/">Web-разработка на node.js и express. Изучаем node.js на практике</a>
+    				<span class="when"> 2 июля 2012 в 23:58</span>
+      </div>
+  </div>			
+</div>
+
+
+	
+  	  
+<div class="block similar_questions">
+	<div class="title">Вопросы по теме</div>
+
+	<div class="posts_list">
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/118621?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Как хранить временные данные в mongoose модели?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/95491?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Как сделать update используя составное имя поля в MongoDB через NodeJS?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/52210?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Какие могут быть варианты разработки игрового сервера?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/43692?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Связь с саб-схемой через populate()</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/31053?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Как сохранить двумерный массив в MongoDB?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/118769?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Как настроить PM2?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/118749?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Почему не работает Supervisor для  nodejs?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/117403?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">На повестку дня : Ruby On Rails или Node.js или php или Python?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/117091?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Как реализовать css live reload?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/116507?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Как устроены потоки в gulp?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/116375?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Какая есть альтернатива Flowy для node.js?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/115739?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Какая есть простая библиотека, реализующая классы в JavaScript?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/115269?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Как исключить папку из обработки gulp-imagemin?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/114557?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Как работать с асихнронным кодом в C++ модуле для Node.JS?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/112975?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">На чем писать чаты как в вк?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/111511?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Почему в  Promise RSVP  нету стека в ошибке?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/111409?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Как перезагрузить скрипт Node.js из под этого же скрипта?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/111127?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Socket.io: как получить определенный socket по id?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/110813?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Как в JavaScript перестать заморачиваться на классы и наследование и полностью переключить своё сознание на прототипы?</a>
+		</div>
+    	<div class="post_item">
+    	    <a class="post_name" href="http://toster.ru/q/110663?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Написал приложение, куда его выложить?</a>
+		</div>
+  </div>			
+		
+</div>
+
+  		
+  		
+
+	<div class="block live_broadcast">
+		<div class="title">Что обсуждают? </div>
+
+		<div class="live_broadcast_activity">
+				<div class="posts_list">
+							<div class="post_item">
+								<a href="http://habrahabr.ru/post/233381#comments" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;live_broadcast_activity&#39;, &#39;post&#39;); }" class="post_name">GAMESCOM 2014: дайджест новостей от Microsoft, Sony, Electronic Arts</a>&nbsp;<span class="count">22</span>
+							</div>
+							<div class="post_item">
+								<a href="http://habrahabr.ru/post/233297#comments" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;live_broadcast_activity&#39;, &#39;post&#39;); }" class="post_name">Опыт работы эникейщиком/системным администратором в бюджетной организации</a>&nbsp;<span class="count">39</span>
+							</div>
+							<div class="post_item">
+								<a href="http://habrahabr.ru/post/233373#comments" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;live_broadcast_activity&#39;, &#39;post&#39;); }" class="post_name">Минобразования Украины отменило запрет 2007 года на использование мобильных телефонов в школах</a>&nbsp;<span class="count">44</span>
+							</div>
+							<div class="post_item">
+								<a href="http://habrahabr.ru/post/233385#comments" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;live_broadcast_activity&#39;, &#39;post&#39;); }" class="post_name">Opera Developer 25 или Возвращение закладок 2</a>&nbsp;<span class="count">29</span>
+							</div>
+							<div class="post_item">
+								<a href="http://habrahabr.ru/post/233221#comments" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;live_broadcast_activity&#39;, &#39;post&#39;); }" class="post_name">Рентабельный код</a>&nbsp;<span class="count">23</span>
+							</div>
+							<div class="post_item">
+								<a href="http://habrahabr.ru/post/233209#comments" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;live_broadcast_activity&#39;, &#39;post&#39;); }" class="post_name">Плюсы и минусы работы в сфере IT, если ты девушка</a>&nbsp;<span class="count">77</span>
+							</div>
+							<div class="post_item">
+								<a href="http://habrahabr.ru/post/233343#comments" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;live_broadcast_activity&#39;, &#39;post&#39;); }" class="post_name">Как мы делали XVM — популярный мод для World of Tanks. Часть вторая: развитие серверной части</a>&nbsp;<span class="count">8</span>
+							</div>
+							<div class="post_item">
+								<a href="http://habrahabr.ru/post/233349#comments" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;live_broadcast_activity&#39;, &#39;post&#39;); }" class="post_name">Nokia и QMUL представили систему зарядки на основе звуковых волн</a>&nbsp;<span class="count">7</span>
+							</div>
+							<div class="post_item">
+								<a href="http://habrahabr.ru/post/233309#comments" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;live_broadcast_activity&#39;, &#39;post&#39;); }" class="post_name">Оптимизации WordPress. Часть 2. Итоги конкурсa «ВПС на год за лучшие идеи!»</a>&nbsp;<span class="count">30</span>
+							</div>
+							<div class="post_item">
+								<a href="http://habrahabr.ru/post/233369#comments" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;live_broadcast_activity&#39;, &#39;post&#39;); }" class="post_name">Synology призывает пользователей обновить ОС DSM для защиты от вируса SynoLocker, угрожающего старым версиями</a>&nbsp;<span class="count">11</span>
+							</div>
+				</div>
+				<div class="all"><a href="http://habrahabr.ru/posts/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;live_broadcast_activity&#39;, &#39;all_posts&#39;); }">все публикации</a></div>
+		</div>
+
+	</div>
+  
+  		<!--  AdRiver code START. Type:AjaxJS Site: habrahabr PZ: 0 BN: 2 -->
+
+<div id="adriver_banner_480931290" class="adbanner"></div>
+
+
+<script type="text/javascript">
+    function show_bn2_block(name, url){
+        if( typeof(name) !== 'undefined'){
+            $.get('/html/'+name+'/1408034048/', function(html){
+                $('#adriver_banner_480931290').html(html);
+                if( typeof(url) !== 'undefined'){
+                    $('.'+name+'_inner_banner .block_url').attr('href', url);
+                }
+            })
+        }
+    }
+
+    $(function(){
+
+        var check_scroll_position = function() {
+            var height = $(window).height();
+            var scrollTop = $(window).scrollTop();
+            var scrollBottom = $(window).scrollTop() + height;
+            var blockTop = $('#adriver_banner_480931290').position().top;
+            var show = scrollTop < blockTop && blockTop < scrollBottom;
+            //console.log('scroll', scrollTop, blockTop, scrollBottom, show)
+            if( show ){
+                //console.log('show bn2');
+                $( window ).off('scroll', check_scroll_position);
+                $( window ).trigger('show_bn2');
+            }
+        };
+        $( window ).on('scroll', check_scroll_position);
+
+        $( window ).on('show_bn2', function(){
+            var keyword = '';
+            if (typeof crtg_content !== 'undefined' && crtg_content) { keyword = crtg_content; }
+            var custom = {4:ar_duo1};
+            custom[1] = 'MongoDB';
+            custom[2] = 'nodejs';
+            custom[3] = 'javascript';
+            new adriver("adriver_banner_480931290", {sid: 176776, bt: 52, bn: 2, custom: custom, keyword: keyword});
+        });
+    });
+    </script>
+<!--  AdRiver code END  -->
+
+  		
+<div class="block best_company">
+
+		<div class="title">Компания дня <img src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/bg_cicle_help.png" class="help-tip"></div>
+
+		<div class="company_info">
+			<div class="name">
+			 <img class="favicon" src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/f6dff06b4758ceeab97ca3232d52743f_small.jpg" alt="Мосигра" height="16" width="16">
+			 <div class="company_name"><a href="http://habrahabr.ru/company/mosigra/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;best_company&#39;, &#39;title&#39;); }" class="title">Мосигра</a></div>
+			</div>
+
+			<p>Последняя публикация:
+				<a href="http://habrahabr.ru/company/mosigra/blog/232193/" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;best_company&#39;, &#39;post&#39;); }">Всё, что я не понимал про устройство Firefly, было на арктической яхте</a>
+			</p>
+
+			<div class="buttons">
+  			<div id="fans_count">3013 подписчиков</div>
+			</div>
+		</div>
+
+	</div>
+
+
+  		
+
+  		
+	<div class="block new_vacanies">
+  <a href="http://brainstorage.me/jobs?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo" class="title">Brainstorage</a>
+  <div class="vacancies">
+		<div class="job_item ">
+			<a href="http://brainstorage.me/jobs/8001?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Senior Ruby Developer</a>
+		</div>
+		<div class="job_item ">
+			<a href="http://brainstorage.me/jobs/21963?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Мастер Python/Django/AngularJS</a>
+		</div>
+		<div class="job_item marked">
+			<a href="http://brainstorage.me/jobs/21959?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">PHP программист</a>
+		</div>
+		<div class="job_item ">
+			<a href="http://brainstorage.me/jobs/21957?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Junior Веб-разработчик</a>
+		</div>
+		<div class="job_item ">
+			<a href="http://brainstorage.me/jobs/21955?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Senior Frontend Developer</a>
+		</div>
+		<div class="job_item ">
+			<a href="http://brainstorage.me/jobs/21953?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Senior PHP Developer</a>
+		</div>
+		<div class="job_item ">
+			<a href="http://brainstorage.me/jobs/21871?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Верстальщик</a>
+		</div>
+		<div class="job_item ">
+			<a href="http://brainstorage.me/jobs/19777?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">PHP программист</a>
+		</div>
+		<div class="job_item ">
+			<a href="http://brainstorage.me/jobs/20911?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">HTML/JavaScript разработчик</a>
+		</div>
+		<div class="job_item ">
+			<a href="http://brainstorage.me/jobs/21773?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Старший разработчик C#, ASP.NET MVC</a>
+		</div>
+  </div>
+  <div class="all"><a href="http://brainstorage.me/jobs?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">все вакансии</a></div>
+</div>
+
+  		
+	<div class="block freelansim">
+	  <a href="http://freelansim.ru/?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo" class="title"></a>
+	  <div class="tasks">
+				<div class="task ">
+					<a href="http://freelansim.ru/tasks/80063?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Разработка фирменного стиля</a>
+				</div>
+				<div class="task ">
+					<a href="http://freelansim.ru/tasks/80061?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Технический дизайнер полиграфии</a>
+				</div>
+				<div class="task ">
+					<a href="http://freelansim.ru/tasks/80057?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Требуется доработка сайта. Bitrix</a>
+				</div>
+				<div class="task ">
+					<a href="http://freelansim.ru/tasks/80055?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Отзывы для магазинов (Яндекс. Маркет)</a>
+				</div>
+				<div class="task ">
+					<a href="http://freelansim.ru/tasks/79931?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Разработка сайта социальной сети по инвестициям на базе SocialEngine</a>
+				</div>
+				<div class="task ">
+					<a href="http://freelansim.ru/tasks/80053?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Статья про Интернет вещей</a>
+				</div>
+				<div class="task ">
+					<a href="http://freelansim.ru/tasks/80051?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Рерайт статьи на тематику дачных поселков</a>
+				</div>
+				<div class="task ">
+					<a href="http://freelansim.ru/tasks/80049?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Дизайн интернет магазина</a>
+				</div>
+				<div class="task ">
+					<a href="http://freelansim.ru/tasks/80039?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Требуется разработка сайта "под ключ" </a>
+				</div>
+				<div class="task ">
+					<a href="http://freelansim.ru/tasks/80047?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">Доработать скрипт на js </a>
+				</div>
+
+	  </div>
+	  <div class="all"><a href="http://freelansim.ru/tasks?utm_source=tm_habrahabr&utm_medium=tm_block&utm_campaign=tm_promo">все заказы</a></div>
+	</div>
+
+  		
+  		
+  		
+  </div>
+  <div class="clear"></div>
+
+  <script>
+    // hubs to GA
+      ga('send', 'event', 'Post_view', 'MongoDB (MongoDB)',  window.location.pathname + window.location.search);
+      ga('send', 'event', 'Post_view', 'nodejs (Node.JS)',  window.location.pathname + window.location.search);
+      ga('send', 'event', 'Post_view', 'javascript (JavaScript)',  window.location.pathname + window.location.search);
+  </script>
+
+
+
+        	
+	<div class="rotated_posts">
+			<div class="rotated_post ">
+				<a href="http://habrahabr.ru/post/227583/" class="grey" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;posts_rotation_block&#39;); }">Дауншифтинг для программиста? Камбоджа, опыт выживания и опыт жизни</a>
+			</div>
+			<div class="rotated_post ">
+				<a href="http://habrahabr.ru/post/224641/" class="grey" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;posts_rotation_block&#39;); }">Работа для программиста в США: 5 простых шагов</a>
+			</div>
+			<div class="rotated_post last">
+				<a href="http://habrahabr.ru/post/232515/" class="grey" onclick="if (typeof ga === &#39;function&#39;) { ga(&#39;send&#39;, &#39;event&#39;, &#39;tm_block&#39;, &#39;posts_rotation_block&#39;); }">Увидеть незримое</a>
+			</div>
+		<div class="clear"></div>
+	</div>
+
+
+        <div class="clear"></div>
+
+        <div class="footer_panel">
+          <div id="footer">
+	<dl>
+		<dd><a href="https://habrahabr.ru/auth/login/">Войти</a></dd>
+		<dd><a href="https://habrahabr.ru/auth/register/">Регистрация</a></dd>
+	</dl>
+	<dl>
+		<dt>Разделы</dt>
+		<dd><a href="http://habrahabr.ru/posts/top/">Публикации</a></dd>
+		<dd><a href="http://habrahabr.ru/hubs/">Хабы</a></dd>
+		<dd><a href="http://habrahabr.ru/companies/">Компании</a></dd>
+		<dd><a href="http://habrahabr.ru/users/">Пользователи</a></dd>
+		<dd><a href="http://toster.ru/?_aa=press_anykey">Q&amp;A</a></dd>
+		<dd><a href="http://habrahabr.ru/sandbox/">Песочница</a></dd>
+		
+	</dl>	
+	<dl>
+		<dt>Инфо</dt>
+		<dd><a href="http://habrahabr.ru/info/about/">О сайте</a></dd>
+		<dd><a href="http://habrahabr.ru/info/help/rules/">Правила</a></dd>
+		<dd><a href="http://habrahabr.ru/info/help/">Помощь</a></dd>
+		<dd><a href="http://habrahabr.ru/info/agreement/">Соглашение</a></dd>
+	</dl>
+	<dl>
+		<dt>Услуги</dt>
+		<dd><a href="http://habrahabr.ru/info/advertising/">Реклама</a></dd>
+		<dd><a href="http://habrahabr.ru/info/advertising/corporate/">Тарифы</a></dd>
+		<dd><a href="http://habrahabr.ru/info/advertising/workshops/">Семинары</a></dd>
+		<dd><a href="http://habrahabr.ru/special/">Спецпроекты</a></dd>
+	</dl>
+	<dl>
+		<dt>Разное</dt>
+		<dd><a href="http://habrahabr.ru/apps/">Приложения</a></dd>
+		<dd><a href="http://habrahabr.ru/special/testdrive/">Тест-драйвы</a></dd>
+		<dd><a href="http://habrahabr.ru/info/hello_startup/">Помощь стартапам</a></dd>
+		<dd><a href="http://habrahabr.ru/special/minsvyaz/">Льготы стартапам</a></dd>
+	</dl>
+	<div class="copyright">
+
+		<div class="about">
+			<a href="http://tmtm.ru/">TM</a>
+			© 2006–2014
+			<br><br>
+			<a href="http://habrahabr.ru/feedback/">Служба поддержки</a><br><br>
+			    <a href="http://m.habrahabr.ru/?mobile=yes">Мобильная версия</a><br><br>
+			
+
+			<div class="social_accounts">
+				<a href="https://twitter.com/habrahabr" class="tw"></a>
+				<a href="https://www.facebook.com/habrahabr.ru" class="fb"></a>
+				<a href="http://vk.com/habr" class="vk"></a>
+				<!-- <a href="" class="gp"></a> //-->
+			</div>
+
+		</div>
+	</div>
+
+</div>    
+          <div class="footer_logos">
+		
+		<div class="project brainstorage">
+			<a href="http://brainstorage.ru/?utm_source=tm_habrahabr&utm_medium=tm_footer&utm_campaign=tm_promo" class="icon "></a>
+			<div class="text">Все мозги в одном месте</div>
+		</div>
+
+		<div class="project toster">
+			<a href="http://toster.ru/?utm_source=tm_habrahabr&utm_medium=tm_footer&utm_campaign=tm_promo" class="icon "></a>
+			<div class="text">Q&amp;A-сервис для разработчиков</div>
+		</div>
+		
+		<div class="project freelansim">
+			<a href="http://freelansim.ru/?utm_source=tm_habrahabr&utm_medium=tm_footer&utm_campaign=tm_promo" class="icon "></a>
+			<div class="text">Заказы для фрилансеров</div>
+		</div>
+		
+		<div class="project autokadabra">
+			<a href="http://autokadabra.ru/?utm_source=tm_habrahabr&utm_medium=tm_footer&utm_campaign=tm_promo" class="icon "></a>
+			<div class="text ">Уютная и дружелюбная</div>
+		</div>
+		
+</div>
+
+        </div>
+      </div>
+    </div>
+  
+
+      <script type="text/javascript" src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/jquery.cookie.js"></script>
+      <script type="text/javascript">
+        $(document).ready( function(){
+          window.tmidLogin = function(){ return false; };
+          if( $.cookie('tmid_no_check') == undefined ) {
+            var expire = new Date();
+            expire.setMinutes(expire.getMinutes() + 10 );
+            $.cookie('tmid_no_check', 1, { expires: expire } );
+            $.getScript("https://id.tmtm.ru/checklogin", function(){
+              if( window.tmidLogin() ) {
+
+                  var href = $('#login').attr('href');
+
+                  if( href !== undefined ) {
+                      window.location.href = href;
+                  }
+              }
+            });
+          }
+        });
+      </script>
+
+    <script type="text/javascript">
+  // global vars
+  var g_base_url = 'habrahabr.ru';
+  var g_show_xpanel = false;
+  var g_base_fullurl = 'http://habrahabr.ru/';
+  var g_is_guest = false;
+</script> 
+
+      <script type="text/javascript" src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/shortcuts.1387180096.js"></script>
+    <script type="text/javascript" src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/global_footer_main.3683047661.js"></script>
+
+    	<script type="text/javascript" src="./Базовое Node.JS приложение с использованием express   Хабрахабр_files/saved_resource"></script>
+
+    
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter24049213 = new Ya.Metrika({id:24049213,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript>&lt;div&gt;&lt;img src="//mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt="" /&gt;&lt;/div&gt;</noscript>
+<!-- /Yandex.Metrika counter -->
+
+    
+
+  
+
+<div id="tiptip_holder" style="max-width:auto;"><div id="tiptip_arrow"><div id="tiptip_arrow_inner"></div></div><div id="tiptip_content"></div></div><div id="AutocompleteContainter_54200" style="position: absolute; z-index: 9999; top: 0px; left: 0px;"><div class="autocomplete-w1"><div class="autocomplete" id="Autocomplete_54200" style="display: none; width: 300px; max-height: 400px;"></div></div></div><div id="AutocompleteContainter_ee2e8" style="position: absolute; z-index: 9999; top: 2px; left: 0px;"><div class="autocomplete-w1"><div class="autocomplete" id="Autocomplete_ee2e8" style="display: none; width: 300px; max-height: 400px;"></div></div></div></body></html>

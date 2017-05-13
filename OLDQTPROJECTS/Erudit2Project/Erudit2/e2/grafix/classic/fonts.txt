@@ -1,0 +1,4 @@
+message=Palatino Linotype Полужирный
+player=Franklin Gothic Heavy
+digital=Crystal
+splashes=TagirCTT

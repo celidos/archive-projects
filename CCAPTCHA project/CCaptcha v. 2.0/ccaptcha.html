@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>CCaptcha</title>
+		<script type="text/javascript" src="jquery.js"></script>         <!-- Подключаем jquery -->
+		<script type="text/javascript" src="jqueryrotate.js"></script>   <!-- Подключаем поворот -->
+		<script type="text/javascript">
+			var angle  = 0;
+			var dspeed = 10;			
+			
+			$(function(){
+				$("#captchaImg").contextmenu(function(){
+					return false;
+				}); 
+				setInterval(function(){
+					angle += dspeed;
+					jQuery("#captchaImg").rotate(angle);
+				}, 40);
+				
+				$("#captchaImg").mouseover(function(){
+					dspeed = -dspeed;
+				})
+				$("#captchaImg").mouseout(function(){
+					dspeed = -dspeed;
+				})	
+			})
+
+			
+		</script>
+		
+	</head>
+	<body>
+		<img id="captchaImg" src="out.png" draggable="false" width="100" height="100" />
+	</body>
+</html>

@@ -1,0 +1,393 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <style>
+            text{
+                font: 14px verdana;
+            }
+            p {
+                font: 14px verdana;
+                color: #fff
+            }
+        </style>
+        <style>
+            div.ccbuttonred {
+                -moz-user-select: none;
+                -khtml-user-select: none;
+                -webkit-user-select: none;
+                -o-user-select: none;
+                user-select: none;
+                cursor: default;
+                color: #fff; /* цвет текста */
+                text-decoration: none; /* убирать подчёркивание у ссылок */
+                user-select: none; /* убирать выделение текста */
+                background: rgb(212,75,56); /* фон кнопки */
+                padding: .7em 1.5em; /* отступ от текста */
+                outline: none; /* убирать контур в Mozilla */
+            }
+            div.ccbuttonred:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
+            div.ccbuttonred:active { background: rgb(152,15,0); } /* при нажатии */
+            div.ccbuttonblue {
+                -moz-user-select: none;
+                -khtml-user-select: none;
+                -webkit-user-select: none;
+                -o-user-select: none;
+                user-select: none;
+                cursor: default;
+                color: #fff; /* цвет текста */
+                text-decoration: none; /* убирать подчёркивание у ссылок */
+                user-select: none; /* убирать выделение текста */
+                background: #0f9494; /* фон кнопки */
+                padding: .7em 1.5em; /* отступ от текста */
+                outline: none; /* убирать контур в Mozilla */
+            }
+            div.ccbuttonblue:hover { background: #16b8b8; } /* при наведении курсора мышки */
+            div.ccbuttonblue:active { background: #022f32 } /* при нажатии */
+
+            iframe{
+                border: 1px solid #FC0;
+                box-shadow: 0 0 0 1px #FFF, 0 0 0 2px #999;
+            }
+            *{
+                font-family: verdana;
+            }
+            .b-container{
+                width:500px;
+                height:350px;
+                background-color: #ccc;
+                margin:0px auto;
+                padding:2px;
+                font-size:30px;
+                color: #fff;
+            }
+            .b-popup{
+                width:100%;
+                height: 2500px;
+                background-color: rgba(0,0,0,0.5);
+                overflow:hidden;
+                position:fixed;
+                top:0px;
+            }
+            .b-popup .b-popup-content{
+                position:relative;
+                margin:20px auto 0px auto;
+                width:700px;
+                height: 320px;
+                padding:0px;
+                background-color: #022F32;
+                border-radius:0px;
+                box-shadow: 0px 0px 10px #000;
+            }
+
+            body { margin: 0; }
+             #cImgShell { position: absolute }
+             #info, #buttons, #checkbutton, #reloadbutton, #closebutton, #anglelabel, #lalka { position: absolute}
+            #cImgShell, #buttons {  padding: 10px; }
+            #header {
+                height: 80px; /* Высота слоя */
+                background: #FEDFC0; border-bottom: 2px solid #7B5427;
+            }
+            #header h1 { padding: 20px; margin: 0; }
+            #cImgShell {
+                width: 320px; /* border-right: 1px solid #231F20;*/
+                top: 50px; /* Расстояние от верхнего края */
+                bottom: 0; /* Расстояние снизу  */
+                left: 43px;
+            }
+            #arrowsImg{
+                left: -32px;
+                top: -10px;
+            }
+            #info {
+                top: 10px; /* Расстояние от верхнего края */
+                /*left: 320px; /* Расстояние от левого края */
+                bottom: 80px;
+                right: 10px;
+                width: 350px;
+                /*position : fixed;*/
+                background: #087070;
+                padding: 15px;
+            }
+            #buttons {
+                /*top: 50px; /* Расстояние от верхнего края */
+                /*left: 320px; /* Расстояние от левого края */
+                bottom: 10px;
+                right: 10px;
+                height: 60px;
+                width: 380px;
+                /*position : fixed;*/
+                padding: 0px;
+
+                background: #087070;
+            }
+            #footer {
+                position: fixed; /* Фиксированное положение */
+                left: 0; bottom: 0; /* Левый нижний угол */
+                padding: 10px; /* Поля вокруг текста */
+                background: #39b54a; /* Цвет фона */
+                color: #fff; /* Цвет текста */
+                width: 100%; /* Ширина слоя */
+            }
+
+            #checkbutton{
+                right: 10px;
+                top: 10px;
+            }
+            #reloadbutton{
+                left: 10px;
+                top: 10px;
+            }
+            #closebutton{
+                left: 10px;
+                top: 10px;
+                font-size: 10px;
+
+            }
+            #anglelabel{
+                -moz-user-select: none;
+                -khtml-user-select: none;
+                -webkit-user-select: none;
+                -o-user-select: none;
+                user-select: none;
+                left: 10px;
+                bottom: 10px;
+                right: 10px;
+                background: #0f9494;
+                color: #fff;
+                padding: 5px;
+                font-size: 48px;
+                text-align: center;
+
+            }
+            #hlys{
+                display:inline-block;
+                vertical-align:middle;
+            }
+
+            #hlys2{
+                display:inline-block;
+                vertical-align:middle;
+                height:100%;
+                width:0px;
+            }
+
+
+            #lalka {
+                left: 14px;
+                top: 20px;
+                width: 260px;
+                height: 260px;
+                background: #087070;
+                -moz-border-radius: 200px;
+                -webkit-border-radius: 200px;
+                border-radius: 200px;
+                padding: 10px;
+                -webkit-animation: preloader 9s infinite linear;
+                -moz-animation: preloader 9s infinite linear;
+                -ms-animation: preloader 9s infinite linear;
+                -o-animation: preloader 9s infinite linear;
+                animation: preloader 9s infinite linear;
+
+                -webkit-animation-play-state: running;
+            }
+            @-webkit-keyframes preloader {
+            to { -webkit-transform: rotate(360deg); }
+            }
+
+            @-moz-keyframes preloader {
+            to { -moz-transform: rotate(360deg); }
+            }
+
+            @-ms-keyframes preloader {
+            to { -ms-transform: rotate(360deg); }
+            }
+
+            @-o-keyframes preloader {
+            to { -o-transform: rotate(360deg); }
+            }
+
+            @keyframes preloader {
+            to { transform: rotate(360deg); }
+            }
+
+            #lalka:hover {
+                animation-play-state: paused;
+            }
+
+            #left{
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 10px 15px 10px;
+                border-color: transparent transparent #fff transparent;
+                display: block;
+                position: relative;
+                float: left;
+                top: 50%;
+                margin:0 auto;
+            }
+
+            #right{
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 15px 10px 0 10px;
+                border-color: #fff transparent transparent transparent;
+                position: relative;
+                float: right;
+                top: 50%;
+            }
+        </style>
+		<title>CCaptcha</title>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="jqueryrotate.js"></script>
+        <script type="text/javascript" src="CapcthaRotateFunctional.js"></script>
+		<script type="text/javascript">
+            function GetPicture(cbFunction){
+                $.ajax({
+                    url: '/captcha?action=get',
+                    dataType: "json",
+                    success: function(res){
+                        $('#captchaImg').attr('width', captchaNmsp.halfCaptchaSize*2-1);
+                        $('#captchaImg').attr('height', captchaNmsp.halfCaptchaSize*2-1);
+                        $('#captchaImg').rotate(0);
+                        $('#captchaImg').attr('src', "/captchas/" + res.uid + ".png");
+                        console.log("На сервер успешно отправлен запрос /captcha?action=get");
+                        console.log("Пришел ответ : " + res);
+                        captchaNmsp.myuid = res.uid;
+                        cbFunction();
+                    }
+                });
+            }
+
+            function PopUpShow(){
+                GetPicture(function () {
+                    $('#popup1').show();
+                    initCaptcha('captchaImg', 'hlus');
+                    console.log("Страница готова");
+                });
+            }
+
+            function PopUpHide(){
+                deinitCaptcha('captchaImg');
+                $('#popup1').hide();
+            }
+
+            $('#popup1').mousedown(function(){
+                PopUpHide();
+            })
+
+            $(function(){
+                PopUpHide();
+
+				$('#captchaImg').contextmenu(function(){                <!-- Отключает правую кнопку мыши -->
+					return false;
+				});
+
+                $('#checkbutton').click(function(){
+                    $('#checkbutton').hide();
+                    $('#infotext').hide();
+                    $('#anglelabel').css({fontSize : "48px", height : "200px"});
+                    deinitCaptcha('captchaImg');
+                    console.log("Пользователь отправляет данные на сервер...");
+                    console.log("Отправляется угол ~ ", captchaNmsp.rotationAngle);
+                    $.ajax({
+                        url: "/captcha?action=check",
+                        dataType: "json",
+                        data: {
+                            angle: captchaNmsp.rotationAngle,
+                            uid: captchaNmsp.myuid
+                        },
+                        success: function (res) {
+                            var r = res.result;
+                            if (r == 'CCI_SOLSUCCESS') {
+                                $('#hlys').html('Верно!');
+                            } else if (r == 'CCI_SOLWRONG') {
+                                $('#hlys').html('Не верно!');
+                            } else if (r == 'CCE_TIMEOUT' || r == 'CCE_DONTEXISTS') {
+                                $('#hlys').css({fontSize : "24px"});
+                                $('#hlys').html('Капча устарела!');
+                            } else {
+                                $('#hlys').html('Неизвестная ошибка : ' + r + '.');
+                            }
+                        }
+                    });
+                });
+
+                $('#reloadbutton').click(function() {
+                    deinitCaptcha('captchaImg');
+                    $('#hlys').html('∠ = 0.00°');
+                    $('#hlys').css({fontSize : "48px"});
+                    $('#anglelabel').css({height : "auto"});
+                    $('#checkbutton').show();
+                    $('#infotext').show();
+                    $.ajax({
+                        url: "/captcha?action=denial",
+                        dataType: "json",
+                        data: { uid : captchaNmsp.myuid },
+                        success : function(){
+                            console.log("Успешно перезагружено.");
+                        }
+                    });
+                    GetPicture(function(){
+                        initCaptcha('captchaImg', 'hlys');
+                        console.log("Новая картинка получена");
+                    });
+
+                    console.log("olololololololaaaaaaaaaaaaaaaaa");
+                });
+			});
+		</script>
+	</head>
+	<body>
+	CAPTCHA (от англ. Completely Automated Public Turing test to tell Computers 
+	and Humans Apart — полностью автоматизированный публичный тест Тьюринга 
+	для различения компьютеров и людей) — компьютерный тест, используемый для 
+	того, 	чтобы определить, кем является пользователь системы: человеком или 
+	компьютером. Термин появился в 2000 году, в Рунете устоялось название капча. 
+	Основная идея теста: предложить пользователю такую задачу, которую с лёгкостью 
+	может решить человек, но которую несоизмеримо сложнее решить компьютеру. 
+	CAPTCHA — это товарный знак университета Карнеги — Меллона, разработавшего 
+	тест. По состоянию на 2013 г., примерно 320 миллионов капч вводится каждый 
+	день пользователями во всём мире.
+    <h>Веб-страница</h>
+    <input type="button" onclick="javascript:PopUpShow()" value=" Готово! ">
+        <a href="/controlpanel.html" rel="external" target="_blank">Дополнительная информация...</a> |
+        <a href="/testinstagram.html" rel="external" target="_blank">Протестировать запрос Instagram...</a>
+        <div class="b-popup" id="popup1">
+            <div class="b-popup-content">
+                <div id='lalka'>
+
+                    <div id='left'>
+                    </div>
+
+                    <div id='right'>
+                    </div>
+
+                </div>
+
+
+                <!-- <img id="arrowsImg" src="whitearrows.png" draggable="false" /> -->
+                <div id="cImgShell">
+                    <img id="captchaImg" src="loader.gif" draggable="false" width="16" height="16" />
+                </div>
+
+                <div id="info">
+                    <div id="infotext">
+                        <center><p>Прототип круговой капчи CCaptcha</p></center>
+                        <center><p>Разверните картинку нужным образом, повернув ее мышью</p></center>
+                    </div>
+                    <div id="anglelabel">
+                        <div id="hlys">∠ = 0.0°</div>
+                        <div id="hlys2"></div>
+                    </div>
+                </div>
+                <div id="buttons">
+                    <div id="checkbutton" class="ccbuttonred">Проверить!</div>
+                    <div id="reloadbutton" class="ccbuttonblue">Обновить</div>
+                </div>
+                <div class="ccbuttonblue" id="closebutton" onclick="javascript:PopUpHide()">X</div>
+            </div>
+        </div>
+	</body>
+</html>

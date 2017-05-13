@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <style>
+        p{
+            font: 14px verdana;
+        }
+        table {
+            font: 14px verdana;
+            width: 50%; /* Ширина таблицы в процентах */
+        }
+        .col1 {
+            width: 230px; /* Ширина ячейки */
+        }
+    </style>
+    <title>Статистика CCaptcha за текущий сеанс</title>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script>
+        function to2 (number){
+            if (number < 10)
+                return '0'+Math.floor(number).toString();
+            else
+                return Math.floor(number).toString();
+        }
+        function GetServerTime(st){
+            var ct = new Date;
+            var d = (ct.getTime() - st.getTime()) * 0.001;
+            var days = Math.floor(d / 86400);
+            d = d % 86400;
+            var hours = Math.floor(d / 3600);
+            d = d % 3600;
+            var minutes = Math.floor(d / 60);
+            d = d % 60;
+            var ans = "";
+            if (days > 0)
+                ans += " " + days + " д. ";
+            ans += to2(hours) + ":" + to2(minutes) + ":" + to2(Math.floor(d));
+            return ans;
+        }
+        $(function(){
+            $("#cleanserver").click(function(event){
+                console.log( $("#psswd").val() + "-------------><----------");
+                $.ajax({
+                    url: "/captcha?action=cleanserver",
+                    dataType: "json",
+
+                    data: {password : $("#psswd").val()},
+                    success: function (res) {
+                        console.log(res.answer);
+                    }
+                });
+                event.preventDefault ? event.preventDefault() : (event.returnValue=false);
+                return false;
+            });
+            setInterval(function() {
+                $.ajax({
+                    url: "/captcha?action=info",
+                    dataType: "json",
+                    success: function (res) {
+                        $("#cr").html(res.cr);
+                        $("#re").html(res.re);
+                        $("#nr").html(res.nr);
+                        $("#bu").html(res.bu);
+                        $("#ne").html(res.ne);
+                        $("#cc").html(res.cc);
+                        if (res.cr > 0)
+                            $("#percent").html( (res.re / res.cr * 100).toFixed(2) + " %");
+                        else
+                            $("#percent").html("0.00 %");
+                        var thatt = new Date(res.sst);
+                        var ct = new Date;
+                        $("#servertime").html(GetServerTime(thatt));
+                        $("#cpersec").html((res.cr / ((ct.getTime() - thatt.getTime()) * 0.001)).toFixed(3));
+                        console.log(res.sst)
+                    }
+                });
+            }, 500)
+        });
+    </script>
+</head>
+<body>
+<center>
+    <p>
+    <strong>Статистика CCaptcha за текущий сеанс</strong> <br /><br /></p>
+    <TABLE BORDER WIDTH="30%">
+        <TR>
+            <TH class="col1">Сеанс</TH>  <TD class="col2"><div id="servertime">0 с</div></TD>
+        </TR>
+        <TR>
+            <TH class="col1">Капч сгенерировано</TH>  <TD class="col2"><div id="cr">0</div></TD>
+        </TR>
+        <TR>
+            <TH class="col1">Распознано</TH> <TD class="col2"><div id="re">0</div></TD>
+        </TR>
+        <TR>
+            <TH class="col1">Не распознано</TH> <TD class="col2"><div id="nr">0</div></TD>
+        </TR>
+        <TR>
+            <TH class="col1">Сгорело (TIMEOUT)</TH><TD class="col2"><div id="bu">0</div></TD>
+        </TR>
+        <TR>
+        <TH class="col1">Процент распознавания</TH> <TD class="col2"><div id="percent">0.00 %</div></TD>
+        </TR>
+        <TR>
+            <TH class="col1">В среднем, капч/с</TH> <TD class="col2"><div id="cpersec">0.00 %</div></TD>
+        </TR>
+        <TR>
+            <TH class="col1">Запрошено сгоревших или использованных</TH> <TD class="col2"><div id="ne">0</div></TD>
+        </TR>
+
+        <TR>
+            <TH class="col1">Сейчас обрабатывается</TH> <TD class="col2"><div id="cc">0</div></TD>
+        </TR>
+    </TABLE>
+</center>
+<p><a href="/ccaptcha.html">Вернуться к тестированию</a> | <input type="button" id="cleanserver" value=" Очистить сервер "> Пароль: <input type="text" id="psswd" value=""></p>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿[Common]
+SaveDate=06.04.2007
+SaveTime=20:13:57
+Info=2 игрока. Счет: 8 : 78#Поле:15x15, классическое#Интеллект партии - Невысокий#Игра без ограничений#Используются только слова из словаря Ожегова#Язык словаря: Немецкий 
+Opponent=0
+Intellect=1
+PlayFieldDimX=15
+PlayFieldDimY=15
+Template=classic.map
+PlayField=511211151112115131114111411131113111212111311211311121113112111131111131111141111111111141112111212111211511211161112115112111212111211141111111111141111131111131111211311121113112113111212111311131114111411131511211151112115
+MainFormXY=7410636
+ControlFormXY=9110351
+Letters=N,Ц,D,E,R,I,E,V,O,E,E,L,I,S,Ц,N,H,^,E,P,I,A,U,I,Ц,A,M,E,A,N,S,R,E,I,R,R,M,A,L,R,E,R,E,U,Q,^,H,R,B,I,N,T,M,A,S,N,K,U,C,N,N,Ь,D,E,D,Z,H,N,M,H,E,I,N,N,Ц,L,E,K,B,R,D,N,I,Y,T,Ц,T,K,P,S,H,S,U,J,L,I,F,Q,Ь,Z,X,D,A,D,L,B,E,D,E,E,F,H,W,R,C,D,L,E,T,G,F,O,S,I,I,I,T,O,V,T,M,A,D,Ц,E,E,R,S,G,E,K,E,E,H,N,F,I,O,A,X,R,Ц,O,Z,^,N,U,Ц,U,Ц,T,E,N,A,D,S,E,E,Y,N,N,S,D,U,I,Ц,S,N,^,T,R,N,H,A,C,O,C,E,Z,S,A,T,L,S,H,C,L,C,E,I,I,U,H,R,M,F,G,M,E,I,Ц,A,N,O,W,E,T,M,O,S,Ц,G,Д,U,C,
+Language=deu
+LanguageExpl=rus
+HintLimit=11
+KeepBonuses=0
+[Players]
+Player1=SLAVA/80001/105/0/Im0
+Player2=КОМПЬЮТЕР/780000/0/1/pc0
+PlayerForms=9110672/0/0,2830672/0/0,
+[Moves]
+(1)SLAVA=SLOT:Ь/98,Y/83,I/82,Q/97,N/81,H/66,N/67,
+(2)КОМПЬЮТЕР=SLOT:D/107,E/135,W/112,L/11,Ц/85,U/201,E/198,
+(1)SLAVA=

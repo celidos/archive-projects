@@ -1,0 +1,197 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "settingsdialog.h"
+#include "plotting.h"
+
+
+#include <QElapsedTimer>
+#include <QVector>
+#include <QMessageBox>
+#include <QtSerialPort/QSerialPort>
+#include <QDebug>
+
+#include <ctime>
+#include <thread>
+
+double averageTime(QVector<double> v)
+{
+    double s = 0;
+    for (auto it = v.begin(); it != v.end(); it++)
+        s += (*it);
+    return double(s) / v.size();
+}
+
+//! [0]
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    styleF.setFileName("style.css");
+    styleF.open(QFile::ReadOnly);
+    QString qssStr = styleF.readAll();
+
+
+    MainWindow::setStyleSheet(qssStr);
+
+//! [0]
+    ui->setupUi(this);
+    plot = new Plotting;
+    plot->setEnabled(false);
+    setCentralWidget(plot);
+    plot->setEnabled(true);
+    last_time = 0;
+
+    this->setFixedSize(QSize(746, 355));
+
+//! [1]
+    serial = new QSerialPort(this);
+//! [1]
+
+    settings = new SettingsDialog;
+
+//![3]
+
+    ui->actionConnect->setEnabled(true);
+    ui->actionConfigure->setEnabled(true);
+    ui->actionLog->setEnabled(false);
+
+    initActionsConnections();
+
+    connect(serial, SIGNAL(error(QSerialPort::SerialPortError)), this,
+            SLOT(handleError(QSerialPort::SerialPortError)));
+
+//! [2]
+    connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
+
+    filename = "C:/BiTronics Lab/log.log";
+
+    connect(settings, SIGNAL(pathChanged(QString)), this, SLOT(logPathChanged(QString)));
+//! [4]
+}
+//! [4]
+
+MainWindow::~MainWindow()
+{
+    delete settings;
+    delete ui;
+}
+
+void MainWindow::changeConnection(bool change)
+{
+    if(change)
+    {
+        openSerialPort();
+        ui->actionConnect->setToolTip(tr("Отключить порт"));
+    }
+    else
+    {
+        closeSerialPort();
+        ui->actionConnect->setToolTip(tr("Подключиться к порту"));
+    }
+}
+
+//! [4]
+void MainWindow::openSerialPort()
+{
+    SettingsDialog::Settings p = settings->settings();
+    serial->setPortName(p.name);
+    serial->setBaudRate(p.baudRate);
+    serial->setFlowControl(p.flowControl);
+    if (serial->open(QIODevice::ReadWrite)) {
+            ui->actionConfigure->setEnabled(false);
+            ui->actionLog->setEnabled(true);
+            ui->statusBar->showMessage(tr("Подключен к %1 : %2, %3")
+                                       .arg(p.name).arg(p.stringBaudRate).arg(p.stringFlowControl));
+    } else {
+        QMessageBox::critical(this, tr("Ошибка"), serial->errorString());
+        ui->statusBar->showMessage(tr("Ошибка подключения"));
+        ui->actionConnect->setChecked(false);
+        changeConnection(false);
+    }
+}
+//! [4]
+
+//! [5]
+void MainWindow::closeSerialPort()
+{
+    if (serial->isOpen())
+        serial->close();
+    ui->actionConfigure->setEnabled(true);
+    ui->actionLog->setEnabled(false);
+    ui->statusBar->showMessage(tr("Отключен"));
+}
+
+//! [6]
+void MainWindow::writeData(const QByteArray &data)
+{
+    serial->write(data);
+}
+//! [6]
+
+//! [7]
+void MainWindow::readData()
+{
+    QByteArray data = serial->readAll();
+    int points_num = plot->drawData(data);
+    if (points_num) {
+        clock_t t = last_time;
+        last_time = clock();
+        double all_time = double(last_time - t) / CLOCKS_PER_SEC;
+        double time_per_point = (double(last_time - t) / CLOCKS_PER_SEC) / points_num;
+        TPPS.push_back(time_per_point);
+//        qDebug() << "points " << points_num;
+//        qDebug() << "all time is " << all_time;
+//        qDebug() << "time per point " << time_per_point << "\n\n";
+        if (TPPS.size() == 100) {
+//            qDebug() << "AVERAGE TIME PER POINT " << averageTime(TPPS) << "\n\n";
+            TPPS.clear();
+        }
+    }
+}
+
+//! [7]
+
+//! [8]
+void MainWindow::handleError(QSerialPort::SerialPortError error)
+{
+    if (error == QSerialPort::ResourceError) {
+        QMessageBox::critical(this, tr("Критическая ошибка"), serial->errorString());
+        closeSerialPort();
+    }
+}
+//! [8]
+
+void MainWindow::initActionsConnections()
+{
+    connect(ui->actionConnect, SIGNAL(triggered(bool)), this, SLOT(changeConnection(bool)));
+    connect(ui->actionConfigure, SIGNAL(triggered()), settings, SLOT(show()));
+    connect(ui->actionLog, SIGNAL(triggered(bool)), this, SLOT(logData(bool)));
+    connect(plot,SIGNAL(wantChangeSize(int)),this,SLOT(changeSize(int)));
+}
+
+void MainWindow::logData(bool firstTime)
+{
+    if(firstTime)
+    {
+        ui->statusBar->showMessage(tr("Началась запись данных"), 1000);
+        ui->actionLog->setToolTip(tr("Начать запись данных"));
+        plot->startLog();
+    }
+    else
+    {
+        ui->statusBar->showMessage(tr("Данные сохранены"), 1000);
+        ui->actionLog->setToolTip(tr("Закончить запись данных"));
+        plot->logData(filename);
+    }
+}
+
+void MainWindow::logPathChanged(const QString &path)
+{
+    filename = path;
+}
+
+void MainWindow::changeSize(int size)
+{
+   this->setFixedSize(QSize(746, size+55));
+}
+

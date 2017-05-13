@@ -1,0 +1,36 @@
+﻿;themes definition file
+;for Erudit-PC v. 1.6.x -
+;language - russian
+;theme data used for assigning the theme suffixes to words in dict files 
+;
+;suffix for children words 
+;don't edit an identifier's name left to '='
+;
+DChildren=Ц
+;
+;suffix for common words 
+;don't edit an identifier's name left to '='
+;
+DCommom=О
+;
+;suffixes for dictionary-specific words (extended dictionary mode)
+;don't edit an identifier's name left to '='
+;
+DExtended1=Ж
+DExtended2=И
+DExtended3=Б
+DExtended4=У
+DExtended5=
+;
+;suffixes for theme-specific words
+;you can edit any part left and right to '=' and add new lines to assign more themes
+;
+[DictionaryThemes]
+Н=Народы, национальности, племена
+Х=Химические соединения
+М=Медицинские термины
+Д=Единицы измерения
+З=Денежные единицы
+;
+;don't edit a flag below
+endoffile

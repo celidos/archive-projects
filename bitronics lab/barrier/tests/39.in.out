@@ -1,0 +1,9 @@
+Testing with parameters: n_workers=6, n_steps=1003
+Running workers ... 
+Done
+Joining workers ... 
+Done
+Validating results ... 
+[5> 0, 1, 2, 3, 4]
+Done
+OK

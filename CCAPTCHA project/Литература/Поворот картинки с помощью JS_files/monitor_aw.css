@@ -1,0 +1,1407 @@
+/* ---------------------------------------------------------------------
+   Базовые настройки ---------------------------------------------------*/
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', Sans;
+    color: #FDFEFE;
+  }
+  img {
+    border: 0;
+  }
+  .clear {
+    clear: both;
+  }
+  .monitor_1280 {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .monitor_1120 {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+
+/* ---------------------------------------------------------------------
+   Шапка ---------------------------------------------------------------*/
+  header {
+    height: 146px;
+    background: #00a6ea;
+    color: black;
+    margin: 0;
+  }
+  header a {
+    text-decoration: none;
+  }
+  #logo {
+    margin: 30px 1% 0px 1%;
+    background: url('/images_design/logo.png') no-repeat;
+    width: 471px;
+    height: 81px;
+    float: left;
+  }
+    a #logo:hover {
+      opacity: 0.7;
+    }
+  ul.section_list {
+    clear: both;
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-left: 1%;
+    font-size: 1em;
+    font-weight: bold;
+    float: left;
+  }
+    .section_list li, .section_list li a {
+      width: 150px;
+      height: 19px;
+      margin: 0;
+      float: left;
+      color: white;
+      background: black;
+      display: inline;
+      text-align: center;
+      border-radius: 20px 20px 0 0;
+    }
+      .section_list li a:hover, .section_list li a.active {
+        background: white;
+        color: black;
+      }
+
+  @media screen and (max-width: 775px) {
+    header {
+      height: auto;
+      padding: 5px 0;
+   }
+    ul.section_list {
+      clear: none;
+      width: 150px;
+      margin: 0 1% 0 0;
+      padding: 0;
+      float: right;
+    }
+    .section_list li, .section_list li a {
+      height: 23px;
+      border-radius: 20px;
+      padding-top: 2px;
+      margin-top: -2px;
+    }
+      .section_list li {
+        margin-top: 2.5px;      
+      }
+  }
+  @media screen and (max-width: 650px) {
+    #logo {
+      width: 81px;
+      float: left;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    header {
+      margin-bottom: 30px;
+    }
+  }
+  @media screen and (max-width: 250px) {
+    #logo {
+      float: none;
+      margin: 0 auto;
+    }
+    ul.section_list {
+      float: none;
+      margin: 0 auto;
+    }
+  }
+
+
+/* ---------------------------------------------------------------------
+   Блок рекламы сверху -------------------------------------------------*/
+  #nlx {
+    width: 98%;
+    margin: 0 auto;
+  }
+  #addnbar {              /* Стилизация nlx блока - убираем лого */
+    display: none;
+  }
+  #google_728_90 {
+    width: 728px;
+    margin: 30px auto;
+  }
+
+  @media screen and (max-width: 800px) {
+    #nlx, #google_728_90 {
+      display: none;
+    }
+  }
+
+
+/* ---------------------------------------------------------------------
+ Заголовок раздела ---------------------------------------------------*/
+#header-section {
+  padding: 5px 5%;
+  margin: 20px 0;
+  font-size: 0.9em; 
+  min-height: 30px;
+  background: #FAFAFA;
+  color: #595959;
+}
+#header-section h1 {
+  font: bold 1.4em Arial,sans-serif;
+  margin: 0 auto 5px auto;
+  width: 80%;
+}
+#header-section p {
+  padding: 0;
+  margin: 0 auto 5px auto;
+  width: 80%;
+}
+
+
+/* ---------------------------------------------------------------------
+   Основная часть ------------------------------------------------------*/
+  #container {
+    width: 100%;
+    float: left;
+    margin-right: -300px;
+    color: #2c2c2c;
+  }
+  #content {
+    margin-right: 300px;
+  }
+  #sideleft {
+    width: 170px;
+    margin-top: 30px;
+    padding: 0 5px;
+    float: left;
+    color: #595959;
+    border-right: 1px solid #fafafa;
+  }
+  #texts {
+    margin-left: 210px;
+    padding: 0 40px 0 0;
+  }
+  #sideright {
+    width: 280px;
+    float: left;
+    color: #595959;
+    padding: 0 10px;
+  }
+  aside h2 {
+    text-align: center;
+    background: black;
+    margin: 30px 0 0 0;
+    font: bold 0.9em Arial, sans-serif;
+    color: white;
+  }
+  @media screen and (max-width: 900px) {
+    #sideleft {
+      display: none;
+    }
+    #texts {
+      margin-left: 20px;
+    }
+  }
+  @media screen and (max-width: 775px) {
+    #sideright {
+      display: none;
+    }
+    #container {
+      margin-right: 0;
+    }
+    #content {
+      margin-right: 50px;
+    }
+    #texts {
+      margin-left: 50px;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    #content {
+      margin-right: 10px;
+    }
+    #texts {
+      margin-left: 10px;
+    }
+  }
+
+
+/* ---------------------------------------------------------------------
+   Левый столбик -------------------------------------------------------*/
+#sideleft a, #sideleft a:visited {
+  color: #00a6ea;
+}
+#sideleft a:hover {
+  color: black;
+}
+ul.arc_twitter {
+  margin: 0 0 0 5px;
+  padding: 0;
+  font-size: 0.8em;
+}
+ul.arc_twitter li {
+  padding: 5px 0;
+  list-style-type: none;
+  border-bottom: 1px solid #fafafa;
+}
+.arc_twitter-posted {
+  color: black;
+  font-style: italic;
+}
+#link_twitter {
+  background: white url('/images_design/twitter.png') left no-repeat;
+  min-width: 30px;
+  min-height: 20px;
+  padding: 25px 0 0 25px;
+  margin: 0 0 30px 20px;
+}
+#link_twitter a, #link_twitter a:visited {
+  font-size: 0.8em;
+  color: black;
+  font-weight: bold;
+  float: left;
+}
+#link_twitter a:hover {
+  color: #00a6ea;
+}
+#sideleft ul.recent_comments a, #sideleft ul.recent_comments a:visited {
+  color: black;
+}
+#sideleft ul.recent_comments a:hover {
+  text-decoration: none;
+}
+#sideleft ul.recent_comments .title_comment a, #sideleft ul.recent_comments .title_comment a:visited {
+  color: #00a6ea;
+}
+#sideleft ul.recent_comments .title_comment a:hover {
+  color: black;
+}
+ul.recent_comments {
+  margin: 0 0 0 5px;
+  padding: 0;
+  font-size: 0.8em;
+}
+ul.recent_comments li {
+  padding: 5px 0;
+  list-style-type: none;
+  border-bottom: 1px solid #fafafa;
+}
+
+
+/* ---------------------------------------------------------------------
+  Блок реклам cлева  ---------------------------------------------------*/
+#google_160_600 {
+  margin: 30px 5px 0 5px;
+}
+
+
+/* ---------------------------------------------------------------------
+  Блок статей  ---------------------------------------------------------*/
+#texts h1, #texts h2.div_h1 {
+  font-size: 1.5em;
+  text-align: left;
+  color: black;
+  font-weight: normal;
+  border-bottom: none;
+  margin: 0;
+}
+#texts h2.div_h1 a, #texts h2.div_h1 a:visited {
+  text-decoration: none;
+  color: black;
+}
+#texts h2.div_h1 a:hover {
+  color: #00a6ea;
+}
+#texts h2 {
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  text-align: left;
+  border-bottom: 2px solid #e0e0e0;
+}
+#texts a, #texts a:visited {
+  color: #00a6ea;
+}
+#texts a:hover {
+  color: black;
+}
+#texts p {
+  text-indent: 1.5em;
+  margin: 0 0 0.5em 0;
+}
+table {
+  width: 100%;
+  border: 0;
+}
+    th {
+      font-weight: bold;
+      background: gray;
+    }
+        td {
+          border: 2px solid gray;
+          color: black;
+          text-align: center;
+          padding: 0.2em;
+        }
+.razdel {
+  color: #454545;
+}
+.strelka {
+  font-size: 1.3em;
+  color: #D6D6D6;
+}
+#texts time {
+  width: 50px;
+  height: 43px;
+  padding: 7px 0 0 0;
+  margin: 3px 10px 0 0;
+  text-align: center;
+  float: left;
+  font-size: 1em;
+  line-height: 1;
+  color: white;
+  background: black;
+  border-radius: 25px;
+}
+img.article-image {
+ float: left;
+ margin: 1em 1em 0 0;
+ }
+
+article {
+ width: 100%;
+ padding: 0.5em 0 1em 0;
+ }
+
+article img {
+ max-width: 100%;
+ height: auto;
+ width: auto\9; /* ie8 */
+}
+
+article a.permlink {
+ margin: 0;
+ padding: 0;
+ float: right;
+ font-size: 1.4em;
+ }
+
+.splCont {
+ display: none;
+ padding: 3px 5px;
+ background-color: #e9e9e9;
+ }
+
+#texts ul, #texts ol {
+ margin-top: 0;
+ }
+
+#texts li {
+ margin-bottom: 0.5em;
+ }
+
+.tags {
+ width: 100%;
+ text-align: right;
+ padding: 0.5em;
+ font: 0.8em;
+ color: black;
+ background: #fafafa;
+ margin: 40px 0 30px 0;
+ }
+
+#texts .tags a, .tags span {
+ color: black;
+ font-weight: bold;
+ }
+
+#texts .tags a:hover {
+ color: #00a6ea;
+ }
+
+#podeli {
+ background: #f7f7f7;
+ padding: 0.5em 2em;
+ margin: 0.5em 0;
+ text-align: center;
+ }
+  @media screen and (max-width: 520px) {
+    .tags, #header-section {
+      display: none;
+    }
+    article {
+      margin-bottom: 50px;
+    }
+    #texts p {
+      clear: both;
+    }
+  }
+
+
+/* ---------------------------------------------------------------------
+  Блок рекламы cправа  -------------------------------------------------*/
+#google_300_250 {
+  margin: 5px 0 10px 0;
+}
+
+
+/* ---------------------------------------------------------------------
+  Столбик cправа  -------------------------------------------------*/
+.cloud {
+  padding: 0 5%;
+  margin: 0;
+  text-align: justify;
+  font-size: 0.8em;
+  width: 90%;
+}
+.cloud a {
+  text-decoration: none;
+  color: #2c2c2c;
+}
+.cloud a:visited {
+  color: #2c2c2c;
+}
+.cloud a:hover {
+  text-decoration: underline;
+  color: #00a6ea;
+}
+.cloud a:active { 
+  color: red;
+}
+ul.popular_li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.popular_li li {
+  margin: 20px 20px;
+  padding: 10px;
+  width: 220px;
+  background: #f7f7f7;
+  text-align: center;
+  font-size: 0.9em;
+}
+.popular_li img {
+  margin: 0 0 0.5em 0;
+}
+.popular_li a, .popular_li a:visited {
+  color: #2c2c2c;
+  text-decoration: none;
+}
+a:hover .popular_li {
+  background: #d9d9d9;
+  margin: -10px;
+  padding: 10px;
+}
+.search_pole {
+  margin: 10px 5%;
+  padding: 5px 0;
+  text-align: center;
+  border: 1px solid black;
+  width: 90%;
+}
+input.error {
+  width: 50%;
+  margin-bottom: 200px;
+}
+
+
+
+/* ---------------------------------------------------------------------
+  Фотки.Яндекс  --------------------------------------------------------*/
+ul.adw_yandexfoto_photos {
+  margin:     5px auto 0 auto;
+  padding:    0;
+  list-style-type: none;
+  width:      240px;
+  }
+  ul.adw_yandexfoto_photos li {
+    width:    110px;
+    height:   72.5px;
+    background: #f7f7f7;
+    margin:   2.5px;
+    padding:  5px 2.5px 2.5px 2.5px;
+    text-align: center;
+    float:    left;
+    }
+    ul.adw_yandexfoto_photos img{
+      border: 1px solid #f7f7f7;
+      }
+      ul.adw_yandexfoto_photos img:hover {
+        border: 1px solid gray;
+        opacity: 0.8;
+        }
+p.yandex-foto {
+  text-align:   right;
+  text-decoration: none;
+  color:      black;
+  }
+  p.yandex-foto span {
+    color:    red;
+    }
+    p.yandex-foto a {
+      color:      black;
+      }
+      p.yandex-foto a:hover {
+        text-decoration: none;
+        }
+
+ul.adw_yandexfoto_album_list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 50px;
+  }
+  ul.adw_yandexfoto_album_list li {
+    margin-bottom: 10px;
+    }
+
+.yandex-left {
+  width: 42%;
+  float: left;
+  text-align: right;
+  padding-right: 2%;
+  }
+
+.yandex-right {
+  width: 50%;
+  float: right;
+  text-align: left;
+  border-left: 2px solid #f7f7f7;
+  margin-left: 1%;
+  padding: 10px 0 0 2%;
+  }
+  .yandex-right img {
+    background: #f7f7f7;
+    padding: 5px;
+    width: auto;
+    height: auto;
+    width: 150px;
+    }
+    .crop {
+      float: left;
+      overflow: hidden;
+      position: relative;
+      width: 150px;
+      height: 120px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      }
+
+
+
+/* ---------------------------------------------------------------------
+  Навигация  -----------------------------------------------------------*/
+  #navigation {
+    clear: both;
+    font-size: 1.2em;
+    margin: 20px 0 0 0;
+    padding: 10px 0;
+    width: 100%;
+    background: #FAFAFA;
+    color: #cacccc;
+  }
+  ul.paginator {
+    list-style-type: none;
+    width: 450px;
+    padding: 20px 0 0 0;
+    margin: 0 auto;
+  }
+    .paginator li {
+      display: inline;
+      margin: 0;
+      padding: 0.5em;
+    }
+  ul.paginator_bottom {
+    list-style-type: none;
+    font-size: 2em;
+    margin: 0 auto;
+    padding: 0;
+    width: 480px;
+  }
+    .paginator_bottom li {
+      width: 49%;
+      float: left;
+      text-align: left;
+      margin: 0;
+      padding: 0.5em 0.5%;
+    }
+      .paginator_bottom li:last-child {
+        text-align: right;
+      }
+  .paginator a, .paginator_bottom a {
+    padding: 0 0.3em;
+    margin: 0 -0.2em;
+    text-decoration: none;
+    color: black;
+    background: #FAFAFA;
+  }
+    .paginator a:hover, .paginator_bottom a:hover {
+      color: white;
+      background: black;
+      text-decoration: none;
+    }
+      .activ_paginator {
+        background: black;
+        color: white;
+        border: 2px solid white;
+      }
+  .error {
+    color: #2c2c2c;
+    padding: 0 20%;
+  }
+
+  @media screen and (max-width: 480px) {
+    ul.paginator {
+      display: none;
+    }
+    ul.paginator_bottom {
+      width: 200px;
+    }
+  }
+
+
+/* ---------------------------------------------------------------------
+  Подвал  -----------------------------------------------------------*/
+  footer {
+   clear: both;
+   padding: 0.5em 0.5em 1em 0.5em;
+   font-size: 0.8em;
+   background: #00a6ea;
+   color: black;
+  }
+  .podval_schet {
+   width: 40%;
+   float: left;
+  }
+  .podval_text {
+   width: 60%;
+   margin: 0 auto;
+   float: left;
+   text-align: center;
+  }
+  .podval_schet p {
+   float: right;
+   margin: 0;
+   padding-right: 0.5em;
+   width: 90px;
+  }
+  footer a, footer a:visited {
+   font-weight: bold;
+   color: white;
+   background: #00a6ea;
+  }
+    footer a:hover {
+     color: black;
+     background: #00a6ea;
+    }
+  .screen a img {
+   margin: 0.5em;
+  }
+
+
+/* ---------------------------------------------------------------------
+ Раздел Demo ---------------------------------------------------------*/
+.demo {
+  margin: 30px auto;
+  width: 90%;
+}
+
+#texts a.demo-link {
+  -moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+  box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+  background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
+  background-color:#79bbff;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:10px;
+  border:1px solid #84bbf3;
+  display:inline-block;
+  color:#ffffff;
+  font-family:arial;
+  font-size:15px;
+  text-align: center;
+  font-weight:bold;
+  padding:6px 24px;
+  text-indent: 0;
+  text-decoration:none;
+  text-shadow:1px 1px 0px #528ecc;
+}
+
+#texts a.demo-link:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
+  background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
+  background-color:#378de5;
+}
+
+#texts a.demo-link:active {
+  position:relative;
+  top:1px;
+}
+
+
+/*--------------------------------------------------Подсветка кода----------------------------------------------------*/
+pre {
+ padding-bottom: 0;
+ margin: 0 0 0.5em 0;
+ }
+
+pre code {
+ display: block;
+ padding: 0.5em;
+ margin: 0;
+ overflow: auto;
+ }
+
+/*------белая------*/
+pre code {
+ background: #F0F0F0;
+ }
+
+pre code,
+pre .ruby .subst,
+pre .tag .title,
+pre .lisp .title {
+ color: black;
+ }
+
+pre .string,
+pre .title,
+pre .constant,
+pre .parent,
+pre .tag .value,
+pre .rules .value,
+pre .rules .value .number,
+pre .preprocessor,
+pre .ruby .symbol,
+pre .ruby .symbol .string,
+pre .ruby .symbol .keyword,
+pre .ruby .symbol .keymethods,
+pre .instancevar,
+pre .aggregate,
+pre .template_tag,
+pre .django .variable,
+pre .smalltalk .class,
+pre .addition,
+pre .flow,
+pre .stream,
+pre .bash .variable,
+pre .apache .tag,
+pre .apache .cbracket,
+pre .tex .command,
+pre .tex .special,
+pre .erlang_repl .function_or_atom {
+ color: #800;
+ }
+
+pre .comment,
+pre .annotation,
+pre .template_comment,
+pre .diff .header,
+pre .chunk {
+ color: #888;
+ }
+
+pre .number,
+pre .date,
+pre .regexp,
+pre .literal,
+pre .smalltalk .symbol,
+pre .smalltalk .char,
+pre .go .constant,
+pre .change {
+ color: #080;
+ }
+
+pre .label,
+pre .javadoc,
+pre .ruby .string,
+pre .decorator,
+pre .filter .argument,
+pre .localvars,
+pre .array,
+pre .attr_selector,
+pre .important,
+pre .pseudo,
+pre .pi,
+pre .doctype,
+pre .deletion,
+pre .envvar,
+pre .shebang,
+pre .apache .sqbracket,
+pre .nginx .built_in,
+pre .tex .formula,
+pre .erlang_repl .reserved,
+pre .input_number {
+ color: #88F
+ }
+
+pre .css .tag,
+pre .javadoctag,
+pre .phpdoc,
+pre .yardoctag {
+ font-weight: bold;
+ }
+
+pre .keyword,
+pre .id,
+pre .phpdoc,
+pre .title,
+pre .built_in,
+pre .aggregate,
+pre .smalltalk .class,
+pre .winutils,
+pre .bash .variable,
+pre .apache .tag,
+pre .go .typename,
+pre .tex .command,
+pre.cod_output .keyword,
+pre.cod_output .literal,
+pre.cod_output .css .id,
+pre.cod_output .phpdoc,
+pre.cod_output .function .title,
+pre.cod_output .class .title,
+pre.cod_output .haskell .label,
+pre.cod_output .vbscript .built_in,
+pre.cod_output .sql .aggregate,
+pre.cod_output .rsl .built_in,
+pre.cod_output .smalltalk .class,
+pre.cod_output .xml .tag .title,
+pre.cod_output .diff .header,
+pre.cod_output .chunk,
+pre.cod_output .winutils,
+pre.cod_output .bash .variable,
+pre.cod_output .lisp .title,
+pre.cod_output .apache .tag,
+pre.cod_output .tex .special {
+ font-weight: bold;
+ }
+
+pre .nginx .built_in {
+ font-weight:normal;
+ }
+
+pre .xml .css,
+pre .xml .javascript,
+pre .xml .vbscript,
+pre .tex .formula,
+pre.cod_output .xml .css,
+pre.cod_output .xml .javascript,
+pre.cod_output .xml .vbscript,
+pre.cod_output .tex .formula {
+ opacity: 0.5;
+ }
+
+/*------черная---------*/
+
+pre.cod_output code {
+ background: #444;
+ }
+
+pre.cod_output .keyword,
+pre.cod_output .literal,
+pre.cod_output .change,
+pre.cod_output .winutils,
+pre.cod_output .flow,
+pre.cod_output .lisp .title,
+pre.cod_output .tex .special {
+ color: white;
+ }
+
+pre.cod_output code,
+pre.cod_output .ruby .subst {
+ color: #DDD;
+ }
+
+pre.cod_output .string,
+pre.cod_output .function .title,
+pre.cod_output .class .title,
+pre.cod_output .haskell .label,
+pre.cod_output .ini .title,
+pre.cod_output .tag .value,
+pre.cod_output .css .rules .value,
+pre.cod_output .pre.cod_outputprocessor,
+pre.cod_output .ruby .symbol,
+pre.cod_output .ruby .symbol .string,
+pre.cod_output .ruby .symbol .keyword,
+pre.cod_output .ruby .symbol .keymethods,
+pre.cod_output .ruby .instancevar,
+pre.cod_output .ruby .class .parent,
+pre.cod_output .built_in,
+pre.cod_output .sql .aggregate,
+pre.cod_output .django .template_tag,
+pre.cod_output .django .variable,
+pre.cod_output .smalltalk .class,
+pre.cod_output .javadoc,
+pre.cod_output .ruby .string,
+pre.cod_output .django .filter .argument,
+pre.cod_output .smalltalk .localvars,
+pre.cod_output .smalltalk .array,
+pre.cod_output .attr_selector,
+pre.cod_output .pseudo,
+pre.cod_output .addition,
+pre.cod_output .stream,
+pre.cod_output .envvar,
+pre.cod_output .apache .tag,
+pre.cod_output .apache .cbracket,
+pre.cod_output .tex .command,
+pre.cod_output .input_number {
+ color: #D88;
+ }
+
+pre.cod_output .comment,
+pre.cod_output .java .annotation,
+pre.cod_output .python .decorator,
+pre.cod_output .template_comment,
+pre.cod_output .pi,
+pre.cod_output .doctype,
+pre.cod_output .deletion,
+pre.cod_output .shebang,
+pre.cod_output .apache .sqbracket,
+pre.cod_output .tex .formula {
+ color: #777;
+ }
+
+div.cod {
+ border: dashed 1px #00a6ea;
+ background: #f3f2ff;
+ text-align: left;
+ padding: 0.5em;
+ margin: 0.5em 0 0.5em 2em;
+ font-size: 1.1em;
+ max-width: 31em;
+ overflow: auto;
+ }
+
+div.cod_output {
+ background: black;
+ text-align: left;
+ color: white;
+ padding: 0.5em;
+ margin: 0.5em 0 0.5em 1em;
+ font: 1.1em Monospace,sans-serif;
+ width: 100%;
+ max-width: 33em;
+ overflow: auto;
+ }
+
+
+/*---------------------------------Комментарии-----------------------------------------------------------------------*/
+ol.comments {
+ list-style-type: none;
+ padding-left: 0;
+ }
+
+ol.comments li, #cpreview {
+ padding: 1em;
+ border: 2px #e0e0e0 solid;
+ color: #595959;
+ font-size: 0.9em;
+ border-radius: 5px;
+ }
+
+ol.comments li {
+ background: #f2f2f2;
+ }
+
+ul.comments {
+ padding: 1em 1em 0 1em;
+ list-style-type: none;
+ }
+
+ul.comments li {
+ background: white;
+ }
+
+ul.comments li ul.comments li {
+ background: #f2f2f2;
+ font-size: 1em;
+ }
+
+ul.comments li ul.comments li ul.comments li {
+ background: white;
+ font-size: 1em;
+ }
+
+ul.comments li ul.comments li ul.comments li ul.comments li {
+ background: #f2f2f2;
+ font-size: 1em;
+ }
+
+ul.comments li ul.comments li ul.comments li ul.comments li ul.comments li {
+ background: white;
+ font-size: 1em;
+ }
+
+ul.comments li ul.comments li ul.comments li ul.comments li ul.comments li ul.comments li {
+ background: #f2f2f2;
+ font-size: 1em;
+ }
+
+ol.comments li span, #cpreview span {
+ color: black;
+ font-weight: bold;
+ }
+
+#texts ol.comments li p, #cpreview p {
+ color: black;
+ padding: 10px 5px;
+ text-indent: 0;
+ }
+
+ol.comments li img, #cpreview img {
+ float: left;
+ margin: 15px 15px;
+ }
+
+.zit {
+ margin-top: 0em;
+ clear: both;
+ }
+
+ol.comments li .zit a, ol.comments li .zit a:visited {
+ font-weight:bold;
+ color: black;
+ }
+
+.zit a:hover {
+ color: black;
+ }
+
+blockquote {
+ border: 1px solid #e5ecff;
+ padding: 0.5em;
+ margin-left: 80px;
+ background: #e5e5e5;
+ text-indent:0;
+ }
+
+blockquote p{
+ text-indent:0;
+ }
+
+input.comment_name_input, input.comment_email_input, input.comment_web_input, input.zemText {
+ width: 50%;
+ height: 1.5em;
+ padding-left: 0.3em;
+ margin: 0.3em 0;
+ font-size: 1em;
+ color: black;
+ }
+
+input.comment_name_input, input.comment_email_input {
+ border: 2px solid #00a6ea;
+ background-color: white;
+ }
+
+input.comment_web_input {
+ border: 2px solid #e0e0e0;
+ color: black;
+ background: white;
+ }
+
+input#peg_replyto {
+ border: 0;
+ color: white;
+ width: 5em;
+ text-align: center;
+ font-weight: bold;
+ font-size: 0.9em;
+ float: right;
+ background-color: #00b7ff;
+ }
+
+#txpCommentInputForm {
+ background: #e0e0e0;
+ padding: 20px;
+ margin: 20px 0;
+ border-radius: 5px;
+ }
+ 
+textarea.txpCommentInputMessage, textarea.zemTextarea {
+ height: 6em;
+ font: 1em Arial,Sans;
+ border: 2px solid #00a6ea;
+ color: black;
+ background-color: white;
+ resize: vertical;
+ }
+
+textarea.txpCommentInputMessage {
+ width: 100%;
+ }
+
+textarea.zemTextarea {
+ width: 90%;
+ }
+
+#cpreview {
+ margin-bottom: 20px;
+ background: white;
+ }
+
+
+#panel1, #panel2, #panel3, #panel4, #panel5, #panel6, #panel7, #panel8, #panel9, #panel10, #panel11, #panel12, #panel13, #panel14, #panel15, #panel16, #panel17, #panel18, #panel19, #panel20, #panel21 {
+ height: auto;
+ display: none;
+ }
+
+.links {
+ text-align: left;
+ max-width: 31em;
+ overflow: auto;
+ }
+
+ol.related {
+ text-align: left;
+ }
+
+
+/* ---------------------------------------------------------------------
+   Fancebox ------------------------------------------------------*/
+.fancybox-wrap,
+.fancybox-skin,
+.fancybox-outer,
+.fancybox-inner,
+.fancybox-image,
+.fancybox-wrap iframe,
+.fancybox-wrap object,
+.fancybox-nav,
+.fancybox-nav span,
+.fancybox-tmp {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: none;
+  vertical-align: top;
+}
+
+.fancybox-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8020;
+}
+
+.fancybox-skin {
+  position: relative;
+  background: #f9f9f9;
+  color: #444;
+  text-shadow: none;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.fancybox-opened {
+  z-index: 8030;
+}
+
+.fancybox-opened .fancybox-skin {
+  -webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.fancybox-outer, .fancybox-inner {
+  position: relative;
+}
+
+.fancybox-inner {
+  overflow: hidden;
+}
+
+.fancybox-type-iframe .fancybox-inner {
+  -webkit-overflow-scrolling: touch;
+}
+
+.fancybox-error {
+  color: #444;
+  font: 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin: 0;
+  padding: 15px;
+  white-space: nowrap;
+}
+
+.fancybox-image, .fancybox-iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.fancybox-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
+  background-image: url('../images_design/fancybox_sprite.png');
+}
+
+#fancybox-loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -22px;
+  margin-left: -22px;
+  background-position: 0 -108px;
+  opacity: 0.8;
+  cursor: pointer;
+  z-index: 8060;
+}
+
+#fancybox-loading div {
+  width: 44px;
+  height: 44px;
+  background: url('../images_design/fancybox_loading.gif') center center no-repeat;
+}
+
+.fancybox-close {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  z-index: 8040;
+}
+
+.fancybox-nav {
+  position: absolute;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  background: transparent url('../images_design/blank.gif'); /* helps IE */
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  z-index: 8040;
+}
+
+.fancybox-prev {
+  left: 0;
+}
+
+.fancybox-next {
+  right: 0;
+}
+
+.fancybox-nav span {
+  position: absolute;
+  top: 50%;
+  width: 36px;
+  height: 34px;
+  margin-top: -18px;
+  cursor: pointer;
+  z-index: 8040;
+  visibility: hidden;
+}
+
+.fancybox-prev span {
+  left: 10px;
+  background-position: 0 -36px;
+}
+
+.fancybox-next span {
+  right: 10px;
+  background-position: 0 -72px;
+}
+
+.fancybox-nav:hover span {
+  visibility: visible;
+}
+
+.fancybox-tmp {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  visibility: hidden;
+}
+
+/* Overlay helper */
+
+.fancybox-lock {
+  overflow: hidden;
+}
+
+.fancybox-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  display: none;
+  z-index: 8010;
+  background: url('../images_design/fancybox_overlay.png');
+}
+
+.fancybox-overlay-fixed {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.fancybox-lock .fancybox-overlay {
+  overflow: auto;
+  overflow-y: scroll;
+}
+
+/* Title helper */
+
+.fancybox-title {
+  visibility: hidden;
+  font: normal 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  position: relative;
+  text-shadow: none;
+  z-index: 8050;
+}
+
+.fancybox-opened .fancybox-title {
+  visibility: visible;
+}
+
+.fancybox-title-float-wrap {
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  margin-bottom: -35px;
+  z-index: 8050;
+  text-align: center;
+}
+
+.fancybox-title-float-wrap .child {
+  display: inline-block;
+  margin-right: -100%;
+  padding: 2px 20px;
+  background: transparent; /* Fallback for web browsers that doesn't support RGBa */
+  background: rgba(0, 0, 0, 0.8);
+  -webkit-border-radius: 15px;
+     -moz-border-radius: 15px;
+          border-radius: 15px;
+  text-shadow: 0 1px 2px #222;
+  color: #FFF;
+  font-weight: bold;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.fancybox-title-outside-wrap {
+  position: relative;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.fancybox-title-inside-wrap {
+  padding-top: 10px;
+}
+
+.fancybox-title-over-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  padding: 10px;
+  background: #000;
+  background: rgba(0, 0, 0, .8);
+}

@@ -1,0 +1,1451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0054)http://www.ibm.com/developerworks/ru/library/wa-games/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru-RU" xml:lang="ru-RU" class="dj_webkit dj_chrome dj_contentbox"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/">
+<link rel="SHORTCUT ICON" href="http://www.ibm.com/favicon.ico">
+<meta name="DC.Rights" content="© Copyright IBM Corporation 2012">
+<meta name="Keywords" content="HTML5, Canvas, jQuery, Modernizr,  Kevin Moot, tttwaca">
+<meta name="DC.Date" scheme="iso8601" content="2012-12-11">
+<meta name="Source" content="v17 delivery:developerWorks">
+<meta name="Security" content="Public">
+<meta name="Abstract" content="В этой статье рассматриваются основные методы отработки взаимодействия с пользователем в играх на базе HTML Canvas.">
+<meta name="Description" content="В этой статье рассматриваются основные методы отработки взаимодействия с пользователем в играх на базе HTML Canvas.">
+<meta name="IBM.Effective" scheme="W3CDTF" content="2012-12-11">
+<meta name="Owner" content="RuAdmin DeveloperWorks/Russia/IBM">
+<meta name="DC.Language" scheme="rfc1766" content="ru-RU">
+<meta name="IBM.SpecialPurpose" content="SP001">
+<meta name="IBM.Country" content="RU">
+<meta name="Robots" content="index,follow">
+<meta name="DC.Type" scheme="IBM_ContentClassTaxonomy" content="CT316">
+<meta name="dW.ContentArea" content="5">
+<meta name="dW.Topic" content="263,69,589">
+<meta scheme="IBM_WTMCategory" name="IBM.WTMCategory" content="SOFDCDEVRU">
+
+<!-- HEADER_SCRIPTS_AND_CSS_INCLUDE -->
+<link href="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/www.css" rel="stylesheet" title="www" type="text/css">
+<!-- Masthead/footer -->
+<link href="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/dw-mfN2014-05.css" media="screen,projection" rel="stylesheet" title="www" type="text/css">
+<link href="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/dw-article-6.css" rel="stylesheet" title="www" type="text/css">
+<link href="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/dw-common-features.css" rel="stylesheet" title="www" type="text/css">
+<link href="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/dw-local-site-v17-N2014-05.css" media="screen,projection" rel="stylesheet" title="www" type="text/css">
+<script type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/www.js">//</script><style type="text/css"></style><script type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/eluminate.js"></script><script src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/head.js"></script><script language="javascript" type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/50200000.js"></script><script language="javascript" type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/cookie-id.js"></script><script language="javascript" type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/rules_50200000.js"></script><script language="javascript" type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/dispatcher-v3.js"></script>
+<script type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/dw-www.js">//</script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/Dialog.xd.js"></script>
+
+<script type="text/javascript">
+//  ibmweb.config.set({ sbs: { enabled: false }});
+</script>
+
+<!-- LEADSPACE_STYLES -->
+
+	<link rel="canonical" href="http://www.ibm.com/developerworks/ru/library/wa-games/index.html">
+<script type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/ruru-utf8.js" id="dojoIoScript1" charset="utf-8"></script><script type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/saved_resource" id="dojoIoScript2" charset="utf-8"></script><script type="text/javascript" src="http://w3.ibm.com/w3/js/ccf/ccf-intercept-whitelist.js" id="dojoIoScript3" charset="utf-8"></script><script type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/profiling.js" id="dojoIoScript4" charset="utf-8"></script><script src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/yahoo-min.js" type="text/javascript"></script><script src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/cp-v3.js" type="text/javascript"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/move.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/TimedMoveable.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/_CssStateMixin.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/_FormMixin.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/_DialogMixin.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/DialogUnderlay.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/ContentPane.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/common.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/TooltipDialog.xd.js"></script><style type="text/css">#lleo_dialog, #lleo_dialog * {
+    margin: 0 !important;
+	padding: 0 !important;
+	background: none !important;
+	border: none 0 !important;
+	position: static !important;
+	vertical-align: baseline !important;
+	font: normal 13px Arial, Helvetica !important;
+	line-height: 15px !important;
+	color: #000 !important;
+	overflow: visible !important;
+	width: auto !important;
+	height: auto !important;
+	float: none !important;
+	visibility: visible !important;
+	text-align: left !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important;
+}
+
+#lleo_dialog iframe {
+	height: 0 !important;
+	width: 0 !important;
+}
+
+#lleo_dialog {
+    position: absolute !important;
+    background: #fff !important;
+    border: solid 1px #ccc !important;
+    padding: 7px 0 0 !important;
+    left: -999px;
+    top: -999px;
+	/*max-width: 450px !important;*/
+    width: 440px !important;
+    overflow: hidden;
+    display: block !important;
+    z-index: 999999999 !important;
+    opacity: 0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+	-moz-border-radius: 3px !important;
+	-webkit-border-radius: 3px !important;
+	border-radius: 3px !important;
+}
+#lleo_dialog.lleo_show {
+    opacity: 1 !important;
+    -webkit-transition: opacity 0.3s !important;
+}
+#lleo_dialog input::-webkit-input-placeholder {
+    color: #aaa !important;
+}
+#lleo_dialog .lleo_has_pic #lleo_word {
+	margin-right: 80px !important;
+}
+#lleo_dialog #lleo_translationsCopntainer1 {
+	position: relative !important;
+}
+#lleo_dialog #lleo_translationsCopntainer2 {
+	padding: 7px 0 0 !important;
+	vertical-align: middle !important;
+}
+#lleo_dialog #lleo_word {
+    color: #000 !important;
+    margin: 0 5px 2px 0 !important;
+    /*float: left !important;*/
+}
+#lleo_dialog .lleo_has_sound #lleo_word {
+    margin-left: 17px !important;
+}
+#lleo_dialog #lleo_text {
+    font-weight: bold !important;
+    color: #d56e00 !important;
+    text-decoration: none !important;
+    cursor: default !important;
+}
+#lleo_dialog #lleo_text.lleo_known {
+    cursor: pointer !important;
+    text-decoration: underline !important;
+}
+#lleo_dialog #lleo_closeBtn {
+    position: absolute !important;
+    right: 6px !important;
+    top: 5px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 0 !important;
+    color: #aaa !important;
+    display: block !important;
+    padding: 2px !important;
+	z-index: 9999999999 !important;
+	width: 7px !important;
+	height: 7px !important;
+	padding: 0  !important;
+	margin: 0   !important;
+}
+
+#lleo_dialog #lleo_optionsBtn {
+    position: absolute !important; 
+    right: 1px !important;
+    top: 12px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 13px !important;
+    color: #aaa !important;
+    padding: 2px !important;
+	display: none;
+}
+#lleo_dialog #lleo_optionsBtn img{
+	width: 12px !important;
+	height: 12px !important;
+}
+#lleo_dialog #lleo_sound {
+    float: left !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin-left: 12px !important;
+    background: 0 0 no-repeat !important;
+    cursor: pointer !important;
+    display: none !important;
+}
+#lleo_dialog .lleo_has_sound #lleo_sound {
+    display: block !important;
+}
+#lleo_dialog #lleo_picOuter {
+    position: absolute !important;
+    float: right !important;
+    right: 29px;
+    top: 0;
+    display: none !important;
+    z-index: 9 !important;
+}
+#lleo_dialog .lleo_has_pic #lleo_picOuter {
+    display: block !important;
+}
+#lleo_dialog #lleo_picOuter:hover {
+    z-index: 11 !important;
+}
+#lleo_dialog #lleo_pic,
+#lleo_dialog #lleo_picBig {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    border: solid 2px #fff !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    z-index: 1 !important;
+}
+#lleo_dialog #lleo_pic {
+	position: relative !important;
+    border: none !important;
+	width: 34px !important;
+}
+#lleo_dialog #lleo_picBig {
+    box-shadow: -1px 2px 4px rgba(0,0,0,0.3);
+    z-index: 2 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+#lleo_dialog #lleo_picOuter:hover #lleo_picBig {
+    visibility: visible !important;
+    opacity: 1 !important;
+    -webkit-transition: opacity 0.3s !important;
+    -webkit-transition-delay: 0.3s !important;
+}
+#lleo_dialog #lleo_transcription {
+    color: #486D85 !important;
+    margin: 0 0 4px 29px !important;
+    color: #aaaaaa !important;
+}
+#lleo_dialog .lleo_no_trans {
+    color: #aaa !important;
+}
+
+
+
+
+
+
+#lleo_dialog .ll-translation-counter {
+	float: right !important;
+    font-size: 11px !important;
+    color: #aaa !important;
+    padding: 2px 2px 1px 10px !important;
+}
+
+#lleo_dialog .ll-translation-text {
+	float: left !important;
+	width: 80% !important;
+}
+
+#lleo_dialog #lleo_trans a {
+    color: #3F669F !important;
+    padding: 1px 4px !important;
+    text-decoration: none !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}
+
+#lleo_dialog .ll-translation-item {
+	width: 100% !important;
+	float: left !important; 
+	padding:1px 4px;
+	color: #3F669F !important;
+	padding: 3px !important;
+	border: solid 1px white !important;
+	-moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+}
+
+#lleo_dialog .ll-translation-item:hover {
+	border: solid 1px #9FC2C9 !important;
+    background: #EDF4F6 !important;
+	cursor: pointer !important;
+}
+
+#lleo_dialog .ll-translation-marker {
+	margin: 0px 5px 2px 2px !important;
+}
+
+
+
+
+
+#lleo_dialog #lleo_icons {
+    margin: 10px 0 7px !important;
+    color: #aaa !important;
+    line-height: 20px !important;
+    font-size: 11px !important;
+    clear: both !important;
+    padding-left: 16px !important;
+}
+#lleo_icons a {
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 0 -2px 3px !important;
+    text-decoration: none !important;
+    background: 0 0 no-repeat !important;
+    opacity: 0.5 !important;
+}
+#lleo_icons a:hover {
+    opacity: 1 !important;
+}
+#lleo_icons a.lleo_google     {background-position:-34px 0 !important;}
+#lleo_icons a.lleo_multitran  {background-position:-64px 0 !important;}
+#lleo_icons a.lleo_lingvo     {background-position:-51px 0 !important; width: 12px !important;}
+#lleo_icons a.lleo_dict       {background-position:-17px 0 !important;}
+#lleo_icons a.lleo_linguee    {background-position:-81px 0 !important;}
+#lleo_icons a.lleo_michaelis  {background-position:-98px 0 !important;}
+
+
+
+
+#lleo_dialog #lleo_contextContainer {
+    margin: 0 !important;
+    padding: 3px 15px 3px 10px !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee)) !important;
+    border-bottom: solid 1px #ddd !important;
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+    display: none !important;
+    overflow: hidden !important;
+}
+#lleo_dialog .lleo_has_context #lleo_contextContainer {
+    display: block !important;
+}
+#lleo_dialog #lleo_context {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    line-height: 12px !important;
+    font-size: 11px !important;
+    margin-left: 2px !important;
+}
+#lleo_dialog #lleo_context b {
+    line-height: 12px !important;
+    color: #000 !important;
+    font-weight: bold !important;
+    font-size: 11px !important;
+}
+#lleo_dialog #lleo_gBrand {
+    color: #aaa !important;
+    font-size: 10px !important;
+    /*padding-right: 52px !important;*/
+    padding-bottom: 14px !important;
+    margin: -3px 4px 0 4px !important;
+    background: left bottom no-repeat !important;
+    display: inline-block !important;
+    float: right !important;
+}
+#lleo_dialog #lleo_gBrand.hidden {
+    display: none !important;
+}
+#lleo_dialog #lleo_translateContextLink {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#ddd)) !important;
+    border: solid 1px !important;
+    box-shadow: 1px 1px 0 #f6f6f6 !important;
+    border-color: #999 #aaa #aaa #999 !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    padding: 0 3px !important;
+    font-size: 11px !important;
+    text-decoration: none !important;
+    margin: 1px 5px 0 !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+}
+#lleo_dialog #lleo_translateContextLink:hover {
+    background: #f8f8f8 !important;
+}
+
+#lleo_dialog #lleo_setTransForm {
+    display: block !important;
+    margin-top: 3px !important;
+    padding-top: 5px !important;
+    /* Set position and background because the form might be overlapped by an image when no translations */
+    position: relative !important;
+    background: #fff !important;
+    z-index: 10 !important;
+    padding-bottom: 10px !important;
+    padding-left: 16px !important;
+}
+#lleo_dialog .lleo-custom-translation {
+    padding: 4px 5px !important;
+    border: solid 1px #ddd !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    width: 90% !important;
+    min-width: 270px !important;
+    background: -webkit-gradient(linear, 0 0, 0 20, from(#f1f1f1), to(#fff)) !important;
+	font: normal 13px Arial, Helvetica !important;
+	line-height: 15px !important;
+}
+#lleo_dialog .lleo-custom-translation:hover {
+    border: solid 1px #aaa !important;
+}
+#lleo_dialog .lleo-custom-translation:focus {
+    background: #FFFEC9 !important;
+}
+
+#lleo_dialog *.hidden {
+    display: none !important;
+}
+
+#lleo_dialog .infinitive{
+    color: #D56E00 !important;
+    text-decoration: none;
+    border-bottom: 1px dotted #D56E00 !important;
+}
+#lleo_dialog .infinitive:hover{
+    border: none !important;
+}
+
+
+#lleo_dialog #lleo_trans{
+    zoom: 1;
+    border-top: 1px solid #eeeeee !important;
+    margin: 10px 0 0 !important;
+    padding: 5px 30px 0 14px !important;
+}
+
+#lleo_dialog .lleo_clearfix {
+	display: block !important;
+	clear: both !important;
+	visibility: hidden !important;
+	height: 0 !important;
+	font-size: 0 !important;
+}
+
+#lleo_dialog #lleo_markBlock {
+    background: #eeeeee !important;
+	cursor: pointer !important; 
+	border-bottom-left-radius: 3px !important;
+	border-bottom-right-radius: 3px !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important; 
+}
+
+#lleo_dialog #lleo_markBlock img{
+	width: 14px !important;
+	height: 14px !important;
+}
+
+#lleo_dialog #lleo_markBlock .icon-cell {
+	padding: 5px 2px 5px 16px !important;
+	height: 17px !important;
+}
+
+#lleo_dialog #lleo_markBlock .wide-cell {
+	width: 100% !important;
+}
+
+#lleo_dialog #lleo_markBlock .text-cell {
+	color: #999999 !important; 
+    font: normal 13px Arial, Helvetica !important;
+    text-shadow: 0 1px #fff !important; 
+}
+
+#lleo_dialog #lleo_markBlock td {
+	vertical-align: middle !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important;
+}
+
+
+#lleo_dialog #lleo_picOuter table{
+    width: 44px !important;
+    position: absolute !important;
+    right: 0 !important;
+    vertical-align: middle !important;
+}
+
+#lleo_dialog #lleo_picOuter td{
+    width: 38px !important;
+    height: 38px !important;
+    border: 1px solid #eeeeee !important;
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+#lleo_dialog #lleo_picOuter td div {
+	height: 38px !important;
+	overflow: hidden !important;
+}</style><style type="text/css">
+.ll-content-notification *{
+	letter-spacing: normal !important;
+	margin: 0 !important;
+    padding: 0 !important;
+	background: none !important;
+	border: 0 !important;
+	float: none !important;
+	text-align: left !important;
+	text-decoration: none !important;
+    font: normal 15px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+}
+
+
+.ll-content-notification {
+    vertical-align: baseline !important;
+    color: #000 !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: fixed !important;
+    background: #fff !important;
+    border: solid 1px #AAA !important;
+	/*
+    left: -999px;
+    top: -999px;
+	*/
+    width: auto;
+    /* width: 300px !important; */
+    display: block;
+    z-index: 999999999 !important;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    -webkit-border-radius: 3px !important;
+    -moz-border-radius: 3px !important;
+    border-radius: 3px !important;
+    overflow: hidden !important;
+    /* opacity: 0 !important; */
+    transition: opacity 0.8s !important;
+    -moz-transition: opacity 0.8s !important; /* Firefox 4 */
+    -webkit-transition: opacity 0.8s !important; /* Safari and Chrome */
+    -o-transition: opacity 0.8s !important; /* Opera */
+    cursor: default !important;
+}
+
+.ll-content-notification-shown {
+    opacity: 1 !important;
+    transition: opacity 0.8s !important;
+    -moz-transition: opacity 0.8s !important; /* Firefox 4 */
+    -webkit-transition: opacity 0.8s !important; /* Safari and Chrome */
+    -o-transition: opacity 0.8s !important; /* Opera */
+}
+
+.ll-content-notification-header {
+	border: 0 !important;
+	margin: 0 !important;
+    background: url(data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAABJJREFUGFdjePHmCxw9e/UZjgAVYhYtk8xZqAAAAABJRU5ErkJggg==) !important;
+    border-bottom: solid 1px #CCC !important;
+    padding: 1px 4px !important;
+	min-height: 18px !important;
+	width: 100% !important;
+	-webkit-border-top-left-radius: 3px !important;
+    -webkit-border-top-right-radius: 3px !important;
+    -moz-border-radius-topleft: 3px !important;
+    -moz-border-radius-topright: 3px !important;
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+	border-collapse: collapse !important;
+	border-spacing: 0 !important;
+}
+
+.ll-content-notification-header-pic {
+	border: 0 !important;
+	margin: 0 !important;
+	padding: 3px 0 0 3px !important;
+	width: 20px !important;
+	vertical-align: top !important;
+	line-height: 1px !important;
+}
+
+.ll-content-notification-header-pic img{
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	line-height: 1px !important;
+}
+
+
+.ll-content-notification-header-caption {
+    font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+	font-weight: bold !important;
+    line-height: 15px !important;
+    color: #555 !important;
+    float: left !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+	white-space: normal !important;
+	padding: 3px !important;
+	margin: 0 !important;
+}
+
+.ll-content-notification-header-close {
+    width: 15px !important;
+	vertical-align: top !important;
+	text-align: right !important;
+	padding: 6px 5px 0 0 !important;
+	margin: 0 !important;
+	line-height: 1px !important;
+}
+
+.ll-content-notification-header-close img {
+	border: 0 !important;
+    width: 7px !important;
+    height: 7px !important;
+    margin: 0 !important;
+	padding: 0 !important;
+}
+
+.ll-content-notification-content {
+    margin: 0 !important;
+    padding: 8px !important;
+    float: left !important;
+    overflow: hidden !important;
+    width: auto !important;
+}
+
+.ll-content-notification-content-logo {
+    float: left !important;
+	height: 48px !important;
+	width: 48px !important;
+}
+
+.ll-content-notification-content-main {
+    margin-left: 60px !important;
+    overflow: hidden !important;
+    padding: 0 0 2px 0 !important;
+    color: #333 !important;
+    text-align: left !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+    font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+    line-height: 15px !important;
+    width: auto !important;
+}
+
+.ll-content-notification-content-header {
+	text-align: left !important;
+	text-decoration: none !important;
+    font: bold 15px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+    line-height: 19px !important;
+    margin: 0 0 4px 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    color: #333 !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+    display: block !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+.ll-content-notification-word {
+    color: #d56e00 !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+}
+</style><script type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/blackwhite_lists.json" id="dojoIoScript5" charset="utf-8"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/Mover.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/Moveable.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/_ContentPaneResizeMixin.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/html.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/loading.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/common.xd(1).js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/autoscroll.xd.js"></script><script type="text/javascript" charset="utf-8" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/_LayoutWidget.xd.js"></script><script src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/json-min.js" type="text/javascript"></script></head>
+
+<body id="ibm-com" class="v17" aria-busy="false">
+
+	<div id="ibm-top" class="ibm-landing-page ibm-no-scroll"><img src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/ibm_logo_print.png" width="43" height="15" id="ibm-print-masthead" alt="IBM Print">
+
+<!-- MASTHEAD_BEGIN -->
+<div id="ibm-masthead" role="banner">
+
+    <!-- TOP ROW -->    
+	<div id="dw-masthead-top-row">
+		<ul id="ibm-mast-options-dw" class="ru" role="toolbar">
+				<li id="dw-mast-top-4" role="presentation">
+				<a href="http://www.ibm.com/developerworks/ru/" tabindex="0"><img width="43" height="22" aria-label="dW" alt="dW" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/dwn-dw-badge.png"></a>
+			</li>
+			<li role="presentation" id="dw-mast-top-0">
+				<div><a class="" href="http://www.ibm.com/developerworks/dwwi/DWAuthRouter?m=loginpage&lang=ru&d=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fru%2Flibrary%2Fwa-games%2F" title="" role="button" tabindex="0">Войти (или Регистрация)</a></div>
+			</li>
+			<li role="presentation" id="dw-mast-top-1" class="dw-mast-top-1-ru">
+				<div><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#SELECTLANG" role="button">Русский</a></div>
+			</li>
+			<li role="presentation" id="dw-mast-top-3">
+				<a role="button" href="http://www.ibm.com/">IBM</a>
+			</li>
+			<li role="presentation" id="dw-mast-top-2" class="dw-mf-hide">
+				<a href="http://www.ibm.com/developerworks/ru/library/wa-games/#">[userid]</a>
+			</li>
+		</ul>
+	</div>
+
+    <!-- TOP ROW SLIDER -->
+	<div id="ibm-my-menu-dw" style="display: none;">
+        <!-- Sign-in -->
+		
+        <!-- Language selector --> 
+		
+		<div id="empty_div" class="dw-mast-columns" role="group"><!-- Authenticated --></div>		
+		<!-- IBM -->
+				
+	<div class="ibm-container-body" dojoattachpoint="ribbonContainer" id="ibmweb_ribbon_0" widgetid="ibmweb_ribbon_0"><a class="ibm-ribbon-prev ibm-disabled" dojoattachpoint="scrollLeftButton" role="button" href="http://www.ibm.com/developerworks/ru/library/wa-games/#" title="Назад" style="margin-top: -12px;">Назад</a><div class="ibm-ribbon-pane" dojoattachpoint="scrollContainer" style="height: 0px;"><div class="ibm-ribbon-section" dojoattachpoint="scrollableNode" role="listbox" id="ibmweb_ribbon_0_scrollable"><div class="ibm-columns" dojoattachpoint="containerNode" role="dialog" id="ibmweb_ribbonSlide_0" widgetid="ibmweb_ribbonSlide_0" aria-labelledby="ibm-rib-menu-0"><h2 class="ibm-access" id="ibm-rib-menu-0">Войти (или Регистрация)</h2><div id="ibmweb_ribbonItemAbstract_0" class="dw-mast-columns" role="group" tabindex="0" widgetid="ibmweb_ribbonItemAbstract_0">
+			<div class="dw-mast-col-1-1">
+				<div id="dw-mast-sso">
+					<div id="signin_error_mf" class="no-display"></div>
+					<div id="dw-mast-sso-form">
+						<form id="sForm_mf" action="" method="post" name="sForm_name_mf" onsubmit="return false;">
+							<div id="dw-mast-sso-id">
+								<label for="ibmid_mf">IBM ID:</label>
+								<input id="ibmid_mf" value="" name="ibmid_name_mf" maxlength="100" onkeypress="dwsi.siInst.handleEP(event,this.form,&#39;mf&#39;);" type="text">
+							</div>
+							<div id="dw-mast-sso-pw">
+								<label for="pw_mf">Пароль:</label>
+								<input id="pw_mf" value="" name="pw_name_mf" maxlength="100" onkeypress="dwsi.siInst.handleEP(event,this.form,&#39;mf&#39;);" type="password">
+							</div>
+							<div id="dw-mast-sso-target" class="dw-mast-sso-target-en">
+								<p class="dw-mf-perm-box">
+									<input id="perm_mf" name="perm_name_mf" type="checkbox"><label for="perm_mf"> Запомнить меня.</label>
+								</p>
+							</div>					
+							<div id="dw-mast-sso-terms">
+										<p class="dw-mast-sso-terms-ru">Нажимая <strong>Отправить</strong>, Вы
+										    принимаете <a href="http://www.ibm.com/developerworks/community/terms?lang=ru">Условия использования</a> developerWorks.</p>
+								</div>
+							<div>
+								<input class="dw-mf-submit-btn-ru" name="ibm_submit_name_mf" value="Отправить" onclick="dwsi.siInst.signin(&#39;mf&#39;);return false;" type="submit">
+							</div>
+						</form>
+					</div>
+					<div id="dw-mast-sso-update" class="dw-mast-sso-update-ru">
+						<div id="dw-mast-sso-update-id">
+							<ul>
+								<li><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#" onclick="(function ()
+								    {window.location=&#39;/developerworks/dwwi/DWAuthRouter?m=reg&amp;lang=ru_RU&amp;d=&#39;+encodeURIComponent(location.href);})();">Нужен IBM ID?</a></li>
+								<li><a href="http://www.ibm.com/developerworks/dwwi/jsp/WSHelp.jsp?lang=ru_RU">Забыли Ваш IBM ID?</a></li>
+							</ul>
+						</div>
+						<div id="dw-mast-sso-update-pw">
+							<ul class="dw-mf-pwupdate">
+								<li><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#" onclick="(function ()
+								    {window.location=&#39;https://www.ibm.com/account/profile?page=forgot&amp;lang=ru_RU&amp;appname=ibm&amp;required=null&amp;d=&#39;+encodeURIComponent(dwsi.siInst.getAuthUrl())+&#39;%3Fm%3Dloginpage%26lang%3Den_US%26d%3D&#39;+encodeURIComponent(location.href);})();">Забыли Ваш пароль?</a></li>
+								<li><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#" onclick="(function ()
+								    {window.location=&#39;https://www.ibm.com/account/profile?page=chpw&amp;lang=ru_RU&amp;appname=ibm&amp;required=null&amp;d=&#39;+encodeURIComponent(location.href);})();">Изменить пароль</a></li>
+							</ul>
+						</div>
+					</div>
+					<div id="dw-mast-sso-text-ru">
+						<p>Профиль создается, когда вы первый раз заходите в developerWorks.  <strong>Информация в вашем профиле (имя, страна / регион,  название компании) отображается для всех пользователей и будет сопровождать любой опубликованный вами контент пока вы специально не укажите скрыть название вашей компании</strong>.  Вы можете обновить ваш IBM аккаунт в любое время.</p>								
+						<p class="dw-mf-secure-ru">Вся введенная информация защищена.</p>
+					</div>
+				</div>
+				<div id="dw-mast-dname" class="dw-mf-hide">
+							<p>При первом входе в developerWorks для Вас будет создан профиль и Вам нужно будет
+							    выбрать Отображаемое имя. Оно будет выводиться рядом с контентом,
+							    опубликованным Вами в developerWorks.</p><p class="dw-mast-dname-ru"><strong>Отображаемое имя должно иметь длину от 3 символов до 31 символа</strong>.  Ваше Имя в системе должно быть уникальным. В качестве имени по соображениям приватности нельзя использовать контактный e-mail.</p>
+									<div id="signin_dname_error_mf" class="no-display"></div>
+					<div id="dw-mast-dname-form" class="dw-mast-dname-form-ru">
+						<form id="dForm_mf" action="" method="post" name="dForm_name_mf" onsubmit="return false;">
+							<div id="dw-mast-dname-mf">
+								<label for="dname_mf">Отображаемое имя:</label>
+								<input id="dname_mf" name="dname_name_mf" maxlength="31" size="25" value="" onkeypress="dwsi.siInst.handleEP(event,this.form,&#39;mf&#39;);" type="text">
+							</div>
+							<div id="dw-mast-dname-terms">
+										<p class="dw-mast-dname-terms-ru">Нажимая <strong>Отправить</strong>, Вы
+										    принимаете <a href="http://www.ibm.com/developerworks/community/terms?lang=ru">Условия использования</a> developerWorks.</p>
+							</div>
+
+							<div>
+								<input class="dw-mf-submit-btn-ru" name="dname_submit_name_mf" value="Отправить" onclick="dwsi.siInst.signin(&#39;mf&#39;);return false;" type="submit">
+							</div>
+						</form>								
+					</div>
+					<div id="dw-mast-dname-secure">
+						<p class="dw-mf-secure-ru">Вся введенная информация защищена.</p>
+					</div>
+				</div>
+				<div id="dw-mast-auth" class="dw-mf-hide">
+			    
+					<div>
+						<h2>Сообщество developerWorks:</h2>
+						<ul>
+							<li><a id="dw-mast-top-0-0" href="http://www.ibm.com/developerworks/community/homepage?lang=ru">Моя главная страница</a></li>
+						    
+							<li><a href="http://www.ibm.com/developerworks/community/profiles/html/myProfileView.do?lang=ru">Мой
+							    профайл</a></li>
+							<li><a href="http://www.ibm.com/developerworks/community/groups/service/html/mycommunities?lang=ru">Мои сообщества</a></li>
+							<li><a href="http://www.ibm.com/developerworks/community/news/?lang=ru">Настройки</a></li>
+						    
+						</ul>     
+					</div>
+					<div class="dw-mast-more">
+						<ul class="ibm-link-list">
+							<li><a class="dw-more-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#" onclick="dwsi.siInst.signOut(); return false;"><strong>Выйти</strong></a></li>
+						</ul>
+					</div>
+				</div>								
+			</div>		
+		</div></div><div class="ibm-columns" dojoattachpoint="containerNode" role="dialog" id="ibmweb_ribbonSlide_1" widgetid="ibmweb_ribbonSlide_1" aria-labelledby="ibm-rib-menu-1"><h2 class="ibm-access" id="ibm-rib-menu-1">Русский</h2><div id="ibmweb_ribbonItemAbstract_1" class="dw-mast-columns" role="group" tabindex="0" widgetid="ibmweb_ribbonItemAbstract_1">
+			<div class="dw-mast-col-2-1">
+				<h2>Выбрать язык:</h2>
+				<ul>
+					<li><a id="dw-mast-top-1-0" href="http://www.ibm.com/developerworks/" lang="en">English</a></li>
+					<li><a href="http://www.ibm.com/developerworks/cn/" lang="zh">中文</a></li>
+					<li><a href="http://www.ibm.com/developerworks/jp/" lang="ja">日本語</a></li>
+					<li><a href="http://www.ibm.com/developerworks/ru/">Русский</a></li>
+				</ul>
+			</div>
+			<div class="dw-mast-col-2-2">
+				<ul>
+					<li><a href="http://www.ibm.com/developerworks/br/" lang="pt">Português (Brasil)</a></li>
+					<li><a href="http://www.ibm.com/developerworks/ssa/" lang="es">Español</a></li>
+					<li><a href="http://www.ibm.com/developerworks/vn/" lang="vi">Việt</a></li>
+				</ul>
+			</div>
+		</div></div><div class="ibm-columns" dojoattachpoint="containerNode" role="dialog" id="ibmweb_ribbonSlide_2" widgetid="ibmweb_ribbonSlide_2" aria-labelledby="ibm-rib-menu-2"><h2 class="ibm-access" id="ibm-rib-menu-2">IBM</h2><div id="ibmweb_ribbonItemAbstract_2" class="dw-mast-columns" role="group" tabindex="0" widgetid="ibmweb_ribbonItemAbstract_2">
+			<div class="dw-mast-col-2-1">
+				<ul>
+            				<li><a id="dw-mast-top-3-0" href="http://www.ibm.com/ru/ru/">Домашняя страница IBM</a></li>
+            				<li><a href="http://www.ibm.com/solutions/ru/ru/">Pешения</a></li>
+            				<li><a href="http://www.ibm.com/software/ru/">Программное обеспечение</a></li>
+            				<li><a href="http://www.ibm.com/technologyservices/ru/ru/">Сервис ПО</a></li>
+ 			</ul>
+			</div>
+			<div class="dw-mast-col-2-2 dw-mast-ibm">
+				<ul>
+           				<li><a href="http://www.ibm.com/support/ru/ru/">Поддержка</a></li>
+            				<li><a href="http://www.ibm.com/support/documentation/ru/ru/">Документация</a></li>
+            				<li><a href="http://www.ibm.com/developerworks/ru/doc/">Библиотека документов</a></li>
+  				</ul>
+			</div>	
+		</div></div></div></div><a class="ibm-ribbon-next" dojoattachpoint="scrollRightButton" role="button" href="http://www.ibm.com/developerworks/ru/library/wa-games/#" title="Далее" style="margin-top: -12px;">Далее</a><div class="ibm-mm-close"><span tabindex="0" aria-label="Закрыть" role="button" title="Закрыть"></span></div></div></div>
+		
+    <!-- BOTTOM ROW -->
+	<div id="ibm-universal-nav-dw" aria-label="Site map">
+		<ul id="ibm-unav-links-dw">
+		<li id="ibm-unav-home-dwlogo">
+				<a href="http://www.ibm.com/developerworks/ru/"><img src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/dwn-dw-wordmark.png" width="225" height="28" alt="developerWorks®"></a>
+			</li>
+		</ul>
+		<ul id="ibm-menu-links-dw" class="ibm-menu-links-dw-ru" role="toolbar" aria-label="Site map">
+			<li id="dw-mast-nav-0" role="presentation"><a href="http://www.ibm.com/developerworks/ru/topics/" tabindex="0">Технические материалы</a></li>
+			<li id="dw-mast-nav-1" role="presentation"><a href="http://www.ibm.com/developerworks/downloads/">Пробное ПО</a></li>
+			<li id="dw-mast-nav-2" role="presentation"><a href="http://www.ibm.com/developerworks/community/?lang=ru">Сообщество</a></li>
+		</ul>
+		<form id="ibm-search-form" action="http://www.ibm.com/search/csass/search/" method="get" name="form1" aria-label="Поиск developerWorks" role="search">
+			<p>
+				<label for="q"><span class="ibm-access">Поиск developerWorks</span></label>
+				<input id="q" type="text" name="q" value="Поиск developerWorks" maxlength="100">
+				<input type="hidden" name="sn" value="dw">
+				<input type="hidden" name="lang" value="ru">
+				<input type="hidden" name="cc" value="RU">
+				<input type="hidden" name="en" value="utf">
+				<input type="hidden" name="hpp" value="20">
+				<input type="hidden" name="dws" value="rudw">
+				<input type="hidden" name="lo" value="ru">
+				<input id="ibm-search" class="ibm-btn-search" type="submit" value="Отправить">
+			</p>
+		</form>		
+	</div>
+	
+<div id="dw-masthead-top"><div id="ibm-social-tools" style="display: block;" role="navigation" aria-label="Инструменты социального взаимодействия"><ul role="toolbar" aria-label="Social tool list"><li><a class="ibm-share-print" title="Распечатать эту страницу" href="http://www.ibm.com/developerworks/ru/library/wa-games/#" rel="print" dojoattrid="1" role="button" tabindex="0">Распечатать эту страницу</a></li><li><a class="ibm-share-email" title="Отправить эту страницу по электронной почте" href="http://www.ibm.com/developerworks/ru/library/wa-games/#" rel="email" dojoattrid="2" role="button" tabindex="-1">Отправить эту страницу по электронной почте</a></li><li><a class="ibm-share-digg" title="Digg" href="http://digg.com/submit?phase=2&url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fru%2Flibrary%2Fwa-games%2Findex.html&title=%D0%9E%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%20%D0%B2%D0%B2%D0%BE%D0%B4%D0%B0%20%D0%B2%20%D0%B8%D0%B3%D1%80%D0%B0%D1%85%20%D1%81%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E%20%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8%20HTML5%20Canvas" rel="digg" dojoattrid="3" role="button" tabindex="-1">Digg</a></li><li><a class="ibm-share-facebook" title="Facebook" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fru%2Flibrary%2Fwa-games%2Findex.html&t=%D0%9E%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%20%D0%B2%D0%B2%D0%BE%D0%B4%D0%B0%20%D0%B2%20%D0%B8%D0%B3%D1%80%D0%B0%D1%85%20%D1%81%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E%20%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8%20HTML5%20Canvas" rel="facebook" dojoattrid="4" role="button" tabindex="-1">Facebook</a></li><li><a class="ibm-share-twitter" title="Twitter" href="http://twitter.com/home?status=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fru%2Flibrary%2Fwa-games%2Findex.html%20-%20%D0%9E%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%20%D0%B2%D0%B2%D0%BE%D0%B4%D0%B0%20%D0%B2%20%D0%B8%D0%B3%D1%80%D0%B0%D1%85%20%D1%81%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E%20%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8%20HTML5%20Canvas" rel="twitter" dojoattrid="5" role="button" tabindex="-1">Twitter</a></li><li><a class="ibm-share-delicious" title="Delicious" href="http://delicious.com/post?url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fru%2Flibrary%2Fwa-games%2Findex.html&title=%D0%9E%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%20%D0%B2%D0%B2%D0%BE%D0%B4%D0%B0%20%D0%B2%20%D0%B8%D0%B3%D1%80%D0%B0%D1%85%20%D1%81%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E%20%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8%20HTML5%20Canvas" rel="delicious" dojoattrid="6" role="button" tabindex="-1">Delicious</a></li><li><a class="ibm-share-linkedin" title="Linked In" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fru%2Flibrary%2Fwa-games%2Findex.html&title=%D0%9E%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%20%D0%B2%D0%B2%D0%BE%D0%B4%D0%B0%20%D0%B2%20%D0%B8%D0%B3%D1%80%D0%B0%D1%85%20%D1%81%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E%20%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8%20HTML5%20Canvas" rel="linkedin" dojoattrid="7" role="button" tabindex="-1">Linked In</a></li><li><a class="ibm-share-googleplus" title="Google+" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fru%2Flibrary%2Fwa-games%2Findex.html&t=%D0%9E%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%20%D0%B2%D0%B2%D0%BE%D0%B4%D0%B0%20%D0%B2%20%D0%B8%D0%B3%D1%80%D0%B0%D1%85%20%D1%81%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E%20%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8%20HTML5%20Canvas" rel="googleplus" dojoattrid="8" role="button" tabindex="-1">Google+</a></li></ul></div></div></div>
+<div id="fdiv" class="ibm-access"></div><!-- MASTHEAD_END -->
+	    
+<!-- LAYOUT -->
+<!-- LEADSPACE_BEGIN --> 
+<div id="ibm-access-cntr" role="main"><div id="ibm-leadspace-head">
+	<!-- LEADSPACE_BODY_BEGIN --> 
+	<div id="ibm-leadspace-body">
+		<!-- Navigation_Trail_BEGIN -->
+        <ul id="ibm-navigation-trail" role="navigation" aria-label="Bread Crumbs"><li><a href="http://www.ibm.com/developerworks/ru/">developerWorks Россия</a></li><li><a href="http://www.ibm.com/developerworks/ru/topics/">Технические материалы</a></li><li><a href="http://www.ibm.com/developerworks/ru/web/">Web-архитектура</a></li><li><a href="http://www.ibm.com/developerworks/ru/views/global/libraryview.jsp">Статьи</a></li></ul>
+		<!-- END_Navigation_Trail -->
+			<!-- Title_Subtitle -->
+			<h1>Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas</h1><p><em><span>Определение событий клавиатуры, мыши и сенсорного экрана для разработки игр</span></em></p>
+	</div>
+	<!-- LEADSPACE_BODY_END --> 
+	<!-- SUMMARY_BEGIN -->
+	<div id="dw-summary-area" class="dw-summary-columns">
+		<div class="ibm-col-6-4">
+		<p>Оказавшись в мире игр HTML5, легко недооценить сложность управления событиями клавиатуры, мыши и сенсорного экрана. В этой статье рассматриваются основные методы отработки взаимодействия с пользователем в играх на базе HTML Canvas. Читатель узнает, как обрабатывать события клавиатуры и мыши, как изменить поведение Web-браузера по умолчанию в отношении событий и как передавать события логическим представлениям игровых объектов. Он также научится обрабатывать события таких  мобильных устройств, как iPhone и iPad.</p>
+		<p class="ibm-no-print ibm-ind-link">
+
+			
+			<span id="nCmts"><span>0</span><img class="dw-cmts-arrow" alt="" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/dw-cmts-arrow.png" height="7" width="7"> <a href="http://www.ibm.com/developerworks/ru/library/wa-games/#icomments" class="dw-cmt-link">Комментарии:</a></span>
+		</p>
+		</div>
+		<div class="ibm-col-6-2 dw-toc-margin">
+			<p class="dw-summary-author"><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#authorN10027" class="ibm-popup-link" onclick="ibmweb.overlay.show(&#39;authorN10027&#39;,this);return false;">Кевин Мут</a>, инженер-программист, The Nerdery</p>
+<div id="authorN10027" class="ibm-common-overlay"><div class="ibm-head"><p><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#close" class="ibm-common-overlay-close">Закрыть [x]</a></p></div><div class="ibm-body"><div class="ibm-main"><div class="ibm-title"><!--this is where the h2 usually goes--></div><div class="ibm-container ibm-alternate"><div class="ibm-container-body">
+<p><!--.-->
+<img class="dw-summary-bio-image-x64" alt="Фото Кевина Мута" name="Фото Кевина Мута" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/p-kmoot.jpg" width="64">Кевин Мут (Kevin Moot) интересуется компьютерной графикой с момента появления на его машине Apple IIe (с ее широким спектром из шести цветов и невероятным разрешением 280x192) таких игр, как "Мальчик-с-пальчик". Работал с технологией Canvas, входящей в HTML5, при создании нескольких передовых Web-сайтов и включает в список своих специализаций  HTML/CSS, JavaScript и .NET. В настоящее время ― разработчик интерактивного программного обеспечения в компании The Nerdery.</p><br><br></div></div></div></div><div class="ibm-footer"><!----></div></div>
+			<p class="dw-summary-date">11.12.2012</p>
+			
+
+
+			<div aria-hidden="true" class="ibm-container" id="dw-toc"><div class="ibm-container-body"><ul class="ibm-twisty"><li><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#toggle" class="ibm-twisty-trigger ibm-twisty-trigger-closed"><img src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/c.gif" alt="+"></a><span class="ibm-twisty-head">Содержание</span><div class="ibm-twisty-body" style="display: none;"><ul style="font-size:0.8em" class="ibm-link-list">
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#N10047">Введение</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#N10065">Типы событий</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#N10079">События клавиатуры</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#N10096">События мыши</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#N100DC">Нежелательное поведение браузера</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#N10137">Передача данных игровым объектам </a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#N101B2">Усовершенствованная проверка попадания</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#N10219">Совместимость с мобильными устройствами</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#N10259">Заключение</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#download">Загрузка</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#resources">Ресурсы</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#icomments">Комментарии</a></li></ul></div></li></ul></div></div>
+		</div>
+	</div>
+	<!-- SUMMARY_END -->
+</div><div id="ibm-pcon">
+
+<!-- BEGIN_IBM-CONTENT -->
+<div id="ibm-content">
+
+<!-- BEGIN_IBM-CONTENT-BODY -->
+<div id="ibm-content-body">
+
+<!-- BEGIN_IBM-CONTENT-MAIN -->
+<div id="ibm-content-main">
+
+<!-- 1_1_COLUMN_BEGIN -->
+<div class="ibm-columns">
+<div class="ibm-col-1-1">
+
+<h2 id="N10047">Введение</h2><p>Разработчики, знакомые с Flash и Silverlight, бывают удивлены тем, что приложения, написанные для HTML5 Canvas, не предоставляют специальных средств для обработки пользовательского ввода. По существу, с самых первых дней существования Web-браузеров с поддержкой JavaScript пользовательский ввод HTML предусматривает применение системы обработки событий, встроенной в браузеры; в HTML5 нет никаких специальных средств для обнаружения и обработки пользовательского ввода. Браузер  может, например, обеспечить низкоуровневую обратную связь с указанием координат (x, y), выбранных пользователем, и не более того.</p><div class="dw-sidebar ibm-inset"><h2 id="N1004F">Часто используемые сокращения</h2><ul class="ibm-bullet-list"><li>CSS: Cascading style sheet / Каскадная таблица стилей</li><li>DOM: Document Object Model</li><li>HTML: HyperText Markup Language</li></ul></div><p>Обработка взаимодействий с пользователем ничем не отличается от ее реализации в любой другой низкоуровневой игровой архитектуре. В Canvas нет встроенных абстракций, уведомляющих о том, что пользователь взаимодействовал с тем или иным отображаемым объектом. Это обеспечивает высокую степень низкоуровневого контроля над тем, как вы будете обрабатывать эти события. Имея в своем распоряжении разнообразные функции браузера, можно настроить обработку событий для достижения максимальной эффективности в соответствии с конкретным приложением — не будучи привязанным к конкретной реализации.</p><p>В этой статье рассматриваются методы обработки данных взаимодействия с пользователем в играх на базе HTML Canvas. Примеры иллюстрируют способы обработки событий клавиатуры, мыши и сенсорного экрана. Также рассматриваются стратегии передачи событий игровых объектов и совместимость с мобильными устройствами.</p><p>Исходный код примеров, приведенных в этой статье, содержится в разделе <a href="http://www.ibm.com/developerworks/ru/library/wa-games/#download">Загрузки</a>. </p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#ibm-pcon" class="ibm-anchor-up-link">В начало</a></p><h2 id="N10065">Типы событий</h2><p>Взаимодействие с пользователем полностью управляется традиционной моделью прослушивателя событий браузера. С появлением HTML5 ничего не изменилось; это та же модель событий, которая используется с первых дней Netscape Navigator.</p><p>По сути, интерактивное приложение или игру можно считать сочетанием модели событий  браузера для пользовательского ввода и Canvas для графического вывода. Между ними нет никакой логической связи, если вы не создадите ее сами.</p><p>Можно воспользоваться тем, что прослушиватели событий допускается связывать с самим элементом <code>&lt;canvas&gt;</code>. Поскольку элемент <code>&lt;canvas&gt;</code> ― это просто элемент уровня блока, с точки зрения браузера это ничем не отличается от присоединения прослушивателей событий к <code>&lt;div&gt;</code> или любому другому элементу уровня блока.</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#ibm-pcon" class="ibm-anchor-up-link">В начало</a></p><h2 id="N10079">События клавиатуры</h2><p>Простейшим типом событий для прослушивания и обработки являются события клавиатуры. Они не зависят от элемента Canvas или положения курсора. Для событий клавиатуры достаточно прослушивать события keydown, keyup  и keypress на уровне документа.</p><h3 id="N10080">Прослушивание событий клавиатуры</h3><p>Модель прослушивателя событий может варьироваться в зависимости от реализации браузера, поэтому лучше всего использовать библиотеку для нормализации обработки событий. В следующих примерах для привязки событий используется библиотека jQuery. Как правило, это самый простой способ приступить к работе, но универсальность библиотеки jQuery, поддерживающей устаревшие браузеры, может неблагоприятно сказаться на производительности. Другая популярная библиотека, написанная специально для ускорения кроссбраузерной обработки  событий клавиатуры, ― Kibo (см. раздел <a href="http://www.ibm.com/developerworks/ru/library/wa-games/#resources">Ресурсы</a>).</p><p>Листинг 1 иллюстрирует прослушивание событий клавиатуры и вызов соответствующих действий в зависимости от того, какая клавиша нажата.</p><h5 id="list1">Листинг 1. Обработка событий клавиатуры</h5><div class="codesection"><pre class="displaycode">$(document.body).on('keydown', function(e) {
+    switch (e.which) {
+        // код клавиши стрелки влево
+        case 37:
+            console.log('left arrow key pressed!');
+            break;
+
+        // код клавиши стрелки вправо
+        case 39:
+            console.log('right arrow key pressed!');
+            break;
+    }
+});</pre></div><p>Если приложение работает в среде Web-браузера, важно учитывать принятые в ней сочетания клавиш. Хотя технически можно переопределить поведение общепринятых комбинаций клавиш, отменив поведение браузера по умолчанию (например, для комбинации клавиш control-r), это настоятельно не рекомендуется.</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#ibm-pcon" class="ibm-anchor-up-link">В начало</a></p><h2 id="N10096">События мыши</h2><p>События мыши сложнее событий клавиатуры. Нужно знать положения элемента Canvas в окне браузера, а также положение курсора пользователя.</p><h3 id="N1009D">Прослушивание событий мыши</h3><p>С помощью свойств <code>e.pageX</code> и <code>e.pageY</code> легко получить положение мыши по отношению ко всему окну браузера. В этом случае начало координат (0,0) расположено в левом верхнем углу окна браузера.</p><p>Обычно если курсор не находится в области Canvas, пользовательский ввод не имеет значения. Поэтому началом координат (0,0) лучше считать верхний левый угол элемента Canvas. В идеале лучше работать в локальной системе координат, относящейся к области Canvas, а не с глобальной, относящейся ко всему окну браузера.</p><h3 id="N100AC">Стратегии обработки событий мыши</h3><p>Для преобразования глобальных  координат окна в локальные координаты Canvas нужно выполнить следующие действия.</p><ol><li>Вычислить положение (x, y) элемента DOM Canvas на странице.</li><li>Определить глобальное положение мыши по отношению к документу в целом.</li><li>Расположить начало координат (0,0) в верхнем левом углу элемента Canvas и эффективно преобразовать глобальные координаты в относительные, используя смещение между   глобальным положением мыши, рассчитанным на шаге 2, и положением Canvas, рассчитанным на шаге 1.</li></ol><p>На рисунке 1 приведен пример информации, которую нужно получить, исходя из глобальной системы координат.</p><h5 id="fig1">Рисунок 1. Положение мыши в глобальных координатах</h5><img alt="Положение мыши в глобальных координатах" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/fig01.jpg" width="533"><p>На рисунке 2 показан результат преобразования положения мыши в локальную систему координат.</p><h5 id="fig2">Рисунок 2. Положение мыши после преобразования в локальную систему координат</h5><img alt="Положение мыши в локальных координатах" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/fig02.jpg" width="180"><p>В листинге 2 показан метод определения локальных координат мыши. Предполагается, что элемент Canvas определен в разметке следующим образом: <code>&lt;canvas id="my_canvas"&gt;&lt;/canvas&gt;</code>.</p><h5 id="list2">Листинг 2. Обработка событий мыши</h5><div class="codesection"><pre class="displaycode">var canvas = $('#my_canvas');
+
+// вычисление положения (x, y) элемента Canvas DOM на странице
+
+var canvasPosition = {
+    x: canvas.offset().left,
+    y: canvas.offset().top
+};
+
+canvas.on('click', function(e) {
+
+    // использование pageX и pageY для получения положения указателя мыши
+    // относительно окна браузера
+
+    var mouse = {
+        x: e.pageX - canvasPosition.x,
+        y: e.pageY - canvasPosition.y
+    }
+
+    // теперь есть локальные координаты,
+    // начало которых  (0,0) расположено в
+    // верхнем левом углу элемента canvas
+});</pre></div><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#ibm-pcon" class="ibm-anchor-up-link">В начало</a></p><h2 id="N100DC">Нежелательное поведение браузера</h2><p>В компьютерной игре обычно требуется, чтобы никакое поведение браузера по умолчанию не мешало действиям пользователя. Например, выбор текста протаскиванием мыши, открытие контекстного меню правой кнопкой или прокрутка страниц колесом мыши не нужны.</p><p>На рисунке 3 приведен пример того, что может произойти, если пользователь нажимает на изображение и буксирует его в браузере. Поведение браузера по умолчанию имеет смысл для перетаскивания в приложениях, но в игре оно только мешает.</p><h5 id="fig3">Рисунок 3. Поведение браузера по умолчанию при перетаскивании изображения</h5><img alt="Поведение браузера по умолчанию при перетаскивании изображения" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/fig03.jpg" width="352"><p>Во всех обработчиках событий добавляйте строку <code>preventDefault()</code> с возвратом из этой функции значения false. Код, приведенный в листинге 3, проделывает этот трюк, предотвращая действие по умолчанию и наложение событий.</p><h5 id="list3">Листинг 3. Предотвращение поведения по умолчанию</h5><div class="codesection"><pre class="displaycode">canvas.on('click', function(e) {
+    e.preventDefault();
+
+    var mouse = {
+        x: e.pageX - canvasPosition.x,
+        y: e.pageY - canvasPosition.y
+    }
+
+    //происходит изменение положения мыши
+
+    return false;
+});</pre></div><p>Даже при наличии кода, приведенного в листинге 3, можно столкнуться с нежелательными побочными эффектами, когда пользователь инициирует событие перетаскивания элемента DOM, такими как появление I-образного курсора, выбор текста и т.п. Проблема событий перетаскивания чаще возникает с изображениями, но лучше применить к элементу Canvas этот метод, чтобы предотвратить перетаскивание и выбор. В листинге 4 показано правило CSS для предотвращения побочных эффектов выбора путем небольшого вкрапления CSS.</p><h5 id="list4">Листинг 4. Рекомендуемые стили для предотвращения выбора</h5><div class="codesection"><pre class="displaycode">image, canvas {
+    user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+}</pre></div><h3 id="N10103">Переопределение поведения рабочего стола</h3><p>Обычно хорошая идея ― переопределить события перетаскивания и выбора, чтобы поведение браузера по умолчанию не высовывало свою уродливую голову.</p><p>В коде, приведенном в листинге 5, библиотека jQuery намеренно не используется для подключения событий. jQuery не обрабатывает события <code>ondragstart</code> и <code>onselectstart</code> должным образом (обработчики могут не сработать, если они подключены с помощью jQuery).</p><h5 id="list5">Листинг 5. Отмена событий перетаскивания и выбора</h5><div class="codesection"><pre class="displaycode">var canvasElement = document.getElementById('my_canvas');
+
+// ничего не делать в обработчике событий, за исключением отмены события
+canvasElement.ondragstart = function(e) {
+    if (e &amp;&amp; e.preventDefault) { e.preventDefault(); }
+    if (e &amp;&amp; e.stopPropagation) { e.stopPropagation(); }
+    return false;
+}
+
+// ничего не делать в обработчике событий, за исключением отмены события
+canvasElement.onselectstart = function(e) {
+    if (e &amp;&amp; e.preventDefault) { e.preventDefault(); }
+    if (e &amp;&amp; e.stopPropagation) { e.stopPropagation(); }
+    return false;
+}</pre></div><h3 id="N10119">Переопределение поведения мобильных устройств</h3><p>На мобильных устройствах часто важно помешать пользователю масштабировать и панорамировать окно браузера (при управлении посредством жестов масштабирование и панорамирование зачастую представляет собой поведение мобильного браузера по умолчанию).</p><p>Поведение масштабирования можно предотвратить, добавив <code>user-scalable=no</code> в метатег <code>viewport</code>. Пример:</p><div class="codesection"><pre class="displaycode">&lt;meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1" /&gt;</pre></div><p>Чтобы отключить любые перемещения документа или окна при использовании жестов, добавьте в файл  document.body прослушиватели событий, приведенные в листинге 6. Это отменит любое поведение браузера по умолчанию при касании пользователя где-то за пределами области Canvas или игры.</p><h5 id="list6">Листинг 6. Отмена перемещения окна мобильного браузера</h5><div class="codesection"><pre class="displaycode">document.body.ontouchstart = function(e) {
+    if (e &amp;&amp; e.preventDefault) { e.preventDefault(); }
+    if (e &amp;&amp; e.stopPropagation) { e.stopPropagation(); }
+    return false;
+}
+
+document.body.ontouchmove = function(e) {
+    if (e &amp;&amp; e.preventDefault) { e.preventDefault(); }
+    if (e &amp;&amp; e.stopPropagation) { e.stopPropagation(); }
+    return false;
+}</pre></div><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#ibm-pcon" class="ibm-anchor-up-link">В начало</a></p><h2 id="N10137">Передача данных игровым объектам </h2><p>Для каждого типа событий, которые нужно захватывать, к Canvas должен быть  подключен только один прослушиватель событий. Например, если нужно захватить события click и mousemove, просто прикрепите к Canvas прослушиватели событий single click и single mousemove. Их нужно подключить только один раз, так что это обычно делается во время инициализации приложения.</p><p>Если какую-то полезную информацию, полученную прослушивателем событий, нужно довести до сведения объектов, находящихся в области Canvas, придется создать свою собственную систему логики. В данном примере такая система отвечала бы за передачу события click или mousemove всем игровым объектам, которые связаны с обработкой одного из этих событий. </p><p>Когда каждый игровой объект узнает об одном из этих событий, он сначала  должен определить, относится ли к нему данное событие click или mousemove. Если да, то объект игры должен будет определить, находятся ли координаты мыши в пределах его границ.</p><h3 id="N10142">Стратегии вещания</h3><p>Конкретная стратегия зависит от типа игры. Например, стратегия для 2D-текстуры может отличаться от стратегии для 3D-мира.</p><p>Следующие действия определяют реализацию, которая хорошо работает с простым 2D-приложением.</p><ol><li>Определение координат нажатия кнопки мыши в области Canvas.</li><li>Уведомление всех игровых объектов о том, что произошло  событие  click с данным набором координат.</li><li>Выполнение проверки нахождения курсора между координатами мыши и границами игрового объекта для каждого игрового объекта, чтобы определить, совпадают ли координаты мыши с этим объектом.</li></ol><h3 id="N10152">Простой пример вещания</h3><p>Обработчик события click может выглядеть как в листинге 7. В примере предполагается, что некоторая структура для отслеживания всех игровых объектов уже создана. Положение и размеры всех игровых объектов хранятся в переменной <code>gameObjectArray</code></p><h5 id="list7">Листинг 7. Вещание обработчика событий click на игровые объекты</h5><div class="codesection"><pre class="displaycode">// Инициализация массива игровых объектов в различных позициях 
+//  на экранес помощью новой переменной 
+// gameObject(x, y, ширина, высота)
+
+var gameObjectArray = [
+	new gameObject(0, 0, 200, 200),
+	new gameObject(50, 50, 200, 200),
+	new gameObject(500, 50, 100, 100)
+];
+
+canvas.on('click', function(e) {
+    var mouse = {
+        x: e.pageX - canvasPosition.x,
+        y: e.pageY - canvasPosition.y
+    }
+
+    // перебор всех игровых объектов с вызовом 
+    // обработчика onclick для каждого из них
+
+    for (var i=0; i &lt; gameObjectArray.length; i++) {
+        gameObjectArray[i].handleClick(mouse);
+    }
+});</pre></div><p>Следующий шаг гарантирует, что каждый игровой объект сможет выполнить проверку попадания, определяя, находятся ли координаты мыши в зоне этого игрового объекта. На рисунке 4 приведен пример неудачной проверки попадания.</p><h5 id="fig4">Рисунок 4. Щелчок вне границ объекта - неудачная проверка попадания</h5><img alt="Щелчок вне границ объекта - неудачная проверка попадания" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/fig04.jpg" width="238"><p>На рисунке 5 приведен пример успешной проверки попадания.</p><h5 id="fig5">Рисунок 5. Щелчок в границах объекта - успешная проверка попадания</h5><img alt="Щелчок в границах объекта - успешная проверка попадания" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/fig05.jpg" width="238"><p>Можно определить класс игровых объектов, как показано в листинге 8. Тест попадания выполняется в функции <code>onclick()</code>, которая проверяет совпадение прямоугольного контура объекта с координатами мыши, которые передаются ей в качестве параметра.</p><h5 id="list8">Листинг 8. Класс игровых объектов и проверка попадания</h5><div class="codesection"><pre class="displaycode">function gameObject(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+
+    // параметр mouse содержит координаты мыши
+    this.handleClick = function(mouse) {
+
+        // выполнение проверки попадания 
+        // координат мыши внутрь контура
+
+        if (this.x &lt; mouse.x &amp;&amp;
+            this.x + this.width &gt; mouse.x &amp;&amp;
+            this.y &lt; mouse.y &amp;&amp;
+            this.y + this.height &gt; mouse.y) {
+
+            // Проверка прошла успешно, обработать событие click!
+            return true;
+        }
+
+        // Проверка попадания не удалась
+        return false;
+    }
+}</pre></div><h3 id="N10184">Повышение эффективности вещания</h3><p>Во многих случаях можно создать более эффективную реализацию. Например, в игре с тысячами игровых объектов хотелось бы избежать проверки каждого игрового объекта на экране при каждом щелчке.</p><p>В следующем примере специальные события jQuery используются для создания синтетических событий. Синтетическое событие обрабатывается только теми игровыми объектами, которые прослушивают данное конкретное событие. Пример</p><ol><li>Обработать событие щелчка кнопкой мыши, как описано выше, и выполнить любые необходимые преобразования (преобразование положения мыши в локальные координаты и т.п.).</li><li>Вызвать синтетическое событие, содержащее в качестве параметра преобразованные координаты мыши.</li><li>Любой игровой объект, обрабатывающий события click, должен настроиться на прослушивание синтетического события.</li></ol><p>Обработчик событий мыши  click изменен таким образом, чтобы просто вызвать специальное событие. Специальному событию можно присвоить любое произвольное имя. В листинге 9 он называется <code>handleClick</code>.</p><h5 id="list9">Листинг 9. Вызов специального события</h5><div class="codesection"><pre class="displaycode">canvas.on('click', function(e) {
+    var mouse= {
+        x: e.pageX - canvasPosition.x,
+        y: e.pageY - canvasPosition.y
+    }
+
+    //вызов синтетического события, содержащего информацию о координатах мыши
+    $(canvas).trigger('handleClick', [mouse]);
+});</pre></div><p>Как показано в листинге 10, класс игровых объектов тоже изменен. Вместо определения функции <code>onclick</code>, просто прослушивается событие <code>handleClick</code>. В каждом случае инициирования события <code>handleClick</code> любые игровые объекты, которые прослушивают это событие, запустят свои обработчики событий.</p><h5 id="list10">Листинг 10. Обработка специального события</h5><div class="codesection"><pre class="displaycode">function gameObject(x, y, width, height) {
+    var self = this;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+
+    $(canvas).on('handleClick', function(e, mouse) {
+
+        // выполнение проверки попадания 
+        // координат мыши внутрь контура
+
+        if (self.x &lt; mouse.x &amp;&amp;
+            self.x + self.width &gt; mouse.x &amp;&amp;
+            self.y &lt; mouse.y &amp;&amp;
+            self.y + self.height &gt; mouse.y) {
+
+            // Проверка прошла успешно, обработать событие click!
+
+        }
+    });
+}</pre></div><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#ibm-pcon" class="ibm-anchor-up-link">В начало</a></p><h2 id="N101B2">Усовершенствованная проверка попадания</h2><p>Важно учитывать, что произойдет, когда несколько игровых объектов накладываются друг на друга. Если пользователь щелкает в точке наложения нескольких игровых объектов, необходимо определить, как обрабатывать такое поведение. Например, обычно ожидается, что сработает только обработчик  событий ближайшего объекта, а другие объекты, расположенные ниже, проигнорируют его.</p><p>Чтобы обрабатывать такие слои, нужно знать порядок, или глубину, каждого из наложенных игровых объектов. Canvas не обеспечивает никакого логического представления глубины, поэтому вновь придется взять бразды правления в свои руки и создать необходимую логику для обработки этой ситуации.</p><p>Чтобы ввести понятие глубины, необходимо присвоить всем игровым объектам индекс z, указывающий их глубину. Пример приведен в листинге 11. </p><h5 id="list11">Листинг 11. Добавление индекса z к игровому объекту </h5><div class="codesection"><pre class="displaycode">function gameObject(x, y, zIndex, width, height) {
+    var self = this;
+    this.x = x;
+    this.y = y;
+    this.zIndex = zIndex;
+    this.width = width;
+    this.height = height;
+
+    //...
+}</pre></div><p>Чтобы облегчить проверку глубины, необходимо выполнить сортировку. В листинге 12 пример структуры для хранения игровых объектов отсортирован таким образом, что  первым в списке  значится  игровой объект с самым большим значением индекса z.</p><h5 id="list12">Листинг 12. Сортировка массива игровых объектов</h5><div class="codesection"><pre class="displaycode">// сортировка в таком порядке, что первым значится самый большой индекс z
+var sortedGameObjectArray = gameObjectArray.sort(function(gameObject1, gameObject2) {
+    if (gameObject1.zIndex &lt; gameObject2.zIndex) return true;
+    else return false;        
+})</pre></div><p>Наконец, в функции <code>click</code> выполняется перебор всех игровых объектов в отсортированном массиве. </p><p>Как только обнаружится положительный результат проверки попадания на игровой объект, сразу же останавливаемся, чтобы распространение click не продолжалось. Если не остановить проверку, как показано в листинге 13, мы получим нежелательное поведение ― обработку события <code>click</code> игровыми объектами более глубоких уровней.</p><h5 id="list13">Листинг 13. Прерывание на успешной проверке попадания</h5><div class="codesection"><pre class="displaycode">canvas.on('click', function(e) {
+    var mouse = {
+        x: e.pageX - canvasPosition.x,
+        y: e.pageY - canvasPosition.y
+    }
+
+    for (var i=0; i &lt; sortedGameObjectArray.length; i++) {
+        var hitTest = sortedGameObjectArray[i].onclick(mouse);
+
+        // остановить при первой же успешной проверке попадания
+        if (hitTest) {
+            break; // прерывание проверки попадания
+        }
+    }
+});</pre></div><h3 id="N101DE">Неправильные границы игровых объектов</h3><p>Чаще всего простейший и наиболее эффективный способ проверки ― это проверка попадания в прямоугольную область, однако во многих случаях этого недостаточно. Если игровой объект имеет неправильную форму, лучше проверять область, ограниченную  треугольником или многоугольником. В таких случаях придется усложнить логику проверки попадания в обработчике событий игрового объекта. Как правило, соответствующая логика опирается на физику столкновений в игре.</p><p> В API  Canvas есть интересная функция <code>IsPointInPath()</code>, способная выполнять проверку на наложение многоугольников. По существу, <code>IsPointInPath(x, y)</code> позволяет проверять, попадает ли данная точка (x, y) в произвольную форму (главным образом, многоугольный контур). Она возвращает значение true, если указанные координаты  (x, y) находятся на текущем пути, определенном в контексте Canvas.</p><h3 id="N101ED">Применение функции <code>isPointInPath()</code></h3><p>Рисунок 6 иллюстрирует ситуацию, когда необходимо проверить координаты мыши на попадание в контур неправильной формы. В данном случае это простой треугольник.</p><h5 id="fig6">Рисунок 6. Нажатие в пределах треугольного контура </h5><img alt="Черный треугольник с указателем мыши в координатах 20,50 x, y" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/fig06.jpg" width="149"><p>Закрашенный путь показан только для иллюстрации. Чтобы получить полезный результат <code>IsPointInPath()</code>, путь не нужно физически отображать на экране, поэтому достаточно определить его без всяких вызовов <code>fill()</code> или <code> stroke()</code>. Детали показаны в листинге 14.</p><h5 id="list14">Листинг 14. Использование функции <code>isPointInPath</code> для проверки попадания</h5><div class="codesection"><pre class="displaycode">$(canvas).on('handleClick', function(e, mouse) {
+
+    // сначала определяем многоугольную область, ограничивающую путь
+    context.save();
+    context.beginPath();
+    context.moveTo(0,0);
+    context.lineTo(0,100);
+    context.lineTo(100,100);
+    context.closePath();
+    
+    // не нужно применять к пути fill() или stroke(), 
+    // потому что он существует только для целей проверки попадания
+    // context.fill();
+    
+    // выполняем проверку попадания внутрь нерегулярного контура
+    // и определяем координаты мыши
+    if (context.isPointInPath(mouse.x, mouse.y)) {
+        // проверка прошла успешно, обработать событие click!
+        
+    }
+    context.restore();
+});</pre></div><p>Чаще всего эффективнее писать алгоритмы столкновения самостоятельно, не используя <code>IsPointInPath()</code>, однако эта функция может служить хорошим инструментом для создания прототипов и быстрой разработки.</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#ibm-pcon" class="ibm-anchor-up-link">В начало</a></p><h2 id="N10219">Совместимость с мобильными устройствами</h2><p>Чтобы создать пример игры, совместимой с мобильными устройствами, нужно работать с событиями сенсорного экрана, а не мыши.</p><p>Хотя браузер мобильного устройства может интерпретировать касание пальца как событие click, как правило, полагаться только на прослушивание событий click мобильного браузера -  не оптимальный подход. Чтобы гарантировать лучшее реагирование, нужно добавить прослушиватели специальных событий сенсорного экрана.</p><h3 id="N10222">Обнаружение событий касания</h3><p>Можно написать вспомогательную функцию, которая сначала определяет, поддерживает ли устройство события сенсорного экрана, а затем возвращает либо координаты мыши, либо координаты касания. Это позволяет вызывать функции, которые обрабатывают координаты ввода независимо от того, настольная это платформа или мобильная.</p><p>В листинге 15 приведен пример не зависящей от устройства функции ввода события мыши и касания с нормализованным ответом.</p><h5 id="list15">Листинг 15. Нормализация событий мыши и касания</h5><div class="codesection"><pre class="displaycode">function getPosition(e) {
+    var position = {x: null, y: null};
+
+    if (Modernizr.touch) { //глобальная переменная, обнаруживающая 
+                                        //поддержку сенсорного экрана
+        if (e.touches &amp;&amp; e.touches.length &gt; 0) {
+            position.x = e.touches[0].pageX - canvasPosition.x;
+            position.y = e.touches[0].pageY - canvasPosition.y;
+        }
+    }
+    else {
+        position.x = e.pageX - canvasPosition.x;
+        position.y = e.pageY - canvasPosition.y;
+    }
+
+    return position;
+}</pre></div><p>Для обнаружения поддержки сенсорного экрана в примере используется библиотека Modernizr (см. раздел <a href="http://www.ibm.com/developerworks/ru/library/wa-games/#resources">Ресурсы</a>). Библиотека  Modernizr обнаруживает поддержку сенсорного экрана, просто проверяя переменную Modernizr.touch, которая возвращает значение true, если устройство поддерживает события сенсорного экрана.</p><h3 id="N10238">Обработчики событий, не зависящие от устройства</h3><p>В процессе инициализации приложения предыдущий код определения прослушивателей событий можно заменить отдельными ветвями для устройств с сенсорным экраном и для мыши. Сопоставить события мыши с   эквивалентными  событиями касания достаточно легко. Например, <code>mousedown</code> заменяется на <code>touchstart</code>, а <code>mouseup</code> ― на <code>touchend</code>.</p><p>В листинге 16 приведен пример использования Modernizr для сопоставления эквивалентных событий мыши/сенсорного экрана. В нем также используется функция <code>getPosition()</code>, определенная в листинге 15.</p><h5 id="list16">Листинг 16. Использование нормализованных событий мыши/сенсорного экрана.</h5><div class="codesection"><pre class="displaycode">var eventName = Modernizr.touch ? 'touchstart' : 'click';
+
+canvas.on(eventName, function(e) {
+    e.preventDefault();
+
+    var position = getPosition(e);
+    //здесь происходит изменение положения мыши
+
+    return false;
+});</pre></div><p>Если не нужно обрабатывать более сложные действия, такие как щипки и проведение пальцем по экрану, то этот подход обычно хорошо работает при прямом вводе событий мыши из настольного приложения. Предполагается система с одним касанием; если же необходимо обнаружение действий multi-touch, то потребуется дополнительный код (рассмотрение которого выходит за рамки этой статьи).</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#ibm-pcon" class="ibm-anchor-up-link">В начало</a></p><h2 id="N10259">Заключение</h2><p>В статье говорится о том, как обрабатывать события клавиатуры и мыши и как запретить нежелательное поведение браузера. Также обсуждаются стратегии вещания событий на игровые объекты и приводятся дополнительные соображения по проверке попадания и простой метод достижения совместимости с мобильными устройствами. Хотя тема ввода данных пользователем выходит далеко за рамки этой статьи, типичные сценарии пользовательского ввода могут служить отправной точкой при создании надежной, не зависящей от устройства библиотеки для обработки данных, вводимых пользователем в приложения HTML5.</p><!--CMA ID: 851409--><!--Site ID: 40--><!--XSLT stylesheet used to transform this file:
+        dw-document-html-7.0.xsl-->
+<div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#ibm-pcon" class="ibm-anchor-up-link">В начало</a></p><h2 id="download">Загрузка</h2><table class="ibm-data-table dw-download-table" cellpadding="0" cellspacing="0" border="0"><thead><tr><th scope="col">Описание</th><th scope="col">Имя</th><th scope="col">Размер</th></tr></thead><tbody><tr><th scope="row" class="ibm-table-row">Листинги программ для статьи</th><td nowrap="nowrap"><a href="http://www.ibm.com/developerworks/apps/download/index.jsp?contentid=851409&filename=article.listings.zip&method=http&locale=ru_RU">article.listings.zip</a></td><td nowrap="nowrap">5 КБ</td></tr></tbody></table>
+
+</div>
+</div>
+<!-- 1_1_COLUMN_END -->
+
+<!-- SPLIT_COLUMNS_BEGIN -->
+<div class="ibm-columns">
+
+<!-- 6_4_COLUMN_BEGIN -->
+<div class="ibm-col-6-4">
+
+<h2 id="resources" class="ibm-rule">Ресурсы</h2><h3 class="dw-resources-category-heading">Научиться</h3><ul class="ibm-bullet-list"><li>Оригинал статьи: <a href="http://www.ibm.com/developerworks/web/library/wa-games/index.html?S_TACT=105AGX99&S_CMP=CP">Handling user input in HTML5 Canvas-based games</a>.</li><li><a href="http://www.ibm.com/developerworks/web/library/wa-html5canvas/??S_TACT=105AGX99&S_CMP=CP">Create great graphics with the HTML5 canvas</a> (developerWorks, февраль 2011 г.): как улучшить Web-страницы с помощью простого и эффективного элемента HTML5 Canvas (EN).  </li><li><a href="http://www.ibm.com/developerworks/offers/lp/demos/summary/web-jhtml5canvas.html??S_TACT=105AGX99&S_CMP=CP">HTML5 Canvas</a>: демонстрация использования API  Canvas и процесса создания простейшей анимации.  </li><li><a href="http://www.ibm.com/developerworks/ru/library/wa-html5fundamentals4/?S_TACT=105AGX99&S_CMP=CP">Основы HTML5: часть 4. Завершающий штрих - Canvas</a> (developerWorks, июль 2011 г.): статья об элементе HTML5 Canvas с примерами, демонстрирующими его функции.  </li><li><a href="https://developer.apple.com/safaridemos/canvas-pixel.php">Canvas Pixel Manipulation</a>: демонстрация Safari Dev Center ― прекрасный пример управления Canvas для разработки эффективных визуальных ресурсов.  </li><li><a href="http://www.whatwg.org/">WHATWG</a>: сообщество разработчиков W3C, которые трудятся над уточнением HTML5.  </li><li><a href="https://developer.mozilla.org/en/Canvas_tutorial">Руководство по Canvas</a>: разработчики  Mozilla показывают, как реализовать элемент &lt;canvas&gt; на своих HTML-страницах.  </li><li><a href="http://www.w3schools.com/html5/html5_canvas.asp">HTML5 Canvas Reference</a>: полезные упражнения W3Schools.com, помогающие отточить свое знание Canvas.  </li><li><a href="http://api.jquery.com/category/events">jQuery Events API</a>: о методах, используемых для регистрации поведения при взаимодействии пользователя с браузером и дальнейшего манипулирования этим зарегистрированным поведением.  </li><li><a href="http://www.ibm.com/developerworks/web/">Раздел Web-разработки developerWorks</a>: статьи о различных Web-решениях. широкий спектр технических статей и советов, руководств, стандартов и документации IBM в <a href="http://www.ibm.com/developerworks/views/web/libraryview.jsp">библиотеке литературы по Web-разработке</a>.</li><li><a href="http://www.ibm.com/developerworks/mydeveloperworks">My developerWorks</a>: оптимизируйте свою работу с DeveloperWorks.   </li><li><a href="http://www.ibm.com/developerworks/offers/techbriefings/">Технические мероприятия и Web-трансляции на портале developerWorks</a>: оставайтесь в курсе последних событий в сфере информационных технологий.  </li><li><a href="http://twitter.com/developerworks/">developerWorks в Twitter</a>: следите за твитами developerWorks.   </li><li><a href="http://www.ibm.com/developerworks/offers/lp/demos/">Демонстрации developerWorks по требованию</a>: от установки и настройки продуктов для начинающих до самых сложных функций для опытных разработчиков.   </li></ul><h3 class="dw-resources-category-heading">Получить продукты и технологии</h3><ul class="ibm-bullet-list"><li><a href="http://jquery.com/">jQuery</a>: загрузите популярную библиотеку JavaScript, которая упрощает анализ HTML-документа, обработку событий, анимацию и Ajax-взаимодействия для ускорения Web-разработки.  </li><li><a href="http://modernizr.com/">Modernizr</a>: библиотека JavaScript с открытым исходным кодом, которая помогает строить Web-сайты нового поколения на базе HTML5 и CSS3.  </li><li><a href="https://github.com/marquete/kibo">Kibo</a>: популярная, простая библиотека JavaScript для обработки событий клавиатуры.  </li></ul>
+
+<!-- INLINE_COMMENTS_BEGIN -->
+<h2 id="icomments" class="ibm-alternate-rule ibm-no-print">Комментарии</h2>
+    
+<div class="ibm-no-print" id="dw-icomments-container">	
+	<div id="threadShow"><img id="imgPlHdr" src="http://1.w3.s81c.com/i/v17/animated-progress-38x38c.gif" alt="" style="display: none;"><div id="cmtTog"><div class="ibm-container ibm-alternate-two dw-commentbox dw-noborder"><div class="ibm-container-body dw-commentbox dw-noborder"><p id="signInSect"> <a onclick="var e=arguments[0] || window.event; dwsi.siInst &amp;&amp; dwsi.siInst.showSignIn(); if (e.stopPropagation){ e.stopPropagation();} else { e.cancelBubble = true; } e.preventDefault &amp;&amp; e.preventDefault(); return false;" href="http://www.ibm.com/developerworks/ru/library/wa-games/#">Войти</a> or <a href="http://www.ibm.com/developerworks/dwwi/DWAuthRouter?m=register&lang=ru_RU&d=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fru%2Flibrary%2Fwa-games%2F%23icomments">зарегистрироваться</a>  чтобы оставить комментарий.</p><p id="cmtHead"><label for="newCmt"><strong>Добавить комментарий:</strong></label></p><p>Внимание: HTML элементы не поддерживаются в комментариях.</p><div id="infoCmt"></div><form focus="name" enctype="multipart/form-data" method="post" action="" name="form" class="ibm-column-form ibm-styled-form"><p class="6-4-textarea"><textarea rows="5" name="newCmt" id="newCmt" class="dw-inoperable" disabled=""></textarea><br></p><span class="ibm-input-group"><input type="checkbox" value="1" name="comment_notification" id="comment_notification" disabled="disabled"><label id="notifyText" class="ibm-form-note dw-btn-cancel-sec" for="comment_notification">Дайте мне знать, когдапоявятся новые комментарии</label></span><span class="ibm-form-note dw-btn-cancel-sec notifySection" id="maxCharsCount">осталось <span id="charCount">1000</span> символов</span><p class="ibm-buttons-row"><input type="button" value="Отправить " name="postCmt" id="postCmt" class="ibm-btn-sec ibm-btn-small ibm-disabled" disabled="disabled"></p></form></div></div><div class="ibm-alternate-rule"><hr></div><div id="topControl" class="ibm-container ibm-alternate-two dw-comment-totals" style="display: none;"><div class="ibm-container-body"><form id="selectComments" method="get" action=""><p>&nbsp;<span class="dw-comment-totals-label"><strong>Всего комментариев (<span id="numCmts">0</span>)</strong></span><span class="dw-how-many-comments-label" style="display:none" id="dropdownCmts"><label for="howManyComments"><strong>Отобразить:</strong></label>&nbsp;<select name="comments" id="howManyComments" class="dw-how-many-comments"><option selected="selected" value="recent">Последние комментарии   </option></select><input type="image" class="ibm-btn-go" name="ibm-go" value="Go" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/short-btn.gif" alt="Go"><br></span></p></form></div></div><div id="cmtSect"><div class="comment"><div class="dw-icomment-container"><table class="dw-icomment-body" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td><p>Нет комментариев</p></td></tr></tbody></table></div></div></div></div><div id="bottomControl" class="ibm-container ibm-alternate-two dw-comment-totals" style="display: none;"><div class="ibm-container-body"><form id="selectComments2" method="get" action=""><p>&nbsp;<span class="dw-comment-totals-label"><strong>Всего комментариев (<span id="numCmts2">0</span>)</strong></span><span class="dw-how-many-comments-label" style="display:none" id="dropdownCmts2"><label for="howManyComments2"><strong>Отобразить:</strong></label>&nbsp;<select name="comments" id="howManyComments2" class="dw-how-many-comments"><option selected="selected" value="recent">Последние комментарии   </option></select><input type="image" class="ibm-btn-go" name="ibm-go" value="Go" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/short-btn.gif" alt="Go"><br></span></p></form></div></div></div>
+</div>
+<!-- Sign in OVERLAY STARTS HERE -->
+    
+<!-- Sign in OVERLAY STARTS HERE -->
+<div class="ibm-common-overlay" id="signin_overlay">
+<div class="ibm-head">
+<p><a class="ibm-common-overlay-close" href="http://www.ibm.com/developerworks/ru/library/wa-games/#" onclick="dwsi.siInst.clearForm();">Закрыть [x]</a></p>
+</div>
+<div class="ibm-body">
+<div class="ibm-main">
+
+ <div class="ibm-title">
+<h2>developerWorks: Войти</h2>
+<div id="ibm-overlay-error-signin" class="no-display"></div>
+</div>
+<div class="ibm-container ibm-alternate ibm-buttons-last">
+<div class="ibm-container-body">
+<p class="ibm-overlay-intro">Обязательные поля отмечены звездочкой (<span class="ibm-required">*</span>).</p> 
+<form class="ibm-column-form" id="sFormId" action="" method="post" name="sForm" onsubmit="return false;">
+<p><label for="ibmid">IBM ID:<span class="ibm-required">*</span></label><span><input name="ibm-id" id="ibmid" size="25" value="" class="required" type="text" onkeypress="dwsi.siInst.handleEP(event,this.form);">
+    <br><a onclick="window.location=&#39;/developerworks/dwwi/DWAuthRouter?m=reg&amp;lang=ru_RU&amp;d=&#39;+encodeURIComponent(location.protocol + &#39;//&#39; + location.hostname + location.pathname + &#39;#icomments&#39;); return false;" href="http://www.ibm.com/developerworks/ru/library/wa-games/#" class="ibm-forward-link">Нужен IBM ID?</a> <br><a class="ibm-forward-link" href="http://www.ibm.com/developerworks/dwwi/jsp/WSHelp.jsp?lang=ru_RU">Забыли Ваш IBM ID?</a>   
+</span>
+</p> 
+<p><label for="password">Пароль:<span class="ibm-required">*</span></label><span>
+    <input name="password" id="password" size="25" value="" class="required" type="password" onkeypress="dwsi.siInst.handleEP(event,this.form);">
+    <br><a class="ibm-forward-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#" onclick="(function ()
+        {window.location=&#39;https://www.ibm.com/account/profile?page=forgot&amp;lang=ru_RU&amp;appname=ibm&amp;required=null&amp;d=&#39;+encodeURIComponent(dwsi.siInst.getAuthUrl())+&#39;%3Fm%3Dloginpage%26lang%3Dru_RU%26d%3D&#39;+encodeURIComponent(location.href);})();">Забыли
+        Ваш пароль?</a>
+    <br><a class="ibm-forward-link" href="http://www.ibm.com/developerworks/ru/library/wa-games/#" onclick="(function ()
+        {window.location=&#39;https://www.ibm.com/account/profile?page=chpw&amp;lang=ru_RU&amp;appname=ibm&amp;required=null&amp;d=&#39;+encodeURIComponent(location.href);})();">Изменить пароль</a></span></p> 
+<p class="dw-perm-box">
+	<span><input id="perm" type="checkbox" name="perm_name"><label for="perm"> Запомнить меня.</label></span>
+</p>
+<p>Нажимая <strong>Отправить</strong>, Вы принимаете <a href="http://www.ibm.com/developerworks/community/terms?lang=ru">Условия использования</a> developerWorks.</p>
+<div class="ibm-buttons-row">
+   <p><input class="ibm-btn-arrow-pri" name="ibm-submit" value="Отправить" onclick="dwsi.siInst.signin();return false;" type="submit"><span class="ibm-sep">&nbsp;</span>
+<input value="Отмена" type="button" name="ibm-cancel" class="ibm-btn-cancel-sec" onclick="dwsi.siInst.clearForm();ibmweb.overlay.hide(&#39;signin_overlay&#39;);return false;"></p>
+</div>
+</form>
+ <div class="ibm-overlay-rule"><hr></div> 
+
+<p>Профиль создается, когда вы первый раз заходите в developerWorks.  <strong>Информация в вашем профиле (имя, страна / регион,  название компании) отображается для всех пользователей и будет сопровождать любой опубликованный вами контент пока вы специально не укажите скрыть название вашей компании</strong>.  Вы можете обновить ваш IBM аккаунт в любое время.</p>    
+<div><p class="dw-c-overlay-secure">Вся введенная информация защищена.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="ibm-footer"></div>
+</div>
+<!-- Display name OVERLAY STARTS HERE -->
+<div class="ibm-common-overlay" id="displayname_overlay">
+<div class="ibm-head">
+<p><a class="ibm-common-overlay-close" href="http://www.ibm.com/developerworks/ru/library/wa-games/#" onclick="dwsi.siInst.clearForm();">Закрыть [x]</a></p>
+</div>
+<div class="ibm-body">
+<div class="ibm-main">
+<div class="ibm-title">
+<h2>Выберите имя, которое будет отображаться на экране</h2><br><br>
+<div id="ibm-overlay-error-dname" class="no-display"></div>
+</div>
+<div class="ibm-container ibm-alternate ibm-buttons-last">
+<div class="ibm-container-body">
+<p class="ibm-overlay-intro">При первом входе в developerWorks для Вас будет создан профиль и Вам нужно будет выбрать Отображаемое имя. Оно будет выводиться рядом с контентом, опубликованным Вами в developerWorks.</p><p><strong>Отображаемое имя должно иметь длину от 3 символов до 31 символа</strong>.  Ваше Имя в системе должно быть уникальным. В качестве имени по соображениям приватности нельзя использовать контактный e-mail.
+    </p>
+<p class="ibm-overlay-intro">Обязательные поля отмечены звездочкой (<span class="ibm-required">*</span>).</p> 
+<form id="dFormId" method="post" action="" name="dForm" onsubmit="return false;" class="ibm-column-form">
+<p><label for="displayname">Отображаемое имя:<span class="ibm-required">*</span></label><span>
+    <input name="displayname" id="displayname" size="25" value="" type="text" onkeypress="dwsi.siInst.handleEP(event,this.form);"></span>
+    <span class="ibm-form-note">(Отображаемое имя должно иметь длину от 3 символов до 31 символа.)</span>
+</p>
+<p>Нажимая <strong>Отправить</strong>, Вы принимаете <a href="http://www.ibm.com/developerworks/community/terms?lang=ru">Условия использования</a> developerWorks.</p>
+<div class="ibm-buttons-row">
+   <p><input class="ibm-btn-arrow-pri" name="ibm-submit" value="Отправить" onclick="dwsi.siInst.signin();return false;" type="submit"><span class="ibm-sep">&nbsp;</span>
+<input value="Отмена" type="button" name="ibm-cancel" class="ibm-btn-cancel-sec" onclick="dwsi.siInst.clearForm();ibmweb.overlay.hide(&#39;displayname_overlay&#39;);return false;"></p>
+</div>
+</form>
+<div class="ibm-overlay-rule"><hr></div>
+<div><p class="dw-c-overlay-secure">Вся введенная информация защищена.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="ibm-footer"></div>
+</div>
+
+
+<!-- INLINE_COMMENTS_END -->
+
+</div>
+<!-- 6_4_COLUMN_END -->
+
+<!-- 6_2_COLUMN_BEGIN -->
+<div class="ibm-col-6-2">
+
+<!-- Next_Steps -->
+<!-- Dig_Deeper -->
+
+
+<!-- Promotion_Module -->
+    
+<!-- PROMOTION_MODULE_START -->
+<div class="ibm-alternate-rule"><hr></div>
+<ul class="ibm-portrait-module-list">
+<li><a class="" href="http://www.ibm.com/developerworks/ru/library/articles/" tabindex="-1" role="presentation"><img height="60" width="60" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/index_auth_60.jpg" alt=""></a>
+<h3><a class="ibm-feature-link" href="http://www.ibm.com/developerworks/ru/library/articles/">Авторы и их статьи</a></h3>
+<p>Статьи на русском языке специалистов в сфере ИТ технологий, сотрудничающих с IBM developerWorks.</p></li>
+<li><a class="" href="http://www.ibm.com/developerworks/ru/cloud/" tabindex="-1" role="presentation"><img height="60" width="60" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/index_cloud_60.jpg" alt=""></a>
+<h3><a class="ibm-feature-link" href="http://www.ibm.com/developerworks/ru/cloud/">Облачные вычисления</a></h3>
+<p>Статьи, руководства, обзоры для ИТ специалистов.</p></li>
+<li><a class="" href="http://www.ibm.com/developerworks/ru/doc/" tabindex="-1" role="presentation"><img height="60" width="60" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/index_ads_lib_60.jpg" alt=""></a>
+<h3><a class="ibm-feature-link" href="http://www.ibm.com/developerworks/ru/doc/">Библиотека документов</a></h3>
+<p>Более трех тысяч статей, обзоров, руководств и других полезных материалов.</p></li>
+</ul>
+<!-- PROMOTION_MODULE_END -->
+
+</div>
+<!-- 6_2_COLUMN_END -->
+
+</div>
+<!-- SPLIT_COLUMNS_END -->
+
+<!-- BOTTOM_BACK_TO_TOP -->
+<div class="ibm-columns">
+<div class="ibm-col-1-1">
+	<div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/ru/library/wa-games/#ibm-pcon" class="ibm-anchor-up-link">В начало</a></p>
+</div>
+</div>
+
+<!-- Rating_Meta_BEGIN -->
+<!--Rating_Meta_BEGIN--><div class="metavalue">static.content.url=http://www.ibm.com/developerworks/js/artrating/</div><div class="metavalue">SITE_ID=40</div><div class="metavalue">Zone=Web-архитектура</div><div class="metavalue">ArticleID=851409</div><div class="metavalue">ArticleTitle=Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas</div><div class="metavalue">publish-date=12112012</div><script language="javascript" type="text/javascript">document.write('<div class="metavalue">url='+location.href.replace(/</g,  '%3C')+'</div>');</script><div class="metavalue">url=http://www.ibm.com/developerworks/ru/library/wa-games/</div><!--Rating_Meta_END-->
+<!-- Rating_Meta_END -->
+
+</div>
+<!-- END_IBM_CONTENT_MAIN -->
+
+</div>
+<!-- END_IBM_CONTENT_BODY -->
+
+</div>
+<!-- END_IBM_CONTENT -->
+
+</div></div>
+<!-- LEADSPACE_END -->
+
+
+<!-- END_IBM_PCON -->
+<!-- FOOTER_BEGIN -->
+<!-- FOOTER_BEGIN -->
+<div id="ibm-footer" aria-label="Нижний колонтитул"><!-- IBM footer container; disabled --></div>
+
+<div id="ibm-footer-module-dwwrapper" role="contentinfo" aria-label="developerWorks Footer">
+
+<div id="ibm-footer-module-dw">
+	<div class="dw-footer-columns">
+		<div class="dw-footer-col-5-1">
+			<ul>
+			<li><a href="https://www.ibm.com/developerworks/secure/feedback.jsp?domain=dwrussia">Помощь</a></li>
+			<li><a href="http://www.ibm.com/developerworks/ru/rss/">Ленты</a></li>
+			<li><a href="https://www.ibm.com/developerworks/community/report?lang=ru">Сообщить о нарушениях</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-5-2">
+			<ul>			
+			<li><a href="https://www.ibm.com/developerworks/community/terms?lang=ru">Условия использования</a></li>
+			<li class="dw-footer-newline"><a href="https://www.ibm.com/developerworks/ru/community/terms/thirdparty/">Уведомить сторонние ресурсы</a></li>
+			<li><a href="http://www.ibm.com/privacy/ru/ru/">Конфиденциальность</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-5-3">
+			<ul>
+			<li><a href="http://www.ibm.com/accessibility/us/en/">Доступность (Английский)</a></li>
+			<li><a href="http://www.ibm.com/ru/software/info/students/">Портал для студентов</a></li>			
+			</ul>
+		</div>
+		<div class="dw-footer-col-5-4">
+			<ul>
+				<li><a href="http://www.ibm.com/ru/partners/">Бизнес-партнеры IBM</a></li>
+				<li><a href="http://www.ibm.com/developerworks/ru/newsletter/">Новости developerWorks</a></li>	
+			</ul>
+		</div>
+		<div class="dw-footer-col-5-5">
+			<img width="223" height="46" alt="IBM®" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/dwn-ibm-logo-v17.png">
+			<img class="dw-preload" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/ibm_sprite_social_blue_ON.png" alt="" width="1" height="1">
+		</div>
+	</div>
+	<!-- Language selector no-script -->
+	<noscript>
+	&lt;div id="dw-footer-selectlang"&gt;
+		&lt;h2&gt;&lt;a name="SELECTLANG"&gt;Выбрать язык:&lt;/a&gt;&lt;/h2&gt;
+		&lt;ul&gt;
+			&lt;li&gt;&lt;a href="http://www.ibm.com/developerworks/" lang="en"&gt;English&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="http://www.ibm.com/developerworks/cn/" lang="zh"&gt;中文&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="http://www.ibm.com/developerworks/jp/" lang="ja"&gt;日本語&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="http://www.ibm.com/developerworks/ru/" &gt;Русский&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="http://www.ibm.com/developerworks/br/" lang="pt"&gt;Português (Brasil)&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="http://www.ibm.com/developerworks/ssa/" lang="es"&gt;Español&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="http://www.ibm.com/developerworks/vn/" lang="vi"&gt;Việt&lt;/a&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/div&gt;
+	</noscript>
+</div>
+
+</div><!-- FOOTER_END --><!-- FOOTER_END -->
+
+<!-- END_IBM-TOP -->
+</div>
+
+<!-- SCRIPTS_INCLUDE_BEGIN -->
+<script type="text/javascript" src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/dw-comments.js">//</script>
+<script type="text/javascript" language="JavaScript">
+		dojo.ready(function(){
+		rBHash = null;
+		rBHash = new Object();
+		rBHash['viperLang'] = 'ru';
+		rBHash['urlLang'] = 'ru';
+		
+		dwsi.siInst = new dwweb.dynnav.dwsi();
+		dwsi.siInst.initSI();		
+
+		// construct the comment widget
+dwc.cmts = 'комментарии';
+dwc.signInPreText = '';
+dwc.signIn = 'Войти';
+dwc.or = 'or';
+dwc.register = 'зарегистрироваться';
+dwc.signInPostText = '';
+dwc.leaveCmt = 'чтобы оставить комментарий.';
+dwc.view = 'Посмотреть';
+dwc.totalCmts = 'Всего комментариев';
+dwc.postYourCmt = 'Отправить ваш комментарий';
+dwc.show = 'Отобразить:';
+dwc.recentCmts = 'Последние комментарии';
+dwc.allCmts = 'Все комментарии';
+dwc.tooLongCmt = 'Количество знаков в вашем комментарии превысило 1000.';
+dwc.numCharsLeft = 'осталось <span id="charCount">{1}</span> символов';
+dwc.reportAbuse = 'Сообщение о нарушениях';
+dwc.notifyMsg = 'Дайте мне знать, когдапоявятся новые комментарии';
+dwc.htmlWarning = 'Внимание: HTML элементы не поддерживаются в комментариях.'; 
+dwc.addCmts = 'Добавить комментарии';
+dwc.addCmt = 'Добавить комментарий';
+dwc.doNotErase = '-- Добавьте любой комментарий ниже --'; 
+dwc.viewOrAddCmts = 'Посмотреть или добавить комментарии';
+dwc.reportInapprCont = 'Сообщить о некорректном содержании';
+dwc.reportInapprContLink = 'http://www.ibm.com/developerworks/forums/forum.jspa?forumID=1835';
+dwc.postingCmt = 'Комментарий отправляется';
+dwc.noCmt = 'Нет комментариев';
+dwc.netwkErr = 'Возникла проблема при загрузке комментариев. Пожалуйста, обновите страничку позже.';
+dwc.addACmt = 'Добавить комментарий';
+dwc.instructCmt = 'Для завершения данной транзакции вы обязательно должны заполнить поля, отмеченные звездочкой (<span class="ibm-required">*</span>).';
+dwc.cmt = 'Комментарий:';
+dwc.btnPost = 'Отправить ';
+dwc.btnPostAnon = 'Отправить анонимно';
+dwc.btnClrCmt = 'Стереть';
+dwc.btnCancel = 'Отменить';
+dwc.showRecent = 'Показать следующие {1} '; // {1} is the count to be substituted
+dwc.showNext = 'Показать следующие {1} '; // {1} is the count to be substituted
+dwc.showAllCmts = 'Показать все комментарии';
+dwc.enterCmt = 'Пожалуйста, введите комментарий';
+dwc.loginErr = 'Статус вашей авторизации не может быть установлен в данный момент. Пожалуйста, повторите попытку позже.';
+dwc.postErr = 'В настоящее время ваше сообщение не может быть опубликовано. Пожалуйста, попробуйте позже.';
+dwc.postBy = 'Выложено (Размещено) <strong>{1}</strong> {2}'; // {1} is the author to be substituted; {2} is the date
+dwc.siteId = 40;
+dwc.lang = 'ru_RU';
+dwc.viperLang = 'ru';
+//dwc.abuseHref =  null;
+dwc.maxChars =  1000;
+dwc.cmtTxt =  'Комментарий:';
+dwc.cmtsTxt =  'Комментарии:';  
+		dwc && new dwc.comments('threadShow','95%',5,'nCmts','icomments');
+		});
+</script>
+
+<!-- BEGIN: Use this section to set page specific variables for the Unica Page Tag -->
+<script language="JavaScript">var NTPT_PGEXTRA="ibmSkillLevel=3&ibmCmaId=851409&ibmContentAreas=web";</script>
+<!--END --><!-- SCRIPTS_INCLUDE_END -->
+
+<div id="ibm-metrics">
+<script src="./Обработка пользовательского ввода в играх с помощью технологии HTML5 Canvas_files/stats.js" type="text/javascript">//</script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

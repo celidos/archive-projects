@@ -1,0 +1,104 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+        <style>
+            p{
+                font: 14px verdana;
+            }
+        </style>
+        <style>
+            p.resultwaiting {
+                font: 12px chicago;
+                background: #FFFAC8;
+                color: #453A00;
+                padding: 1px;
+                text-shadow: gray 0.5px 0.5px 1px;
+                font: 14px verdana;
+            }
+            p.resultwrong {
+                background: #FFCFCF;
+                color: #500000;
+                padding: 1px;
+                text-shadow: gray 0.5px 0.5px 1px;
+                font: 14px verdana;
+            }
+            p.resultcorrect {
+                background: #D9FFAD;
+                color: green;
+                padding: 1px;
+                text-shadow: gray 0.5px 0.5px 1px;
+                font: 14px verdana;
+            }
+            iframe{
+                border: 1px solid #FC0;
+                box-shadow: 0 0 0 1px #FFF, 0 0 0 2px #999;
+            }
+        </style>
+		<title>CCaptcha</title>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="jqueryrotate.js"></script>
+        <script type="text/javascript" src="CapcthaRotateFunctional.js"></script>
+		<script type="text/javascript">
+
+			var HalfCaptchaSize = 101;									<!-- 50 (константу) надо заменить на текущий размер изображения -->
+            var myuid = 'undefined';
+            $(function(){	                                            <!-- Событие, когда страница будет готова -->
+                $.ajax({                                                <!-- Можно через XMLHTTPRequest, но лучше через AJAX -->
+                    url: '/captcha?action=get',
+                    dataType: "json",
+                    success: function(res){
+                        console.log("На сервер успешно отправлен запрос /captcha?action=get");
+                        console.log(res);
+
+                        $('#captchaImg').attr('width', HalfCaptchaSize*2-1);
+                        $('#captchaImg').attr('height', HalfCaptchaSize*2-1);
+                        $('#captchaImg').attr('src', res.file);
+                        myuid = res.uid;
+                        console.log("myuid = "+myuid);
+
+                        Initializate(HalfCaptchaSize, 'captchaImg', 'anglelabel');
+
+                        console.log("Готово.");
+                    }
+                })
+
+				$('#captchaImg').contextmenu(function(){                <!-- Отключает правую кнопку мыши -->
+					return false;
+				});
+
+                $('#checkbutton').click(function(){
+                    console.log("Пользователь отправляет данные на сервер...");
+                    console.log("Отправляется угол ~ ", rotangle);
+                    $.ajax({
+                        url: "/captcha?action=check",
+                        dataType: "json",
+                        data:
+                        {
+                            angle: rotangle,
+                            uid: myuid
+                        },
+                        success: function(res){
+                            if (res.correct){
+                                $('#result').html('<p class="resultcorrect">Верно!</p>');
+                            } else{
+                                $('#result').html('<p class="resultwrong">Не верно!</p>');
+                            }
+                        }
+                    });
+                });
+                $('#reloadbutton').click(function() {
+                    location.reload();
+                });
+			});
+		</script>
+	</head>
+	<body>
+        <div id="ccaptchaframe" style="border: 1px solid #BBB; box-shadow: 0 0 0 1px #FFF, 0 0 0 2px #888; padding: 1px; margin: 3px 0px 0px 0px; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -khtml-border-radius:3px;">
+            <p>Прототип круговой капчи CCaptcha</p>
+            <div id="cImgShell"><img id="captchaImg" src="loader.gif" draggable="false" width="16" height="16" /></div>
+            <br/><input type="button" id="checkbutton" value=" Проверить! "/><input type="button" id="reloadbutton" value=" Перезагрузить "/>
+            <div id="anglelabel"><p>Поворот: 0 градусов</p></div>
+            <div id="result"><p class="resultwaiting">В процессе...</p></div>
+        </div>
+	</body>
+</html>

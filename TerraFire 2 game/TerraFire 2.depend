@@ -1,0 +1,211 @@
+# depslib dependency file v1.0
+1395586486 source:/home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/main.c
+
+1397635858 source:/home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/main.cpp
+	<GL/gl.h>
+	<GL/glut.h>
+	<stdio.h>
+	<math.h>
+	"vectormath.h"
+	"droid.h"
+	"spot.h"
+	"physics.h"
+	"gameworld.h"
+	"versions.h"
+
+1396202230 /home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/vectormath.h
+	<math.h>
+
+1396436496 source:/home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/droid.cpp
+	"droid.h"
+	"vectormath.h"
+	"gameworld.h"
+	"physics.h"
+	<stdio.h>
+
+1396377312 /home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/droid.h
+	<GL/gl.h>
+	<GL/glut.h>
+	"vectormath.h"
+	"gameworld.h"
+
+1396201386 source:/home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/vectormath.cpp
+	"vectormath.h"
+	"math.h"
+
+1396376847 /home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/spot.h
+	<GL/gl.h>
+	<GL/glut.h>
+
+1396373457 source:/home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/physics.cpp
+	"physics.h"
+	"vectormath.h"
+	"math.h"
+
+1396375178 /home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/physics.h
+	"vectormath.h"
+
+1396437197 /home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/gameworld.h
+	<list>
+	"vectormath.h"
+
+1396609643 source:/home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/gameworld.cpp
+	<GL/gl.h>
+	<GL/glut.h>
+	"gameworld.h"
+
+1397636587 /home/elluzion/Документы/CodeBocks::Projects/TerraFire 2/versions.h
+
+1399361039 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/droid.cpp
+	"droid.h"
+
+1399380411 /home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/droid.h
+	<GL/gl.h>
+	<GL/glut.h>
+	<stdio.h>
+	"gameworld.h"
+
+1404751444 /home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/vectormath.h
+	<math.h>
+	<stdlib.h>
+
+1402831941 /home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/gameworld.h
+	<GL/gl.h>
+	<GL/glut.h>
+	<list>
+	<vector>
+	<stdio.h>
+	<time.h>
+	"physics.h"
+	"wall.h"
+	"turret.h"
+
+1399307744 /home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/physics.h
+	<stdio.h>
+	<math.h>
+	"vectormath.h"
+
+1402831949 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/main.cpp
+	<GL/gl.h>
+	<GL/glut.h>
+	<stdio.h>
+	<math.h>
+	<string>
+	<list>
+	"droid.h"
+	"versions.h"
+	"spot.h"
+
+1396376846 /home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/spot.h
+	<GL/gl.h>
+	<GL/glut.h>
+
+1404751436 /home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/versions.h
+
+1399361494 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/physics.cpp
+	"physics.h"
+
+1399295676 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/vectormath.cpp
+	"vectormath.h"
+
+1399379296 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/gameworld.cpp
+	"gameworld.h"
+
+1399298681 /home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/turret.h
+	<GL/gl.h>
+	<GL/glut.h>
+	<math.h>
+	"bullet.h"
+	"additionalgraphics.h"
+
+1399292850 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/turret.cpp
+	"turret.h"
+
+1398775412 /home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/additionalgraphics.h
+	<GL/gl.h>
+	<GL/glut.h>
+	"vectormath.h"
+
+1398775412 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/additionalgraphics.cpp
+	"additionalgraphics.h"
+
+1398775412 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/additionalgraphics.h
+	<GL/gl.h>
+	<GL/glut.h>
+	"vectormath.h"
+
+1402831941 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/gameworld.h
+	<GL/gl.h>
+	<GL/glut.h>
+	<list>
+	<vector>
+	<stdio.h>
+	<time.h>
+	"physics.h"
+	"wall.h"
+	"turret.h"
+
+1399307744 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/physics.h
+	<stdio.h>
+	<math.h>
+	"vectormath.h"
+
+1399298681 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/turret.h
+	<GL/gl.h>
+	<GL/glut.h>
+	<math.h>
+	"bullet.h"
+	"additionalgraphics.h"
+
+1404751436 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/versions.h
+
+1399379296 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/bsp.cpp
+	"bsp.h"
+
+1399363372 /home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/bsp.h
+	<vector>
+	<cstring>
+	<time.h>
+	"physics.h"
+	"wall.h"
+
+1399291038 /home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/wall.h
+	<GL/gl.h>
+	<GL/glut.h>
+	<stdio.h>
+	"vectormath.h"
+
+1399301263 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/wall.cpp
+	"wall.h"
+
+1399294786 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/bullet.cpp
+	"bullet.h"
+
+1399294786 /home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/bullet.h
+	<GL/gl.h>
+	<GL/glut.h>
+	"vectormath.h"
+
+1399959215 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/aabbtree.h
+	<algorithm>
+	"physics.h"
+	"wall.h"
+
+1399363372 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/bsp.h
+	<vector>
+	<cstring>
+	<time.h>
+	"physics.h"
+	"wall.h"
+
+1399294786 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/bullet.h
+	<GL/gl.h>
+	<GL/glut.h>
+	"vectormath.h"
+
+1399291038 source:/home/elluzion/Документы/CodeBlocks::Projects/TerraFire 2/wall.h
+	<GL/gl.h>
+	<GL/glut.h>
+	<stdio.h>
+	"vectormath.h"
+

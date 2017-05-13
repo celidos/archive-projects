@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://adminway.ru/povorot-kartinki-s-pomoshchyu-js -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="http://an.yandex.ru/system/context.js" async="true"></script>
+    <meta charset="utf-8">
+    <link media="screen" rel="stylesheet" type="text/css" href="./Поворот картинки с помощью JS_files/monitor_aw.css">
+    <link rel="icon" type="image/png" href="http://adminway.ru/logo.png">
+    <link rel="icon" type="image/png" href="http://adminway.ru/favicon.ico">
+    <link rel="alternate" type="application/rss+xml" title="all articles" href="http://feeds.feedburner.com/adminway">
+
+    <meta name="yandex-verification" content="7c09e4a9ac04ce29">
+    <meta name="verify-v1" content="GD+LDHQF1Hg7h9t2Jvv5gbKlR3QYVWOG1fTzz80gTI4=">
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no">
+    <meta name="description" content="Поворот картинки с помощью JS">
+
+    <title>
+      
+      
+      
+        
+          Поворот картинки с помощью&nbsp;JS
+        
+      
+      
+      
+    </title>
+  <style type="text/css"></style><style type="text/css">#lleo_dialog, #lleo_dialog * {
+    margin: 0 !important;
+	padding: 0 !important;
+	background: none !important;
+	border: none 0 !important;
+	position: static !important;
+	vertical-align: baseline !important;
+	font: normal 13px Arial, Helvetica !important;
+	line-height: 15px !important;
+	color: #000 !important;
+	overflow: visible !important;
+	width: auto !important;
+	height: auto !important;
+	float: none !important;
+	visibility: visible !important;
+	text-align: left !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important;
+}
+
+#lleo_dialog iframe {
+	height: 0 !important;
+	width: 0 !important;
+}
+
+#lleo_dialog {
+    position: absolute !important;
+    background: #fff !important;
+    border: solid 1px #ccc !important;
+    padding: 7px 0 0 !important;
+    left: -999px;
+    top: -999px;
+	/*max-width: 450px !important;*/
+    width: 440px !important;
+    overflow: hidden;
+    display: block !important;
+    z-index: 999999999 !important;
+    opacity: 0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+	-moz-border-radius: 3px !important;
+	-webkit-border-radius: 3px !important;
+	border-radius: 3px !important;
+}
+#lleo_dialog.lleo_show {
+    opacity: 1 !important;
+    -webkit-transition: opacity 0.3s !important;
+}
+#lleo_dialog input::-webkit-input-placeholder {
+    color: #aaa !important;
+}
+#lleo_dialog .lleo_has_pic #lleo_word {
+	margin-right: 80px !important;
+}
+#lleo_dialog #lleo_translationsCopntainer1 {
+	position: relative !important;
+}
+#lleo_dialog #lleo_translationsCopntainer2 {
+	padding: 7px 0 0 !important;
+	vertical-align: middle !important;
+}
+#lleo_dialog #lleo_word {
+    color: #000 !important;
+    margin: 0 5px 2px 0 !important;
+    /*float: left !important;*/
+}
+#lleo_dialog .lleo_has_sound #lleo_word {
+    margin-left: 17px !important;
+}
+#lleo_dialog #lleo_text {
+    font-weight: bold !important;
+    color: #d56e00 !important;
+    text-decoration: none !important;
+    cursor: default !important;
+}
+#lleo_dialog #lleo_text.lleo_known {
+    cursor: pointer !important;
+    text-decoration: underline !important;
+}
+#lleo_dialog #lleo_closeBtn {
+    position: absolute !important;
+    right: 6px !important;
+    top: 5px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 0 !important;
+    color: #aaa !important;
+    display: block !important;
+    padding: 2px !important;
+	z-index: 9999999999 !important;
+	width: 7px !important;
+	height: 7px !important;
+	padding: 0  !important;
+	margin: 0   !important;
+}
+
+#lleo_dialog #lleo_optionsBtn {
+    position: absolute !important; 
+    right: 1px !important;
+    top: 12px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 13px !important;
+    color: #aaa !important;
+    padding: 2px !important;
+	display: none;
+}
+#lleo_dialog #lleo_optionsBtn img{
+	width: 12px !important;
+	height: 12px !important;
+}
+#lleo_dialog #lleo_sound {
+    float: left !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin-left: 12px !important;
+    background: 0 0 no-repeat !important;
+    cursor: pointer !important;
+    display: none !important;
+}
+#lleo_dialog .lleo_has_sound #lleo_sound {
+    display: block !important;
+}
+#lleo_dialog #lleo_picOuter {
+    position: absolute !important;
+    float: right !important;
+    right: 29px;
+    top: 0;
+    display: none !important;
+    z-index: 9 !important;
+}
+#lleo_dialog .lleo_has_pic #lleo_picOuter {
+    display: block !important;
+}
+#lleo_dialog #lleo_picOuter:hover {
+    z-index: 11 !important;
+}
+#lleo_dialog #lleo_pic,
+#lleo_dialog #lleo_picBig {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    border: solid 2px #fff !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    z-index: 1 !important;
+}
+#lleo_dialog #lleo_pic {
+	position: relative !important;
+    border: none !important;
+	width: 34px !important;
+}
+#lleo_dialog #lleo_picBig {
+    box-shadow: -1px 2px 4px rgba(0,0,0,0.3);
+    z-index: 2 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+#lleo_dialog #lleo_picOuter:hover #lleo_picBig {
+    visibility: visible !important;
+    opacity: 1 !important;
+    -webkit-transition: opacity 0.3s !important;
+    -webkit-transition-delay: 0.3s !important;
+}
+#lleo_dialog #lleo_transcription {
+    color: #486D85 !important;
+    margin: 0 0 4px 29px !important;
+    color: #aaaaaa !important;
+}
+#lleo_dialog .lleo_no_trans {
+    color: #aaa !important;
+}
+
+
+
+
+
+
+#lleo_dialog .ll-translation-counter {
+	float: right !important;
+    font-size: 11px !important;
+    color: #aaa !important;
+    padding: 2px 2px 1px 10px !important;
+}
+
+#lleo_dialog .ll-translation-text {
+	float: left !important;
+	width: 80% !important;
+}
+
+#lleo_dialog #lleo_trans a {
+    color: #3F669F !important;
+    padding: 1px 4px !important;
+    text-decoration: none !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}
+
+#lleo_dialog .ll-translation-item {
+	width: 100% !important;
+	float: left !important; 
+	padding:1px 4px;
+	color: #3F669F !important;
+	padding: 3px !important;
+	border: solid 1px white !important;
+	-moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+}
+
+#lleo_dialog .ll-translation-item:hover {
+	border: solid 1px #9FC2C9 !important;
+    background: #EDF4F6 !important;
+	cursor: pointer !important;
+}
+
+#lleo_dialog .ll-translation-marker {
+	margin: 0px 5px 2px 2px !important;
+}
+
+
+
+
+
+#lleo_dialog #lleo_icons {
+    margin: 10px 0 7px !important;
+    color: #aaa !important;
+    line-height: 20px !important;
+    font-size: 11px !important;
+    clear: both !important;
+    padding-left: 16px !important;
+}
+#lleo_icons a {
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 0 -2px 3px !important;
+    text-decoration: none !important;
+    background: 0 0 no-repeat !important;
+    opacity: 0.5 !important;
+}
+#lleo_icons a:hover {
+    opacity: 1 !important;
+}
+#lleo_icons a.lleo_google     {background-position:-34px 0 !important;}
+#lleo_icons a.lleo_multitran  {background-position:-64px 0 !important;}
+#lleo_icons a.lleo_lingvo     {background-position:-51px 0 !important; width: 12px !important;}
+#lleo_icons a.lleo_dict       {background-position:-17px 0 !important;}
+#lleo_icons a.lleo_linguee    {background-position:-81px 0 !important;}
+#lleo_icons a.lleo_michaelis  {background-position:-98px 0 !important;}
+
+
+
+
+#lleo_dialog #lleo_contextContainer {
+    margin: 0 !important;
+    padding: 3px 15px 3px 10px !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee)) !important;
+    border-bottom: solid 1px #ddd !important;
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+    display: none !important;
+    overflow: hidden !important;
+}
+#lleo_dialog .lleo_has_context #lleo_contextContainer {
+    display: block !important;
+}
+#lleo_dialog #lleo_context {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    line-height: 12px !important;
+    font-size: 11px !important;
+    margin-left: 2px !important;
+}
+#lleo_dialog #lleo_context b {
+    line-height: 12px !important;
+    color: #000 !important;
+    font-weight: bold !important;
+    font-size: 11px !important;
+}
+#lleo_dialog #lleo_gBrand {
+    color: #aaa !important;
+    font-size: 10px !important;
+    /*padding-right: 52px !important;*/
+    padding-bottom: 14px !important;
+    margin: -3px 4px 0 4px !important;
+    background: left bottom no-repeat !important;
+    display: inline-block !important;
+    float: right !important;
+}
+#lleo_dialog #lleo_gBrand.hidden {
+    display: none !important;
+}
+#lleo_dialog #lleo_translateContextLink {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#ddd)) !important;
+    border: solid 1px !important;
+    box-shadow: 1px 1px 0 #f6f6f6 !important;
+    border-color: #999 #aaa #aaa #999 !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    padding: 0 3px !important;
+    font-size: 11px !important;
+    text-decoration: none !important;
+    margin: 1px 5px 0 !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+}
+#lleo_dialog #lleo_translateContextLink:hover {
+    background: #f8f8f8 !important;
+}
+
+#lleo_dialog #lleo_setTransForm {
+    display: block !important;
+    margin-top: 3px !important;
+    padding-top: 5px !important;
+    /* Set position and background because the form might be overlapped by an image when no translations */
+    position: relative !important;
+    background: #fff !important;
+    z-index: 10 !important;
+    padding-bottom: 10px !important;
+    padding-left: 16px !important;
+}
+#lleo_dialog .lleo-custom-translation {
+    padding: 4px 5px !important;
+    border: solid 1px #ddd !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    width: 90% !important;
+    min-width: 270px !important;
+    background: -webkit-gradient(linear, 0 0, 0 20, from(#f1f1f1), to(#fff)) !important;
+	font: normal 13px Arial, Helvetica !important;
+	line-height: 15px !important;
+}
+#lleo_dialog .lleo-custom-translation:hover {
+    border: solid 1px #aaa !important;
+}
+#lleo_dialog .lleo-custom-translation:focus {
+    background: #FFFEC9 !important;
+}
+
+#lleo_dialog *.hidden {
+    display: none !important;
+}
+
+#lleo_dialog .infinitive{
+    color: #D56E00 !important;
+    text-decoration: none;
+    border-bottom: 1px dotted #D56E00 !important;
+}
+#lleo_dialog .infinitive:hover{
+    border: none !important;
+}
+
+
+#lleo_dialog #lleo_trans{
+    zoom: 1;
+    border-top: 1px solid #eeeeee !important;
+    margin: 10px 0 0 !important;
+    padding: 5px 30px 0 14px !important;
+}
+
+#lleo_dialog .lleo_clearfix {
+	display: block !important;
+	clear: both !important;
+	visibility: hidden !important;
+	height: 0 !important;
+	font-size: 0 !important;
+}
+
+#lleo_dialog #lleo_markBlock {
+    background: #eeeeee !important;
+	cursor: pointer !important; 
+	border-bottom-left-radius: 3px !important;
+	border-bottom-right-radius: 3px !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important; 
+}
+
+#lleo_dialog #lleo_markBlock img{
+	width: 14px !important;
+	height: 14px !important;
+}
+
+#lleo_dialog #lleo_markBlock .icon-cell {
+	padding: 5px 2px 5px 16px !important;
+	height: 17px !important;
+}
+
+#lleo_dialog #lleo_markBlock .wide-cell {
+	width: 100% !important;
+}
+
+#lleo_dialog #lleo_markBlock .text-cell {
+	color: #999999 !important; 
+    font: normal 13px Arial, Helvetica !important;
+    text-shadow: 0 1px #fff !important; 
+}
+
+#lleo_dialog #lleo_markBlock td {
+	vertical-align: middle !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important;
+}
+
+
+#lleo_dialog #lleo_picOuter table{
+    width: 44px !important;
+    position: absolute !important;
+    right: 0 !important;
+    vertical-align: middle !important;
+}
+
+#lleo_dialog #lleo_picOuter td{
+    width: 38px !important;
+    height: 38px !important;
+    border: 1px solid #eeeeee !important;
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+#lleo_dialog #lleo_picOuter td div {
+	height: 38px !important;
+	overflow: hidden !important;
+}</style><style type="text/css">
+.ll-content-notification *{
+	letter-spacing: normal !important;
+	margin: 0 !important;
+    padding: 0 !important;
+	background: none !important;
+	border: 0 !important;
+	float: none !important;
+	text-align: left !important;
+	text-decoration: none !important;
+    font: normal 15px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+}
+
+
+.ll-content-notification {
+    vertical-align: baseline !important;
+    color: #000 !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: fixed !important;
+    background: #fff !important;
+    border: solid 1px #AAA !important;
+	/*
+    left: -999px;
+    top: -999px;
+	*/
+    width: auto;
+    /* width: 300px !important; */
+    display: block;
+    z-index: 999999999 !important;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    -webkit-border-radius: 3px !important;
+    -moz-border-radius: 3px !important;
+    border-radius: 3px !important;
+    overflow: hidden !important;
+    /* opacity: 0 !important; */
+    transition: opacity 0.8s !important;
+    -moz-transition: opacity 0.8s !important; /* Firefox 4 */
+    -webkit-transition: opacity 0.8s !important; /* Safari and Chrome */
+    -o-transition: opacity 0.8s !important; /* Opera */
+    cursor: default !important;
+}
+
+.ll-content-notification-shown {
+    opacity: 1 !important;
+    transition: opacity 0.8s !important;
+    -moz-transition: opacity 0.8s !important; /* Firefox 4 */
+    -webkit-transition: opacity 0.8s !important; /* Safari and Chrome */
+    -o-transition: opacity 0.8s !important; /* Opera */
+}
+
+.ll-content-notification-header {
+	border: 0 !important;
+	margin: 0 !important;
+    background: url(data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAABJJREFUGFdjePHmCxw9e/UZjgAVYhYtk8xZqAAAAABJRU5ErkJggg==) !important;
+    border-bottom: solid 1px #CCC !important;
+    padding: 1px 4px !important;
+	min-height: 18px !important;
+	width: 100% !important;
+	-webkit-border-top-left-radius: 3px !important;
+    -webkit-border-top-right-radius: 3px !important;
+    -moz-border-radius-topleft: 3px !important;
+    -moz-border-radius-topright: 3px !important;
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+	border-collapse: collapse !important;
+	border-spacing: 0 !important;
+}
+
+.ll-content-notification-header-pic {
+	border: 0 !important;
+	margin: 0 !important;
+	padding: 3px 0 0 3px !important;
+	width: 20px !important;
+	vertical-align: top !important;
+	line-height: 1px !important;
+}
+
+.ll-content-notification-header-pic img{
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	line-height: 1px !important;
+}
+
+
+.ll-content-notification-header-caption {
+    font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+	font-weight: bold !important;
+    line-height: 15px !important;
+    color: #555 !important;
+    float: left !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+	white-space: normal !important;
+	padding: 3px !important;
+	margin: 0 !important;
+}
+
+.ll-content-notification-header-close {
+    width: 15px !important;
+	vertical-align: top !important;
+	text-align: right !important;
+	padding: 6px 5px 0 0 !important;
+	margin: 0 !important;
+	line-height: 1px !important;
+}
+
+.ll-content-notification-header-close img {
+	border: 0 !important;
+    width: 7px !important;
+    height: 7px !important;
+    margin: 0 !important;
+	padding: 0 !important;
+}
+
+.ll-content-notification-content {
+    margin: 0 !important;
+    padding: 8px !important;
+    float: left !important;
+    overflow: hidden !important;
+    width: auto !important;
+}
+
+.ll-content-notification-content-logo {
+    float: left !important;
+	height: 48px !important;
+	width: 48px !important;
+}
+
+.ll-content-notification-content-main {
+    margin-left: 60px !important;
+    overflow: hidden !important;
+    padding: 0 0 2px 0 !important;
+    color: #333 !important;
+    text-align: left !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+    font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+    line-height: 15px !important;
+    width: auto !important;
+}
+
+.ll-content-notification-content-header {
+	text-align: left !important;
+	text-decoration: none !important;
+    font: bold 15px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+    line-height: 19px !important;
+    margin: 0 0 4px 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    color: #333 !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+    display: block !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+.ll-content-notification-word {
+    color: #d56e00 !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+}
+</style></head>
+
+  <body data-twttr-rendered="true">
+    <header>
+      <div class="monitor_1280">
+        
+          <a href="http://adminway.ru/"><div id="logo"></div></a>
+        
+        <nav>
+          <ul class="section_list">
+	<li><a href="http://adminway.ru/">Все посты</a></li>
+	<li><a href="http://adminway.ru/articles/">Админ</a></li>
+	<li><a class="active" href="http://adminway.ru/html/">html+css</a></li>
+	<li><a href="http://adminway.ru/our_life/">Про жизнь</a></li>
+	<li><a href="http://adminway.ru/o-bloge/">О блоге</a></li>
+</ul>
+        </nav>
+      </div>
+      <div class="clear"></div>
+    </header>
+
+    <div id="nlx"><div id="ncode">
+  <script>
+    id = 5635;
+    document.write('<sc'+'ript type="text/javascript" src="http://a.contextbar.ru/n.js?rnd='+Math.round(Math.random()*100000)+'"></sc'+'ript>');
+  </script><script type="text/javascript" src="http://a.contextbar.ru/n.js?rnd=60706"></script>
+</div></div>
+
+    <div class="monitor_1120">
+      
+        <div id="google_728_90">
+          <script type="text/javascript"><!--
+	google_ad_client = "ca-pub-4417020466525890";
+	/* adminway_728_90 */
+	google_ad_slot = "9190517362";
+	google_ad_width = 728;
+	google_ad_height = 90;
+	//-->
+</script>
+<script src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+ 
+        </div>
+      
+
+      
+      
+      
+        
+        
+      
+      
+
+      <div id="container">
+        <div id="content">
+          <aside id="sideleft">
+            <h2>Последнии твиты</h2>
+              <ul class="arc_twitter">
+	<li><a href="http://twitter.com/Sotmarket_Ru" rel="external">@Sotmarket_Ru</a> почему сабовых динамиков нет в скидках)) <span class="arc_twitter-posted">09:27, 13.08.2014</span></li>
+	<li><a href="http://twitter.com/ixth" rel="external">@ixth</a> недоработав админа <span class="arc_twitter-posted">09:17, 13.08.2014</span></li>
+</ul>
+            <div id="link_twitter">
+              <a href="http://twitter.com/itshaman" rel="nofollow" target="_blank">Следить за мной!</a>
+            </div>
+            <h2>Комментарии</h2>
+              
+                <ul class="recent_comments">
+	<li>
+                  <a href="http://adminway.ru/kak-sokhranit-nastroiki-cisco-v-fail-i-zagruzit-ikh-potom-obratno#c002492" id="c002492">
+                    Александо
+                  </a> прокомментировал пост <span class="title_comment"><a rel="bookmark" href="http://adminway.ru/kak-sokhranit-nastroiki-cisco-v-fail-i-zagruzit-ikh-potom-obratno">Как сохранить настройки Cisco в файл и загрузить их потом&nbsp;обратно?</a></span>
+                </li>
+	<li>
+                  <a href="http://adminway.ru/dobavlyaem-dinamicheskii-vodyanoi-znak-na-izobrazhenie-sredstvami-php#c002486" id="c002486">
+                    itshaman
+                  </a> прокомментировал пост <span class="title_comment"><a rel="bookmark" href="http://adminway.ru/dobavlyaem-dinamicheskii-vodyanoi-znak-na-izobrazhenie-sredstvami-php">Добавляем динамический водяной знак на изображение средствами&nbsp;PHP</a></span>
+                </li>
+	<li>
+                  <a href="http://adminway.ru/dobavlyaem-dinamicheskii-vodyanoi-znak-na-izobrazhenie-sredstvami-php#c002485" id="c002485">
+                    Vova
+                  </a> прокомментировал пост <span class="title_comment"><a rel="bookmark" href="http://adminway.ru/dobavlyaem-dinamicheskii-vodyanoi-znak-na-izobrazhenie-sredstvami-php">Добавляем динамический водяной знак на изображение средствами&nbsp;PHP</a></span>
+                </li>
+	<li>
+                  <a href="http://adminway.ru/kak-skachat-video-s-video-yandex#c002484" id="c002484">
+                    Андрей
+                  </a> прокомментировал пост <span class="title_comment"><a rel="bookmark" href="http://adminway.ru/kak-skachat-video-s-video-yandex">Как скачать видео с video&nbsp;yandex?</a></span>
+                </li>
+	<li>
+                  <a href="http://adminway.ru/prodvizhenie-grupp-vkontakte#c002483" id="c002483">
+                    Сергей
+                  </a> прокомментировал пост <span class="title_comment"><a rel="bookmark" href="http://adminway.ru/prodvizhenie-grupp-vkontakte">Продвижение групп "ВКонтакте"</a></span>
+                </li>
+</ul>
+              
+
+            
+              <section id="google_160_600">
+                <script type="text/javascript"><!--
+                  google_ad_client = "ca-pub-4417020466525890";
+                  /* adminway_160_600 */
+                  google_ad_slot = "7969327027";
+                  google_ad_width = 160;
+                  google_ad_height = 600;
+                  //-->
+                </script>
+                <script src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+              </section>
+            
+          </aside>
+
+          <section id="texts">
+            
+              
+                
+
+  <time pubdate="" datetime="2013-01-26T10:10:48Z">
+    26<br>
+    Янв
+  </time>
+  <h1>Поворот картинки с помощью&nbsp;JS</h1>
+  <article>
+    <a href="./Поворот картинки с помощью JS_files/Поворот картинки с помощью JS.html" title="Поворот картинки с помощью JS">
+      <img src="./Поворот картинки с помощью JS_files/474.jpg" alt="" class="article-image" width="250" height="191">
+    </a>
+    	<p>JavaScript – это мега крутая штука, которая позволяет делать очень много великолепных эффектов. Одним из таких эффектов можно назвать поворот картинки. Такой эффект добавляет живости сайту, делая его более интересным с точки зрения пользователя.</p>
+
+	<p>Я использовал его на одном своем женском сайте, который упорно не хотят брать в Яндекс.Каталог.</p>
+
+	<p>Я считаю, что умение поворачивать изображение – это очень полезный и нужный эффект, который в некоторых случаях будет к месту на вашем сайте.</p>
+    	<p>Возможность поворачивать изображения у нас есть благодаря существованию jQuery и дополнительному плагину <strong>jqueryrotate</strong>.</p>
+
+	<p>Могу сказать с некоторой увереностью, что этот плагин корректно работает в большинстве браузеров. В современных версиях работает 100% и только в Opera под Linux есть незначительные лаги. В более старых версиях начиная от IE 6 и Firefox 2.0 плагин также отлично работает. И это огроменный плюс в его пользу.</p>
+
+	<h2>Что нам нужно для поворота изображений?</h2>
+
+	<p>Для этого нам нужно подключить к своему сайту библиотеку jQuery и плагин <a href="http://code.google.com/p/jqueryrotate/" target="_blank">jqueryrotate</a>:</p>
+
+<pre><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"/js/jqueryrotate.2.1.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
+
+	<p>Перед этим необходимо поместить плагин jqueryrotate в директорию <strong>/js</strong> вашего сайта.</p>
+
+	<h2>Непосредственно сам поворот</h2>
+
+	<p>Плагин jqueryrotate позволяет:</p>
+
+	<ul>
+		<li>повернуть картинку на определенный угол;</li>
+		<li>красиво, с анимацией поворачивать картинку, так сказать в онлайн режиме.</li>
+	</ul>
+
+	<p>Анимированный поворот можно посадить на событие, к примеру, на наведение курсора мыши и получить эффект отзывчивости от картинки.</p>
+
+	<p>С самого начала нам нужно выделить то изображение, к которому будем применять эффект поворота – присваиваем ему идентификатор <em>rotateimg</em>:</p>
+
+<pre><code class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/img.jpg"</span> <span class="attribute">alt</span>=<span class="value">""</span> <span class="attribute">id</span>=<span class="value">"rotateimg"</span> /&gt;</span></code></pre>
+
+	<p>Вот несколько типовых примеров, с помощью которых можно добиться требуемого эффекта:</p>
+
+	<h3>Повернуть изображение на угол в 12 градусов:</h3>
+
+<pre><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+	jQuery(document).ready(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+	    jQuery(<span class="string">"#rotateimg"</span>).rotate({angle:<span class="number">12</span>});
+	});
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
+
+	<h3>Постоянно вращать изображение:</h3>
+
+<pre><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+	<span class="keyword">var</span> angle = <span class="number">0</span>;
+	setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+	      angle+=<span class="number">3</span>;
+	     jQuery(<span class="string">"#rotateimg"</span>).rotate(angle);
+	},<span class="number">60</span>);
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
+
+	<h3>Поворот изображения при наведении на него мышки:</h3>
+
+<pre><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+	jQuery(<span class="string">"#rotateImg"</span>).rotate({ 
+	   bind: 
+	     { 
+	        mouseover : <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span> 
+	            jQuery(<span class="keyword">this</span>).rotate({animateTo:<span class="number">15</span>})
+	        },
+	        mouseout : <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span> 
+	            jQuery(<span class="keyword">this</span>).rotate({animateTo:<span class="number">0</span>})
+	        }
+	     } 
+	});
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
+
+	<p>Сначала хотел сделать отдельную страницу с примерами этого чудо-плагина, но перечитав всю статьи заново, понял, что всё и так понятно.</p>
+
+	<p><strong>P.S.</strong> С недавнего времени я вышел из тени и стал разрабатывать сайты уже платя налоги. Для такой работы нужно очень много вдохновения и новых идей, в силу того, что своих ресурсов, увы, не хватает, я в постоянном поиске таких мест. Бороздя просторы всемирной паутины, я набрел на очень красивый и интересный <a href="http://simonenko.su/" target="_blank">блог «Web Energy»</a>, где автор делится своими знаниями в области <span class="caps">HTML</span>, <span class="caps">CSS</span>, <span class="caps">PHP</span> и JavaScript. Очень интересно почитать. Автор блога работает в Serenity, на сайте которых можно найти очень много красивых дизайнов, интересных идей и находок. В общем, всем рекомендую!</p>
+    
+  </article>
+  <div id="podeli">
+    <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="./Поворот картинки с помощью JS_files/tweet_button.1407888064.html" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-horizontal" title="Twitter Tweet Button" data-twttr-rendered="true" style="width: 138px; height: 20px;"></iframe>
+  </div>
+
+  <div id="yandex_ad"></div>
+    <script type="text/javascript">
+     (function(w, d, n, s, t) {
+       w[n] = w[n] || [];
+       w[n].push(function() {
+         Ya.Direct.insertInto(63895, "yandex_ad", {
+            site_charset: "utf-8",
+            ad_format: "direct",
+            font_size: 1,
+            type: "flat",
+            border_type: "ad",
+            limit: 2,
+            title_font_size: 1,
+            site_bg_color: "FFFFFF",
+            border_color: "F7F7F7",
+            title_color: "0096D1",
+            url_color: "2C2C2C",
+            text_color: "2C2C2C",
+            hover_color: "0066FF",
+            favicon: true
+         });
+       });
+       t = d.documentElement.firstChild;
+       s = d.createElement("script");
+       s.type = "text/javascript";
+       s.src = "http://an.yandex.ru/system/context.js";
+       s.setAttribute("async", "true");
+       t.insertBefore(s, t.firstChild);
+     })(window, document, "yandex_context_callbacks");
+    </script>
+
+    <script src="./Поворот картинки с помощью JS_files/saved_resource"></script>
+    <script src="./Поворот картинки с помощью JS_files/saved_resource(1)"></script>
+
+<h4 id="Комментарий">Комментарии:</h4>
+
+<ol class="comments">
+	<li><span>Секрет</span> опубликовал комментарий 28 Январь 2013, 19:21 <a href="http://adminway.ru/povorot-kartinki-s-pomoshchyu-js#c002104" id="c002104">#</a>
+<div class="clear"></div>
+<a href="http://secrety-ineta.ru/" target="_blank" rel="nofollow external"><img src="./Поворот картинки с помощью JS_files/avatar.php" alt="" width="80" height="80"></a>
+
+	<p>Отличный прием! Спасибо! Возьму на вооружение!</p>
+
+<div class="zit">
+<script type="text/javascript">getQuotation('Секрет','Цитировать');</script><a href="javascript:paste_strinL(selektion,1,'','','','Секрет')" onmousemove="pasteSel()">Цитировать</a>
+ | <a class="peg_replyto" href="http://adminway.ru/povorot-kartinki-s-pomoshchyu-js#peg_replyto" onclick="peg_selectComment(&#39;002104&#39;);"> Ответить </a>
+</div>
+
+
+</li>
+</ol>
+
+
+
+
+<form id="txpCommentInputForm" method="post" action="http://adminway.ru/povorot-kartinki-s-pomoshchyu-js#cpreview">
+<div class="comments-wrapper">
+
+<strong></strong>
+
+<input type="text" value="" name="name" size="25" class="comment_name_input" id="name" required=""> <strong>Имя</strong><br>
+<input type="email" value="" name="email" size="25" class="comment_email_input" id="email" required=""> <strong>e-mail</strong><br>
+<input type="text" value="" name="web" size="25" class="comment_web_input" id="web"> <strong>Сайт</strong><br>
+<strong>Текст комментария:</strong> <input type="text" name="peg_replyto" id="peg_replyto" value=""><br>
+<br>
+<textarea id="message" name="message" cols="25" rows="5" required="" class="txpCommentInputMessage"></textarea><br>
+
+<input type="submit" value="Предпросмотр" name="preview" class="button" id="txpCommentPreview"> 
+<input type="submit" value="Сохранить" name="submit" class="button disabled" id="txpCommentSubmit" disabled="disabled">
+<input type="checkbox" name="remember" value="1" id="remember" checked="checked" class="checkbox active"> <label for="remember">Запомнить</label> <input type="hidden" value="remember" name="checkbox_type">
+
+<input type="hidden" value="402" name="parentid">
+<input type="hidden" value="/povorot-kartinki-s-pomoshchyu-js" name="backpage">
+
+</div>
+</form>
+
+
+
+              
+            
+          </section>
+        </div>
+      </div>
+
+      <aside id="sideright">
+        <section id="300_250">
+
+          <object type="application/x-shockwave-flash" data="http://adminway.ru/banner.swf" width="240" height="400">
+            <param name="quality" value="high">
+            <param name="wmode" value="transparent">
+            <param name="movie" value="banner.swf">
+          </object>
+
+        </section>
+        
+          <section>
+            <h2>Схожее</h2>
+            <ul class="popular_li">
+              <li>
+<a rel="bookmark" href="http://adminway.ru/gde-naiti-ikonki-v-internete">
+<div class="popular_li">
+
+<div>Где найти иконки в&nbsp;Интернете?</div>
+</div>
+</a></li>
+<li>
+<a rel="bookmark" href="http://adminway.ru/avtomaticheskoe-dobovlenie-vsem-vneshnim-ssylkam-atributa-rel-nofollow-s-pomoshchyu-js">
+<div class="popular_li">
+<img src="./Поворот картинки с помощью JS_files/351t.png" alt="Автоматическое добовление всем внешним ссылкам атрибута rel=&quot;nofollow&quot; с помощью JS" title="Автоматическое добовление всем внешним ссылкам атрибута rel=&quot;nofollow&quot; с помощью JS" width="150" height="150">
+<div>Автоматическое добовление всем внешним ссылкам атрибута rel="nofollow" с помощью&nbsp;JS</div>
+</div>
+</a></li>
+<li>
+<a rel="bookmark" href="http://adminway.ru/predlagayu-polnyi-obzor-vashego-saita-za-postovoi">
+<div class="popular_li">
+<img src="./Поворот картинки с помощью JS_files/90t.jpg" alt="Предлагаю полный обзор вашего сайта за постовой" title="Предлагаю полный обзор вашего сайта за постовой" width="150" height="172">
+<div>Предлагаю полный обзор вашего сайта за&nbsp;постовой</div>
+</div>
+</a></li>
+<li>
+<a rel="bookmark" href="http://adminway.ru/yandeks-otvetil-na-vtoroe-pismo-ili-chto-takoe-khoroshii-sait-glazami-yandeksa">
+<div class="popular_li">
+
+<div>Яндекс ответил на второе письмо или что такое хороший сайт глазами&nbsp;Яндекса</div>
+</div>
+</a>
+</li>
+            </ul>
+            <ul class="popular_li">
+              <li>
+<a rel="bookmark" href="http://adminway.ru/kak-reshit-oshibku-zip-oshibka-chteniya-ili-poiska-">
+<div class="popular_li">
+<img src="./Поворот картинки с помощью JS_files/372t.jpg" alt="Как решить ошибку &quot;ZIP: ошибка чтения или поиска&quot;?" title="Как решить ошибку &quot;ZIP: ошибка чтения или поиска&quot;?" width="150" height="145">
+<div>Как решить ошибку "ZIP: ошибка чтения или поиска"?</div>
+</div>
+</a></li>
+<li>
+<a rel="bookmark" href="http://adminway.ru/kak-po-umolchaniyu-vystavit-status-state-nabrosok-v-textpattern">
+<div class="popular_li">
+<img src="./Поворот картинки с помощью JS_files/141t.jpg" alt="Как по-умолчанию выставить статус статье &quot;Набросок&quot; в Textpattern" title="Как по-умолчанию выставить статус статье &quot;Набросок&quot; в Textpattern" width="150" height="76">
+<div>Как по-умолчанию выставить статус статье "Набросок" в&nbsp;Textpattern</div>
+</div>
+</a>
+</li>
+            </ul>
+          </section>
+        
+        <section>
+          <ul class="popular_li">
+            <li><a href="http://adminway.ru/karta-saita/">Карта сайта</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Поиск по блогу</h2>
+          <form action="http://adminway.ru/" method="get">
+            <input class="search_pole" type="text" name="q" value="ПОИСК" onfocus="if (this.value==&#39;ПОИСК&#39;) this.value=&#39;&#39;;" onblur="if (this.value==&#39;&#39;) this.value=&#39;ПОИСК&#39;;">
+          </form>
+        </section>
+        <section>
+          <h2>Последние фотографии</h2>
+            <ul class="adw_yandexfoto_photos"><li><a href="http://img-fotki.yandex.ru/get/9810/55395537.40/0_f9933_62f6aa2f_XXL.jpg" class="fancybox-foto" title="Captains of Crush Trainer" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_f9933_62f6aa2f_XS.jpg" alt="" title="Captains of Crush Trainer"></a></li><li><a href="http://img-fotki.yandex.ru/get/9743/55395537.40/0_f9932_96f510b_XXL.jpg" class="fancybox-foto" title="Captains of Crush Trainer" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_f9932_96f510b_XS.jpg" alt="" title="Captains of Crush Trainer"></a></li><li><a href="http://img-fotki.yandex.ru/get/9828/55395537.3f/0_eff29_cbd026cf_XXL.jpg" class="fancybox-foto" title="Бутусов в Омске" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_eff29_cbd026cf_XS.jpg" alt="" title="Бутусов в Омске"></a></li><li><a href="http://img-fotki.yandex.ru/get/6729/55395537.3f/0_d872e_eb9ec2eb_XXL.jpg" class="fancybox-foto" title="Омская набережная" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_d872e_eb9ec2eb_XS.jpg" alt="" title="Омская набережная"></a></li><li><a href="http://img-fotki.yandex.ru/get/9151/55395537.3f/0_d872f_2de96ec0_XXL.jpg" class="fancybox-foto" title="Осторожно! Омск - опасное место" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_d872f_2de96ec0_XS.jpg" alt="" title="Осторожно! Омск - опасное место"></a></li><li><a href="http://img-fotki.yandex.ru/get/9497/55395537.3f/0_d8730_2806068e_XXL.jpg" class="fancybox-foto" title="Омская набережная" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_d8730_2806068e_XS.jpg" alt="" title="Омская набережная"></a></li><li><a href="http://img-fotki.yandex.ru/get/9491/55395537.3f/0_d8732_4196afe7_XXL.jpg" class="fancybox-foto" title="Омская набережная" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_d8732_4196afe7_XS.jpg" alt="" title="Омская набережная"></a></li><li><a href="http://img-fotki.yandex.ru/get/9115/55395537.3f/0_d7a6e_b9d55953_XXL.jpg" class="fancybox-foto" title="IMG_4784.jpg" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_d7a6e_b9d55953_XS.jpg" alt="" title="IMG_4784.jpg"></a></li><li><a href="http://img-fotki.yandex.ru/get/9107/55395537.3f/0_d7a6d_d99187b_XXL.jpg" class="fancybox-foto" title="IMG_4764.jpg" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_d7a6d_d99187b_XS.jpg" alt="" title="IMG_4764.jpg"></a></li><li><a href="http://img-fotki.yandex.ru/get/9261/55395537.3f/0_d7a6c_9daa99fc_XXL.jpg" class="fancybox-foto" title="Питер" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_d7a6c_9daa99fc_XS.jpg" alt="" title="Питер"></a></li><li><a href="http://img-fotki.yandex.ru/get/6719/55395537.3f/0_d7a77_9bfafac9_XXL.jpg" class="fancybox-foto" title="IMG_5882.jpg" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_d7a77_9bfafac9_XS.jpg" alt="" title="IMG_5882.jpg"></a></li><li><a href="http://img-fotki.yandex.ru/get/9498/55395537.3f/0_d7a76_c4bd2f70_XXL.jpg" class="fancybox-foto" title="IMG_5875.jpg" rel="fancybox-foto"><img src="./Поворот картинки с помощью JS_files/0_d7a76_c4bd2f70_XS.jpg" alt="" title="IMG_5875.jpg"></a></li></ul>
+            <p class="yandex-foto">
+              <a href="http://fotki.yandex.ru/users/itshaman55" rel="nofollow" target="_blank"><span>Я</span>ндекс.Фотки</a>
+            </p>
+        </section>
+      </aside>
+
+      
+      
+
+      <footer>
+        <section class="podval_text">
+          Если Вы используете материал моего блога, то будьте добры поставьте ссылку.<br>Блог о жизни системного администратора.<br>
+          <a rel="home" href="http://adminway.ru/">www.adminway.ru - Жизнь между диваном и сервером.</a> © 2009 - 2014
+        </section>
+        <section class="podval_schet">
+          <p>
+            <span id="spylog2026624"><a target="_blank" href="http://rating.openstat.ru/site/2026624"><img alt="SpyLOG" border="0" src="./Поворот картинки с помощью JS_files/digits"></a></span>
+            <script>
+              var spylog = { counter: 2026624, image: 5003, next: spylog };
+              document.write(unescape("%3Cscript src=%22http" + 
+(("https:" == document.location.protocol) ? "s" : "") + 
+"://counter.spylog.com/cnt.js%22 defer=%22defer%22%3E%3C/script%3E"));
+            </script><script src="./Поворот картинки с помощью JS_files/cnt.js" defer="defer"></script>
+          </p>
+          <p>
+            <script>
+              document.write("<a href='http://www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t57.5;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+"' alt='' title='LiveInternet' "+
+"><\/a>")
+            </script><a href="http://www.liveinternet.ru/click" target="_blank"><img src="./Поворот картинки с помощью JS_files/hit" alt="" title="LiveInternet"></a>
+          </p>
+        </section>
+        <div class="clear"></div>
+      </footer>
+    </div>
+
+<script src="./Поворот картинки с помощью JS_files/jquery.min.js"></script>
+<script type="text/javascript" src="./Поворот картинки с помощью JS_files/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var boxen = [];
+    $("a[class^=fancybox]").each(function() {
+      if ($.inArray($(this).attr('class'),boxen)) boxen.push($(this).attr('class'));
+    });
+    $(boxen).each(function(i,val) {
+      $('a[class='+val+']').attr('rel',val).fancybox({
+        keys     :{
+          next : {
+            13 : 'left',
+            34 : 'up',
+            39 : 'left',
+            40 : 'up'
+          },
+          prev : {
+            8  : 'right',
+            33 : 'down',
+            37 : 'right',
+            38 : 'down'
+          },
+          close  : [27],
+            play   : [32],
+            toggle : [70]
+          }
+      }); });
+  });
+</script>
+
+<script>
+	function peg_selectComment(discussid) {
+		//var mySelect = document.forms[2].peg_replyto;
+		var mySelect = document.getElementById('peg_replyto');
+
+		mySelect.value = discussid;
+	}
+</script>
+<script src="./Поворот картинки с помощью JS_files/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="./Поворот картинки с помощью JS_files/widgets.js"></script>
+
+<!--[if lt IE 9]>
+  <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> 
+<![endif]-->
+
+<!-- код Nolix Bar --> 
+
+<script>
+  document.getElementById('nlx').appendChild(document.getElementById('ncode'));
+</script>
+<!-- конец кода Nolix Bar --> 
+
+
+</body></html>
